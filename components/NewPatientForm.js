@@ -6,8 +6,12 @@ import CountryPicker from 'react-native-country-picker-modal';
 import { CheckBox } from 'react-native-elements';
 import moment from 'moment-timezone';
 import axios from 'axios';
+import { useAuth0 } from 'react-native-auth0';
 
 const NewPatientForm = ({ navigation }) => {
+
+  const { user } = useAuth0(); 
+  console.log('User::', user);
   const [FirstName, setFirstName] = useState('vamsi');
   const [LastName, setLastName] = useState('P');
   const [Email, setEmail] = useState('psvdutt@gmail.com');
@@ -74,6 +78,7 @@ const NewPatientForm = ({ navigation }) => {
         first_language: FirstLanguage,
         second_language: AdditionalLanguage,
         phone: `${CountryCode}${PhoneNumber}`,
+        auth0_id: `${user.sub}`,
         notes: `${CheifConcern} Telegram: ${TelegramId} Local practitioner: ${LocalPhysician}`,
         telegram: TelegramId,
         practitioner: LocalPhysician,
