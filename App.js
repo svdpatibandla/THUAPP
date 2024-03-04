@@ -10,21 +10,13 @@ import {
   useColorScheme,
 } from 'react-native';
 
-import Login from './components/LoginPage';
 import LandingPage from './components/LandingPage';
+import config from './components/auth0-configuration';
 import NewPatientForm from './components/NewPatientForm';
 import AppNavigator from './components/AppNavigator';
-import LoadingScreen from './components/LoadingScreen';
-import LoginScreen from './components/LoginScreen';
-import AccountScreen from './components/AccountScreen';
+import AccountPage from './components/AccountPage';
 
 const Stack = createStackNavigator();
-
-const auth0Config = {
-  domain: 'dev-8tjrasnlq302ey51.us.auth0.com',
-  clientId: 'SV2DsWEvZd86DWrtKv3VJHNFywPuXn7W',
-};
-
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -32,7 +24,7 @@ const App = () => {
 
   console.log('App component is rendered');
   return (
-    <Auth0Provider domain={auth0Config.domain} clientId={auth0Config.clientId} >
+    <Auth0Provider domain={config.domain} clientId={config.clientId}>
       <SafeAreaView style={styles.root}>
         {console.log('SafeAreaView is rendered')}
         
@@ -42,14 +34,11 @@ const App = () => {
         
           <NavigationContainer>
             {console.log('Stack Navigator is rendered')}
-            <Stack.Navigator initialRouteName={user ? "AppNavigator" : "Login"}  screenOptions={{ headerShown: true }}>
+            <Stack.Navigator initialRouteName={user ? "AppNavigator" : "LandingPage"}  screenOptions={{ headerShown: true }}>
               <Stack.Screen name="AppNavigator" component={AppNavigator}  screenOptions={{ headerShown: true }}/>
               <Stack.Screen name="LandingPage" component={LandingPage}  screenOptions={{ headerShown: false }}/>
               <Stack.Screen name="NewPatientForm" component={NewPatientForm} screenOptions={{ headerShown: true }}/>
-              <Stack.Screen name="Loading" component={LoadingScreen} />
-              <Stack.Screen name="LoginScreen" component={LoginScreen} />
-              <Stack.Screen name="Login" component={Login}  screenOptions={{ headerShown: false }}/>
-              <Stack.Screen name="Account" component={AccountScreen} />
+              <Stack.Screen name="Account" component={AccountPage} />
             </Stack.Navigator>
           </NavigationContainer>
       </SafeAreaView>

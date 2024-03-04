@@ -2,7 +2,7 @@ import React from 'react';
 import { View, FlatList, TouchableOpacity, Text, Image, StyleSheet, Linking, Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useAuth0, Auth0Provider } from 'react-native-auth0';
-import config from './auth0-configuration';
+import config from '../components/auth0-configuration';
 import { useNavigation } from '@react-navigation/native';
 
 

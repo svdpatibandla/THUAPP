@@ -1,11 +1,11 @@
 import React from 'react';
 import { Alert, Button, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { useAuth0, Auth0Provider } from 'react-native-auth0';
-import config from './auth0-configuration';
+import config from '../components/auth0-configuration';
 import { useNavigation } from '@react-navigation/native';
 
-import AppNavigator from './AppNavigator';
-import NewPatientForm from './NewPatientForm';
+import AppNavigator from '../components/AppNavigator';
+import NewPatientForm from '../components/NewPatientForm';
 
 const Home = () => {
   const navigation = useNavigation();
