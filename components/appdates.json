@@ -1,0 +1,169 @@
+{
+    "data": [
+      {
+        "account.name": {
+          "account": " account.name",
+          "services": [
+            {
+              "service": "service_dict",
+              "practitioners": [
+                {
+                  "name": "Dr. John Doe",
+                  "cliniko_account_id": 123,
+                  "cliniko_practitioner_id": 456,
+                  "first_lang_id": 1,
+                  "second_lang_id": 2,
+                  "third_lang_id": 3,
+                  "specialization": "General Medicine"
+                },
+                {
+                  "name": "Dr. Jane Smith",
+                  "cliniko_account_id": 789,
+                  "cliniko_practitioner_id": 1011,
+                  "first_lang_id": 2,
+                  "second_lang_id": 3,
+                  "third_lang_id": 1,
+                  "specialization": "Dermatology"
+                }
+              ],
+              "slots": {
+                "all_slots": {
+                  "2024-03-11 10:00:00": [
+                    {
+                      "cliniko_practitioner_id": 123,
+                      "human_readable_UA": "10:00, Monday, March 11th",
+                      "interpreter_id": null,
+                      "interpreter_name": null,
+                      "language": "E",
+                      "language_id": 1,
+                      "patient_datetime": "Mon, 11 Mar 2024 10:00:00 GMT"
+                    },
+                    {
+                      "cliniko_practitioner_id": 456,
+                      "human_readable_UA": "10:00, Monday, March 11th",
+                      "interpreter_id": null,
+                      "interpreter_name": null,
+                      "language": "U",
+                      "language_id": 2,
+                      "patient_datetime": "Mon, 11 Mar 2024 10:00:00 GMT"
+                    }
+                  ],
+                  "2024-03-12 14:00:00": [
+                    {
+                      "cliniko_practitioner_id": 789,
+                      "human_readable_UA": "14:00, Tuesday, March 12th",
+                      "interpreter_id": null,
+                      "interpreter_name": null,
+                      "language": "R",
+                      "language_id": 3,
+                      "patient_datetime": "Tue, 12 Mar 2024 14:00:00 GMT"
+                    }
+                  ]
+                },
+                "first_language_slots": "",
+                "second_language_slots": ""
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "patient": {
+      "auth0_id": "str",
+      "first_lang_id": 1,
+      "first_name": "str",
+      "last_name": "str",
+      "second_lang_id": 2,
+      "tz": "str(pytz)",
+      "attachments": [
+        {
+          "id": 1,
+          "filename": "str"
+        }
+      ],
+      "appointments": [
+        {
+          "id": "1",
+          "starts_at": "2024-03-12T10:00:00Z",
+          "ends_at": "2024-03-12T11:00:00Z",
+          "human_readable_UA": "Sample Appointment 1",
+          "telehealth_url": "sample-url-1",
+          "practitioner": {
+            "cliniko_account_id": 123,
+            "cliniko_practitioner_id": 456,
+            "information": "no interpreter",
+            "name": "Dr. Smith",
+            "specialization": "General Medicine",
+            "tz": "America/New_York"
+          },
+          "datetime": "03/12/2024, 10:00",
+          "api_key": "sample-api-key-1",
+          "future_appt": true,
+          "cancel": false,
+          "video_link": "sample-video-link-1"
+        },
+        {
+            "id": "2",
+            "starts_at": "2024-03-12T12:00:00Z",
+            "ends_at": "2024-03-12T13:00:00Z",
+            "human_readable_UA": "Sample Appointment 2",
+            "telehealth_url": "sample-url-2",
+            "practitioner": {
+              "cliniko_account_id": 789,
+              "cliniko_practitioner_id": 768,
+              "information": "no interpreter",
+              "name": "Dr. Prasanth",
+              "specialization": "General Medicine",
+              "tz": "America/New_York"
+            },
+            "datetime": "03/12/2024, 12:00",
+            "api_key": "sample-api-key-1",
+            "future_appt": true,
+            "cancel": false,
+            "video_link": "sample-video-link-2"
+          },
+        {
+          "id": "3",
+          "starts_at": "2024-03-15T14:00:00Z",
+          "ends_at": "2024-03-15T15:00:00Z",
+          "human_readable_UA": "Sample Appointment 3",
+          "telehealth_url": "sample-url-2",
+          "practitioner": {
+            "cliniko_account_id": 878,
+            "cliniko_practitioner_id": 1011,
+            "information": "interpreter available",
+            "name": "Dr. Johnson",
+            "specialization": "Dermatology",
+            "tz": "America/Los_Angeles"
+          },
+          "datetime": "03/15/2024, 14:00",
+          "api_key": "sample-api-key-3",
+          "future_appt": true,
+          "cancel": false,
+          "video_link": "sample-video-link-3"
+        },
+        {
+            "id": "4",
+            "starts_at": "2024-03-11T16:30:00Z",
+            "ends_at": "2024-03-11T17:30:00Z",
+            "human_readable_UA": "Sample Appointment 4",
+            "telehealth_url": "sample-url-4",
+            "practitioner": {
+              "cliniko_account_id": 123,
+              "cliniko_practitioner_id": 456,
+              "information": "no interpreter",
+              "name": "Dr. Smith",
+              "specialization": "General Medicine",
+              "tz": "America/New_York"
+            },
+            "datetime": "03/11/2024, 16:30",
+            "api_key": "sample-api-key-4",
+            "future_appt": true,
+            "cancel": false,
+            "video_link": "sample-video-link-4"
+          }
+          
+      ]
+    }
+  }
+  

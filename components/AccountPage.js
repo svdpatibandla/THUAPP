@@ -1,12 +1,17 @@
 import React from 'react';
 import { useAuth0 } from 'react-native-auth0';
 import { View, FlatList, TouchableOpacity, Text, Image, StyleSheet, Linking } from 'react-native';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser, clearUser } from '../redux/actions/authActions';
 import LandingPage from './LandingPage';
+import { useNavigation } from '@react-navigation/native';
 
 
-const AccountPage = ({ navigation }) => {
-  const { logout, clearSession } = useAuth0();
+const AccountPage = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const { authorize, clearSession, getCredentials, error, isLoading } = useAuth0();
+  const loggedIn = useSelector(state => state.auth.isAuthenticated);
 
   const accountItems = [
     { id: '1', title: 'Patient', screen: 'Item1Screen', image: require('../assets/arrow.png') },
@@ -22,7 +27,9 @@ const AccountPage = ({ navigation }) => {
   const onLogout = async () => {
     console.log('Logging out...');
     await clearSession({}, {});
+    dispatch(clearUser());
     console.log('Logged out successfully!');
+    navigation.navigate(LandingPage);
   };
 
   const renderItem = ({ item }) => (
@@ -30,8 +37,7 @@ const AccountPage = ({ navigation }) => {
       style={styles.itemContainer}
       onPress={() => {
         if (item.title === 'Logout') {
-          onLogout(); // Call logout function from useAuth0 hook
-          navigation.navigate(LandingPage);
+          onLogout();
         } else if (item.url) {
           Linking.openURL(item.url).catch((err) => console.error('An error occurred', err));
         } else {

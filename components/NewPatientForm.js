@@ -1,3 +1,5 @@
+//NewPatientForm.js
+
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, Alert, ScrollView } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
@@ -8,10 +10,12 @@ import moment from 'moment-timezone';
 import axios from 'axios';
 import { useAuth0 } from 'react-native-auth0';
 
+
 const NewPatientForm = ({ navigation }) => {
 
-  const { user } = useAuth0(); 
+  const { authorize, clearSession, user, getCredentials, error, isLoading, isAuthenticated } = useAuth0();
   console.log('User::', user);
+  console.log('auth:', isAuthenticated);
   const [FirstName, setFirstName] = useState('vamsi');
   const [LastName, setLastName] = useState('P');
   const [Email, setEmail] = useState('psvdutt@gmail.com');
@@ -309,3 +313,17 @@ const styles = StyleSheet.create({
 });
 
 export default NewPatientForm;
+
+/*
+here is my flow,
+
+if not logged-in, 
+-->goes to LandingPage, selects one in (new, existing)
+-------> if new selected goes to auth0 login chrome web page, once logged in goes back to newpatientform page in app, once form filled it goes to AppNavigator
+-------> if existing selected goes to auth0 login chrome web page, once logged in goes to AppNavigator
+
+if logged-in,  goes to AppNavigator
+
+i have these files app.js, NewPatientForm.js, AppNavigator Page, LandingPage
+
+*/
