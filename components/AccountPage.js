@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser, clearUser } from '../redux/actions/authActions';
 import LandingPage from './LandingPage';
 import { useNavigation } from '@react-navigation/native';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import{ clearSession } from 'react-native-auth0';
 
 const AccountPage = () => {
   const navigation = useNavigation();
@@ -26,11 +27,24 @@ const AccountPage = () => {
 
   const onLogout = async () => {
     console.log('Logging out...');
-    await clearSession({}, {});
-    dispatch(clearUser());
-    console.log('Logged out successfully!');
-    navigation.navigate(LandingPage);
+    try {
+      // Uncomment this line to ensure user info is removed from AsyncStorage
+      await AsyncStorage.removeItem('@user_info');
+      await AsyncStorage.removeItem('isLoggedIn');
+      // Clearing the session with proper error handling
+      await clearSession({ federated: false }).then(() => {
+        console.log('Logged out successfully!');
+        dispatch(clearUser());
+        // Navigate using the route name, not the component. Update "LandingPage" to your route name.
+        navigation.navigate('LandingPage');
+      }).catch((error) => {
+        console.error('Logout failed', error);
+      });
+    } catch (error) {
+      console.error('An error occurred during logout', error);
+    }
   };
+  
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
