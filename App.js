@@ -9,11 +9,11 @@ import NewPatientForm from './components/NewPatientForm';
 import AppNavigator from './components/AppNavigator';
 import AccountPage from './components/AccountPage';
 import { useSelector } from 'react-redux';
-import AvailableAppointments from './components/AvailableAppointments';
+import AvailableAppointments from './components/BookingPage';
 import MentalContent from './components/MentalContentPage';
 import PlanPage from './components/PlanPage';
-import AppointmentsPage from './components/AppointmentsPage';
-
+import BookingPage from './components/BookingPage';
+import PractitionerPage from './components/PractitionerPage';
 
 const Stack = createStackNavigator();
 
@@ -38,15 +38,29 @@ const App = () => {
       <SafeAreaView style={styles.root}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="LandingPage" screenOptions={{ headerShown: true }}>
+          <Stack.Navigator initialRouteName="BookingsPage" 
+                screenOptions={{ headerShown: true }}  
+                options={{
+                  title: 'Bookings Page',
+                  headerTitleAlign: 'center'
+              }}>
 
             <Stack.Screen name="AppNavigator" 
               component={AppNavigator} 
               options={{
-                title: 'My Appointments',
+                title: 'Appointments',
                 headerLeft: null,
                 headerTitleAlign: 'center'
               }}/>
+
+            <Stack.Screen name="PractitionerPage" 
+              component={PractitionerPage} 
+              options={{
+                title: 'Appointments',
+                headerLeft: null,
+                headerTitleAlign: 'center'
+              }}/>
+
 
             <Stack.Screen name="LandingPage" 
               component={LandingPage} 
@@ -67,8 +81,13 @@ const App = () => {
             <Stack.Screen name="PlanPage" 
               component={PlanPage} />
 
-            <Stack.Screen name="AvailableAppointments" 
-              component={AvailableAppointments} />
+            <Stack.Screen name="BookingPage" 
+              component={BookingPage} 
+              screenOptions={{ headerShown: true }}  
+              options={{
+                title: 'Bookings',
+                headerTitleAlign: 'center'
+            }} />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaView>

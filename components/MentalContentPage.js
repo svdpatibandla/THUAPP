@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, Image, StyleSheet, Dimensions } from 'react-native';
-import { AvailableAppointments } from './AvailableAppointments';
+import { AvailableAppointments } from './BookingPage';
 import { useNavigation } from '@react-navigation/native';
 
 const MentalHealthItems = [
-    { id: '1', title: 'Adult Psychologist', description: "Description 1" },
-    { id: '2', title: 'Adult Talk Therapy', description: "Description 2" },
-    { id: '3', title: 'Adult Psychiatrist', description: "Description 3" },
-    { id: '4', title: 'Child Talk Therapy', description: "Description 4" },
+    { id: '1', title: 'Adult Psychologist', description: "Provides counseling and therapy for adults dealing with various mental health issues." },
+    { id: '2', title: 'Adult Talk Therapy', description: "Offers talk therapy sessions for adults to discuss and address personal concerns and challenges." },
+    { id: '3', title: 'Adult Psychiatrist', description: "Specializes in diagnosing and treating mental health disorders in adults through medication management and therapy." },
+    { id: '4', title: 'Child Talk Therapy', description: "Provides child-friendly talk therapy sessions to help children express their feelings and cope with emotional difficulties." },  
 ];
 
 const MentalContent = () => {

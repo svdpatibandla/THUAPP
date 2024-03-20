@@ -73,10 +73,8 @@ const LandingPage = () => {
         <Image source={require('../assets/arrow.png')} style={styles.image} />
       </TouchableOpacity>
 
-      {loggedIn && <Text>You are logged in</Text>}
-      {!loggedIn && <Text>You are not logged in</Text>}
 
-      {error && <Text style={styles.error}>Error: {error.message}</Text>}
+      {error && <Text style={styles.error}></Text>}
     </View>
   );
 };

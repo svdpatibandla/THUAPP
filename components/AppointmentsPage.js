@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Modal, Button } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 
-import appointmentData from './appdates.json';
+import appointmentData from './patient_appointments.json';
 
 const AppointmentOptionsPopup = ({ visible, onClose, onCancel, onUploadFiles, position }) => {
   return (
@@ -41,7 +41,9 @@ const AppointmentsPage = () => {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
 
   useEffect(() => {
+    console.log(appointmentData);
     const allSlots = appointmentData.patient.appointments;
+    console.log(allSlots)
     const appointmentsGroupedByDate = {};
     allSlots.forEach(appointment => {
       const date = appointment.starts_at.split('T')[0];

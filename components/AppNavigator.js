@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AppointmentsPage from './AppointmentsPage';
 import PlanPage from './PlanPage';
 import AccountPage from './AccountPage';
+import BookingPage from './BookingPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,7 +40,7 @@ const AppNavigator = () => {
       />
       <Tab.Screen
         name="Book/Plan"
-        component={PlanPage}
+        component={BookingPage}
         options={{
           headerShown: false,
           tabBarIcon: () => (
