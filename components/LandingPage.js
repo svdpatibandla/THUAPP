@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useAuth0 } from 'react-native-auth0';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser, clearUser } from '../redux/actions/authActions';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LandingPage = () => {
 
@@ -25,19 +26,21 @@ const LandingPage = () => {
 
       console.log('Logged in successfully!');
       const credentials = await getCredentials();
-      const user_id = await getCredentials();
+      console.log(credentials);
+      const user_id = credentials?.user_id;
       console.log('AccessToken:', credentials?.accessToken);
       console.log('user_id: ', user_id);
-
+      //AsyncStorage.setItem('@user_info', JSON.stringify({ name: userType, ...credentials }));
+      AsyncStorage.setItem('isLoggedIn', JSON.stringify(true));
       dispatch(setUser({ name: userType, ...credentials }));
 
       if (userType === 'New') {
-        if (user_id){
+        if (credentials){
           navigation.navigate('NewPatientForm');
         }
         
       } else if (userType === 'existing') {
-        if (user_id){
+        if (credentials){
           navigation.navigate('AppNavigator');
         }
       }
@@ -48,10 +51,19 @@ const LandingPage = () => {
 
   const onLogout = async () => {
     console.log('Logging out...');
-    await clearSession({}, {});
-    dispatch(clearUser());
-    console.log('Logged out successfully!');
+    try {
+      await AsyncStorage.removeItem('@user_info');
+      AsyncStorage.removeItem('isLoggedIn');
+      await clearSession({ federated: false }); // Ensure parameters match your Auth0 setup requirements
+      dispatch(clearUser());
+      console.log('Logged out successfully!');
+      navigation.navigate('LandingPage'); // Navigate to the landing page or another initial screen
+    } catch (e) {
+      console.error('Logout Error:', e);
+      // Optionally, update the UI to show an error message
+    }
   };
+  
 
   if (isLoading) {
     return (
@@ -72,7 +84,6 @@ const LandingPage = () => {
         <Text style={styles.text}>Existing Patient</Text>
         <Image source={require('../assets/arrow.png')} style={styles.image} />
       </TouchableOpacity>
-
 
       {error && <Text style={styles.error}></Text>}
     </View>
