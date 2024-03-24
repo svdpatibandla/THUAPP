@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image } from 'react-native';
 import { Calendar } from 'react-native-calendars';
+import { useNavigation } from '@react-navigation/native';
+
 const PractitionerPage = ({ route }) => {
   const { practitioner } = route.params; // Receive practitioner details as route params
   const [selectedDate, setSelectedDate] = useState(null);
-  console.log(practitioner);
+  const navigation = useNavigation(); // Hook to access navigation
 
   // Parse the slots data from practitioner
   const slots = practitioner.slots.reduce((acc, slot) => {
@@ -20,10 +22,16 @@ const PractitionerPage = ({ route }) => {
     setSelectedDate(date);
   };
 
+  const handleAppointmentPress = (time) => {
+    navigation.navigate('ConfirmAppointment', { time, practitioner });
+  };
+
   const renderAppointmentItem = ({ item }) => (
-    <View style={styles.appointmentBox}>
-      <Text>{item.time}</Text>
-    </View>
+    <TouchableOpacity onPress={() => handleAppointmentPress(item.time)}>
+      <View style={styles.appointmentBox}>
+        <Text>{item.time}</Text>
+      </View>
+    </TouchableOpacity>
   );
 
   return (

@@ -93,4 +93,37 @@ const styles = StyleSheet.create({
   },
 });
 
+
+/*
+
+if a practitioner is clicked, to go practitioner page
+else continue selected, go to new page with same header and footer but content varies, asks for adult or child and click continue(one must be selected), if any selected(one must) go to new content now to select medical or mental to select, if medical show medical1, 2, 3 ...mental selected mental 1, 2, 3 .... if any selected show all the practitioners in that services, now how should I design my page
+
+ChatGPT
+To design your page with the described functionality, you'll need to implement navigation between screens and conditionally render different content based on user actions. Here's how you can structure your page:
+
+Practitioner Selection Page:
+
+Display a list of practitioners.
+If a practitioner is clicked, navigate to the practitioner page.
+If "Continue" is selected, navigate to the next page.
+Selection Confirmation Page:
+
+Display a message asking the user to select either adult or child.
+Provide buttons for adult and child selection.
+If any option is selected, navigate to the next page.
+Medical or Mental Selection Page:
+
+Display a message asking the user to select medical or mental services.
+Provide buttons for medical and mental selection.
+If any option is selected, navigate to the next page.
+Practitioners List Page:
+
+Display a list of practitioners based on the selected service (medical or mental).
+Provide an option to go back to the previous selection page.
+If a practitioner is clicked, navigate to the practitioner page.
+Here's a basic structure of how you can implement these pages:
+
+*/
+
 export default AccountPage;

@@ -13,14 +13,21 @@ import AppNavigator from './components/AppNavigator';
 import AccountPage from './components/AccountPage';
 import { useSelector } from 'react-redux';
 import AvailableAppointments from './components/BookingPage';
-import MentalContent from './components/MentalContentPage';
-import PlanPage from './components/PlanPage';
+import MentalContent from './temp/MentalContentPage';
+import PlanPage from './temp/PlanPage';
 import BookingPage from './components/BookingPage';
 import PractitionerPage from './components/PractitionerPage';
 import AppointmentsPage from './components/AppointmentsPage';
+import ConfirmAppointment from './components/ConfirmAppointment';
+import SelectPractitioner from './components/BookingPages/PractitionerSelection';
+import AgeGroupSelection from './components/BookingPages/AgeGroupSelection';
+import HealthTypeSelection from './components/BookingPages/HealthTypeSelection';
+import MentalIssueSelection from './components/BookingPages/MentalIssueSelection';
+import MentalPractitionerSelection from './components/BookingPages/MedicalPractitionerSelection';
+import MedicalPractitionerSelection from './components/BookingPages/MedicalPractitionerSelection';
 
 const Stack = createStackNavigator();
-// Logged-in user navigator
+
 const LoggedInNavigator = () => (
   <Stack.Navigator initialRouteName="AppNavigator" screenOptions={{ headerShown: true }}>
     <Stack.Screen name="AppNavigator" component={AppNavigator} options={{ title: 'My Appointments', headerLeft: null, headerTitleAlign: 'center' }} />
@@ -32,6 +39,13 @@ const LoggedInNavigator = () => (
     <Stack.Screen name="BookingPage" component={BookingPage} />
     <Stack.Screen name="AppointmentsPage" component={AppointmentsPage} />
     <Stack.Screen name="PractitionerPage" component={PractitionerPage} />
+    <Stack.Screen name="ConfirmAppointment" component={ConfirmAppointment} />
+    <Stack.Screen name="SelectPractitioner" component={SelectPractitioner} options={{ headerShown: false}} />
+    <Stack.Screen name="AgeGroupSelection" component={AgeGroupSelection} options={{ headerShown: false}} />
+    <Stack.Screen name="HealthTypeSelection" component={HealthTypeSelection} options={{ headerShown: false}} />
+    <Stack.Screen name="MentalIssueSelection" component={MentalIssueSelection} options={{ headerShown: false}} />
+    <Stack.Screen name="MentalPractitionerSelection" component={MentalPractitionerSelection} options={{ headerShown: false}} />
+    <Stack.Screen name="MedicalPractitionerSelection" component={MedicalPractitionerSelection} options={{ headerShown: false}} />
   </Stack.Navigator>
 );
 
@@ -62,7 +76,7 @@ const App = () => {
   return (
     <Auth0Provider domain={config.domain} clientId={config.clientId}>
       <SafeAreaView style={styles.root}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <StatusBar backgroundColor="white" barStyle="dark-content" />
         <NavigationContainer>
           {isLoggedIn ? <LoggedInNavigator /> : <GuestNavigator />}
         </NavigationContainer>

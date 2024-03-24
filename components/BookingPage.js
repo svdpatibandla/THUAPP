@@ -39,14 +39,16 @@ const BookingPage = () => {
                 groupedSlots[practitionerId].slots.push({
                     date: datePart,
                     time: `${hour}:${minute}`, 
-                    language: slot.language
+                    language: slot.language,
+                    appointment: item // Include the appointment details here
                 });
             
                 if (date === todayDate) {
                     groupedSlots[practitionerId].todayAppointments.push({
                         date: datePart,
                         time: `${hour}:${minute}`, 
-                        language: slot.language
+                        language: slot.language,
+                        appointment: item // Include the appointment details here
                     });
                   }
               });
@@ -72,28 +74,26 @@ const BookingPage = () => {
 
   const groupedSlots = groupedSlotsByPractitioner();
 
-  const navigateToNewPage = practitioner => {
-    navigation.navigate('PractitionerPage', { practitioner: practitioner });
+  const navigateToNewPage = (practitioner, timeSlot) => {
+    navigation.navigate('SelectPractitioner');
   };
 
-  const renderTableData = (slots) => {
-    const tableData = [];
-    const chunkSize = 4;
+  const handleTimeSlotPress = (practitioner, timeSlot) => {
+    // Navigate to a new page passing the selected practitioner and time slot
+    navigateToNewPage((practitioner, timeSlot));
+  };
 
-    for (let i = 0; i < slots.length; i += chunkSize) {
-      tableData.push(slots.slice(i, i + chunkSize));
-    }
-
-    return tableData.map((row, index) => (
-      <View key={index} style={styles.tableRow}>
-        {row.map((slot, idx) => (
-          <View key={idx} style={styles.tableCell}>
+  const renderTimeSlots = (practitioner, slots) => (
+    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <View style={styles.timeSlotsContainer}>
+        {slots.map((slot, index) => (
+          <TouchableOpacity key={index} style={styles.timeSlot} onPress={() => handleTimeSlotPress(practitioner, slot)}>
             <Text style={styles.timeText}>{slot.time}</Text>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
-    ));
-  };
+    </ScrollView>
+  );
 
   return (
     <ScrollView style={styles.container}>
@@ -116,12 +116,12 @@ const BookingPage = () => {
           <View style={styles.appointmentList}>
             <Text style={styles.appointmentHeader}>Today's Appointments:</Text>
             {groupedSlots[practitionerId].todayAppointments.length > 0 ? (
-              renderTableData(groupedSlots[practitionerId].todayAppointments)
+              renderTimeSlots(groupedSlots[practitionerId].details, groupedSlots[practitionerId].todayAppointments)
             ) : (
               <Text>No appointments today</Text>
             )}
           </View>
-          <TouchableOpacity onPress={() => navigateToNewPage(groupedSlots[practitionerId])} style={styles.viewMoreButton}>
+          <TouchableOpacity onPress={() => navigateToNewPage(groupedSlots[practitionerId].details)} style={styles.viewMoreButton}>
             <Text style={styles.viewMoreText}>View All Times</Text>
           </TouchableOpacity>
         </View>
@@ -187,24 +187,19 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  tableRow: {
+  timeSlotsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
+    flexWrap: 'nowrap',
   },
-  tableCell: {
-    flexBasis: '18%',
+  timeSlot: {
     borderWidth: 1,
     borderColor: '#ccc',
-    padding: 1, // Adjust padding to fit the time properly
-    width: 10,
+    padding: 10,
+    marginHorizontal: 5,
     borderRadius: 8,
-    marginVertical: 5,
-    alignContent: 'center'
   },
   timeText: {
     fontSize: 16,
-    alignContent: 'center'
   },
 });
 

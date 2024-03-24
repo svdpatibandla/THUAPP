@@ -5,6 +5,8 @@ import { useAuth0 } from 'react-native-auth0';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser, clearUser } from '../redux/actions/authActions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwtDecode from 'jwt-decode'; // Import jwtDecode
+
 
 const LandingPage = () => {
 
@@ -27,9 +29,12 @@ const LandingPage = () => {
       console.log('Logged in successfully!');
       const credentials = await getCredentials();
       console.log(credentials);
+
       const user_id = credentials?.user_id;
-      console.log('AccessToken:', credentials?.accessToken);
-      console.log('user_id: ', user_id);
+      console.log('ID Token:', credentials?.idToken);
+      console.log('User ID:', user_id);
+
+
       //AsyncStorage.setItem('@user_info', JSON.stringify({ name: userType, ...credentials }));
       AsyncStorage.setItem('isLoggedIn', JSON.stringify(true));
       dispatch(setUser({ name: userType, ...credentials }));

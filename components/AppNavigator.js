@@ -4,7 +4,7 @@ import { Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import AppointmentsPage from './AppointmentsPage';
-import PlanPage from './PlanPage';
+import PlanPage from '../temp/PlanPage';
 import AccountPage from './AccountPage';
 import BookingPage from './BookingPage';
 
@@ -69,3 +69,5 @@ const AppNavigator = () => {
 };
 
 export default AppNavigator;
+
+//can u do the same for this page and also update the style and variable names accordingly

@@ -1,38 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Modal, Button } from 'react-native';
-import { Calendar } from 'react-native-calendars';
+import { FAB } from 'react-native-paper';
 
 import appointmentData from './patient_appointments.json';
 
-const AppointmentOptionsPopup = ({ visible, onClose, onCancel, onUploadFiles, position }) => {
-  return (
-    <Modal
-      animationType="fade"
-      transparent={true}
-      visible={visible}
-      onRequestClose={onClose}
-    >
-      <TouchableOpacity style={styles.popupBackground} onPress={onClose}>
-        <View style={[styles.popupContainer, position]}>
-          <TouchableOpacity onPress={onCancel}>
-            <Text style={styles.popupOption}>Cancel Appointment</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onUploadFiles}>
-            <Text style={styles.popupOption}>Upload Files</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onClose}>
-            <Text style={styles.popupCloseButton}>Close</Text>
-          </TouchableOpacity>
-        </View>
-      </TouchableOpacity>
-    </Modal>
-  );
-};
 
 const AppointmentButton = ({ onPress, isActive }) => (
-  <TouchableOpacity onPress={onPress} style={[styles.appointmentButton, { backgroundColor: isActive ? 'blue' : 'gray' }]}>
-    <Text style={styles.appointmentButtonText}>Join the Appointment</Text>
-  </TouchableOpacity>
+  <View style={styles.AppointmentOptions}>
+    <TouchableOpacity onPress={onPress} style={[styles.appointmentButton, { backgroundColor: "gray" }]}>
+      <Text style={styles.appointmentButtonText}>Modify</Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress={onPress} style={[styles.appointmentButton, { backgroundColor: isActive ? 'blue' : 'gray' }]}>
+      <Text style={styles.appointmentButtonText}>Join the Appointment</Text>
+    </TouchableOpacity>
+  </View>
 );
 
 const AppointmentsPage = () => {
@@ -87,7 +68,6 @@ const AppointmentsPage = () => {
             }}
             style={styles.optionsButton}
           >
-            <Text>...</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.practitionerInfo}>
@@ -201,6 +181,11 @@ const styles = StyleSheet.create({
   practitionerInfo: {
     marginBottom: 10, 
   },
+  AppointmentOptions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  }
 });
 
 export default AppointmentsPage;

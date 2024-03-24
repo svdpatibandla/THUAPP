@@ -25087,7 +25087,7 @@
                                         "utc_date": "2024-04-19"
                                     }
                                 ],
-                                "2024-04-21": [
+                                "2024-03-23": [
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
                                         "human_readable_UA": "17:55, неділя, 21 квітня",
@@ -25096,8 +25096,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 15:55:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 15:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25106,8 +25106,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 15:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 15:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25117,8 +25117,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 16:40:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 16:40:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25127,8 +25127,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 16:40:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 16:40:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25138,8 +25138,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 16:55:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 16:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25148,8 +25148,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 16:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 16:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25159,8 +25159,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 17:25:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 17:25:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25169,8 +25169,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 17:25:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 17:25:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25180,8 +25180,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 17:55:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 17:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25190,8 +25190,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 17:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 17:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25201,8 +25201,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 18:10:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 18:10:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25211,8 +25211,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 18:10:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 18:10:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25222,8 +25222,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 18:55:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 18:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25232,8 +25232,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 18:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 18:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25243,8 +25243,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 19:40:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 19:40:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25253,8 +25253,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 19:40:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 19:40:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25264,8 +25264,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 19:55:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 19:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25274,8 +25274,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 19:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 19:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25285,8 +25285,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 20:25:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 20:25:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25295,8 +25295,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 20:25:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 20:25:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25306,8 +25306,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 20:55:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 20:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25316,8 +25316,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 20:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 20:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25327,8 +25327,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 21:10:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 21:10:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25337,8 +25337,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 21:10:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 21:10:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25348,8 +25348,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 21:55:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 21:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25358,8 +25358,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 21:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 21:55:00",
+                                        "utc_date": "2024-03-23"
                                     }
                                 ],
                                 "2024-04-22": [
@@ -25372,7 +25372,7 @@
                                         "language": "U",
                                         "language_id": 4,
                                         "patient_date": "2024-04-22",
-                                        "patient_datetime": "Sun, 21 Apr 2024 22:40:00 GMT",
+                                        "patient_datetime": "Sun, 23 Mar 2024 22:40:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25381,8 +25381,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 22:40:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 22:40:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25393,7 +25393,7 @@
                                         "language": "U",
                                         "language_id": 4,
                                         "patient_date": "2024-04-22",
-                                        "patient_datetime": "Sun, 21 Apr 2024 22:55:00 GMT",
+                                        "patient_datetime": "Sun, 23 Mar 2024 22:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25402,8 +25402,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 22:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 22:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25414,7 +25414,7 @@
                                         "language": "U",
                                         "language_id": 4,
                                         "patient_date": "2024-04-22",
-                                        "patient_datetime": "Sun, 21 Apr 2024 23:25:00 GMT",
+                                        "patient_datetime": "Sun, 23 Mar 2024 23:25:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25423,8 +25423,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 23:25:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 23:25:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -25435,7 +25435,7 @@
                                         "language": "U",
                                         "language_id": 4,
                                         "patient_date": "2024-04-22",
-                                        "patient_datetime": "Sun, 21 Apr 2024 23:55:00 GMT",
+                                        "patient_datetime": "Sun, 23 Mar 2024 23:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -25444,8 +25444,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 23:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 23:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46069,7 +46069,7 @@
                                         "utc_date": "2024-04-19"
                                     }
                                 ],
-                                "2024-04-21": [
+                                "2024-03-23": [
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
                                         "human_readable_UA": "17:55, неділя, 21 квітня",
@@ -46078,8 +46078,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 15:55:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 15:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46088,8 +46088,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 15:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 15:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46099,8 +46099,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 16:40:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 16:40:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46109,8 +46109,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 16:40:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 16:40:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46120,8 +46120,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 16:55:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 16:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46130,8 +46130,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 16:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 16:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46141,8 +46141,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 17:25:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 17:25:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46151,8 +46151,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 17:25:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 17:25:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46162,8 +46162,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 17:55:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 17:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46172,8 +46172,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 17:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 17:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46183,8 +46183,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 18:10:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 18:10:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46193,8 +46193,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 18:10:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 18:10:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46204,8 +46204,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 18:55:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 18:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46214,8 +46214,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 18:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 18:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46225,8 +46225,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 19:40:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 19:40:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46235,8 +46235,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 19:40:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 19:40:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46246,8 +46246,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 19:55:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 19:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46256,8 +46256,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 19:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 19:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46267,8 +46267,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 20:25:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 20:25:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46277,8 +46277,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 20:25:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 20:25:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46288,8 +46288,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 20:55:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 20:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46298,8 +46298,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 20:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 20:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46309,8 +46309,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 21:10:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 21:10:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46319,8 +46319,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 21:10:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 21:10:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46330,8 +46330,8 @@
                                         "interpreter_name": null,
                                         "language": "U",
                                         "language_id": 4,
-                                        "patient_date": "2024-04-21",
-                                        "patient_datetime": "Sun, 21 Apr 2024 21:55:00 GMT",
+                                        "patient_date": "2024-03-23",
+                                        "patient_datetime": "Sun, 23 Mar 2024 21:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46340,8 +46340,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 21:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 21:55:00",
+                                        "utc_date": "2024-03-23"
                                     }
                                 ],
                                 "2024-04-22": [
@@ -46354,7 +46354,7 @@
                                         "language": "U",
                                         "language_id": 4,
                                         "patient_date": "2024-04-22",
-                                        "patient_datetime": "Sun, 21 Apr 2024 22:40:00 GMT",
+                                        "patient_datetime": "Sun, 23 Mar 2024 22:40:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46363,8 +46363,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 22:40:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 22:40:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46375,7 +46375,7 @@
                                         "language": "U",
                                         "language_id": 4,
                                         "patient_date": "2024-04-22",
-                                        "patient_datetime": "Sun, 21 Apr 2024 22:55:00 GMT",
+                                        "patient_datetime": "Sun, 23 Mar 2024 22:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46384,8 +46384,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 22:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 22:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46396,7 +46396,7 @@
                                         "language": "U",
                                         "language_id": 4,
                                         "patient_date": "2024-04-22",
-                                        "patient_datetime": "Sun, 21 Apr 2024 23:25:00 GMT",
+                                        "patient_datetime": "Sun, 23 Mar 2024 23:25:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46405,8 +46405,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 23:25:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 23:25:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
@@ -46417,7 +46417,7 @@
                                         "language": "U",
                                         "language_id": 4,
                                         "patient_date": "2024-04-22",
-                                        "patient_datetime": "Sun, 21 Apr 2024 23:55:00 GMT",
+                                        "patient_datetime": "Sun, 23 Mar 2024 23:55:00 GMT",
                                         "practitioner": {
                                             "cliniko_account_id": 4,
                                             "cliniko_practitioner_id": 923783092794034372,
@@ -46426,8 +46426,8 @@
                                             "specialization": "Therapist",
                                             "tz": "US/Eastern"
                                         },
-                                        "time": "2024-04-21 23:55:00",
-                                        "utc_date": "2024-04-21"
+                                        "time": "2024-03-23 23:55:00",
+                                        "utc_date": "2024-03-23"
                                     },
                                     {
                                         "cliniko_practitioner_id": "923783092794034372",
