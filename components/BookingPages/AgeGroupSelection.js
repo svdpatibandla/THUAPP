@@ -25,7 +25,7 @@ const AgeGroupSelection = () => {
   };
 
   const handleClose = () => {
-    navigation.navigate('AppointmentsPage');
+    navigation.navigate('AppNavigator');
   };
 
   // Filter age groups based on search text

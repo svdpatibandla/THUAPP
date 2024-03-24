@@ -1,116 +1,182 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Modal, Button } from 'react-native';
-import { FAB } from 'react-native-paper';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Animated } from 'react-native';
+import appointmentsData from './patient_appointments.json'; 
+import { useNavigation } from '@react-navigation/native';
 
-import appointmentData from './patient_appointments.json';
+const AppointmentItem = ({ appointment }) => {
+  const currentTime = new Date();
+  const appointmentTime = new Date(appointment.starts_at);
 
+  const isFutureAppointment = appointmentTime > currentTime;
+  const isActiveAppointment = appointmentTime.getTime() === currentTime.getTime();
 
-const AppointmentButton = ({ onPress, isActive }) => (
-  <View style={styles.AppointmentOptions}>
-    <TouchableOpacity onPress={onPress} style={[styles.appointmentButton, { backgroundColor: "gray" }]}>
-      <Text style={styles.appointmentButtonText}>Modify</Text>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={onPress} style={[styles.appointmentButton, { backgroundColor: isActive ? 'blue' : 'gray' }]}>
-      <Text style={styles.appointmentButtonText}>Join the Appointment</Text>
-    </TouchableOpacity>
-  </View>
-);
+  const joinButtonStyle = [
+    styles.joinButton,
+    !isFutureAppointment && styles.disabledButton,
+    isActiveAppointment && styles.joinButtonActive,
+  ];
+
+  const joinButtonTextStyle = [
+    styles.joinButtonText,
+    isActiveAppointment && styles.joinButtonTextActive,
+  ];
+
+  return (
+    <View style={styles.appointmentItem}>
+      <Text style={styles.appointmentDate}>{appointment.date}</Text>
+      <Text style={styles.appointmentTime}>{appointment.time}</Text>
+      <Text style={styles.appointmentTitle}>{appointment.human_readable_UA}</Text>
+      <Text style={styles.appointmentText}>Practitioner: {appointment.practitioner.name} (Speaks {appointment.practitioner.language})</Text>
+      {appointment.interpreter ? (
+        <Text style={styles.appointmentText}>Interpreter: {appointment.interpreter.name} ({appointment.interpreter.language})</Text>
+      ) : (
+        <Text style={styles.appointmentText}>No interpreter: Appointment in {appointment.practitioner.language}</Text>
+      )}
+      <View style={styles.uploadedFilesContainer}>
+        <Text style={styles.appointmentText}>Uploaded files:</Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.modifyButton}>
+          <Image source={require('../assets/modify.png')} style={styles.buttonImage} />
+          <Text style={styles.modifyButtonText}>Modify</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={joinButtonStyle}>
+          <Text style={joinButtonTextStyle}>Join the appointment</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
 
 const AppointmentsPage = () => {
-  const [appointmentsByDate, setAppointmentsByDate] = useState({});
-  const [popupVisible, setPopupVisible] = useState({});
-  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [futureAppointments, setFutureAppointments] = useState([]);
+  const [previousAppointments, setPreviousAppointments] = useState([]);
+  const [scrollY, setScrollY] = useState(new Animated.Value(0));
+  const [scrolling, setScrolling] = useState(false);
+  const [fabVisible, setFabVisible] = useState(true); 
+
+  const navigation = useNavigation();
 
   useEffect(() => {
-    console.log(appointmentData);
-    const allSlots = appointmentData.patient.appointments;
-    console.log(allSlots)
-    const appointmentsGroupedByDate = {};
-    allSlots.forEach(appointment => {
-      const date = appointment.starts_at.split('T')[0];
-      if (appointmentsGroupedByDate[date]) {
-        appointmentsGroupedByDate[date].push(appointment);
-      } else {
-        appointmentsGroupedByDate[date] = [appointment];
-      }
-    });
+    if (appointmentsData && appointmentsData.patient && appointmentsData.patient.appointments) {
+      const appointments = appointmentsData.patient.appointments;
+      const currentDate = new Date();
+      const future = [];
+      const previous = [];
 
-    // Sort appointments within each date group by start time
-    Object.keys(appointmentsGroupedByDate).forEach(date => {
-      appointmentsGroupedByDate[date].sort((a, b) => {
-        return new Date(a.starts_at) - new Date(b.starts_at);
+      appointments.forEach((appointment) => {
+        const appointmentDate = new Date(appointment.starts_at);
+        const options = { weekday: 'long', month: 'long', day: 'numeric' };
+        const formattedDate = appointmentDate.toLocaleDateString('en-US', options);
+        const startTime = appointmentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        const endTime = new Date(appointment.ends_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        const timeRange = `${startTime} - ${endTime}`;
+        const details = `${formattedDate}\n${timeRange}\n${appointment.human_readable_UA}\nPractitioner: ${appointment.practitioner.name} (Speaks ${appointment.practitioner.language})`;
+        const interpreter = appointment.interpreter ? appointment.interpreter.name : null;
+        const uploadedFiles = appointment.attachments ? appointment.attachments.map(file => file.filename) : [];
+        const formattedAppointment = {
+          id: appointment.id,
+          date: formattedDate,
+          time: timeRange,
+          details: details,
+          interpreter: interpreter,
+          uploadedFiles: uploadedFiles,
+          ...appointment,
+        };
+
+        if (appointmentDate > currentDate) {
+          future.push(formattedAppointment);
+        } else {
+          previous.push(formattedAppointment);
+        }
       });
-    });
-    
-    setAppointmentsByDate(appointmentsGroupedByDate);
+
+      setFutureAppointments(future);
+      setPreviousAppointments(previous);
+    }
   }, []);
 
-  const handleCancel = () => {
-    setPopupVisible(false);
-  };
+  useEffect(() => {
+    // Reset visibility of FAB content when scrolling stops
+    const timeout = setTimeout(() => {
+      setFabVisible(true);
+    }, 2000); // Adjust the delay time as needed
 
-  const handleUploadFiles = () => {
-    setPopupVisible(false);
-  };
+    return () => clearTimeout(timeout);
+  }, [scrolling]);
 
-  const renderAppointmentItem = ({ item, index }) => {
-    const position = popupVisible[index] ? { top: popupVisible[index].y, left: popupVisible[index].x } : null;
-    const isCurrentAppointment = isAppointmentCurrent(item);
+  const handleScroll = Animated.event(
+    [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    { 
+      useNativeDriver: false,
+      listener: event => {
+        const offsetY = event.nativeEvent.contentOffset.y;
+        setScrolling(offsetY !== 0);
+      }
+    }
+  );
 
-    return (
-      <View style={styles.appointmentBox}>
-        <View style={styles.dateAndOptions}>
-          <Text style={styles.date}>{new Date(item.starts_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })} - {new Date(item.ends_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</Text>
-          <TouchableOpacity
-            onPress={event => {
-              setSelectedAppointment(item);
-              setPopupVisible({ ...popupVisible, [index]: { x: event.nativeEvent.pageX, y: event.nativeEvent.pageY } });
-            }}
-            style={styles.optionsButton}
-          >
-          </TouchableOpacity>
-        </View>
-        <View style={styles.practitionerInfo}>
-          <Text>{item.human_readable_UA}</Text>
-          <Text>{item.practitioner.name}</Text>
-          <Text>{item.practitioner.specialization}</Text>
-        </View>
-        <AppointmentButton onPress={() => {}} isActive={isCurrentAppointment} />
-        {popupVisible[index] && (
-          <AppointmentOptionsPopup
-            visible={true}
-            onClose={() => setPopupVisible({ ...popupVisible, [index]: null })}
-            onCancel={handleCancel}
-            onUploadFiles={handleUploadFiles}
-            position={position}
-          />
-        )}
-      </View>
-    );
-  };
-
-  const isAppointmentCurrent = (appointment) => {
-    const currentTime = new Date();
-    const appointmentStartTime = new Date(appointment.starts_at);
-    const appointmentEndTime = new Date(appointment.ends_at);
-    return currentTime >= appointmentStartTime && currentTime <= appointmentEndTime;
-  };
+  const fabTextOpacity = scrollY.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 0],
+    extrapolate: 'clamp',
+  });
 
   return (
     <View style={styles.container}>
-      {Object.keys(appointmentsByDate).map(date => (
-        <View key={date}>
-          <Text style={styles.dateHeading}>
-            {new Date(date).toLocaleDateString('en-US', { weekday: 'long' })}, {new Date(date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
-          </Text>
-          <FlatList
-            style={styles.appointmentsContainer}
-            data={appointmentsByDate[date]}
-            renderItem={renderAppointmentItem}
-            keyExtractor={(item, index) => `${index}`}
-          />
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        onScroll={handleScroll}
+        onScrollBeginDrag={() => setFabVisible(true)} 
+        onScrollEndDrag={() => setFabVisible(true)} 
+        scrollEventThrottle={16}
+      >
+        <View style={styles.header}>
+          <Text style={styles.titleText}>Appointments</Text>
         </View>
-      ))}
+        
+        <View style={styles.headerLine} />
+
+        {futureAppointments.length > 0 ? (
+          <View style={styles.section}>
+            <Text style={styles.sectionHeading}>Future Appointments</Text>
+            <View style={styles.appointmentsContainer}>
+              {futureAppointments.map((appointment) => (
+                <AppointmentItem key={appointment.id} appointment={appointment} />
+              ))}
+            </View>
+          </View>
+        ) : (
+          <View style={styles.noAppointmentsContainer}>
+            <Text style={styles.noAppointmentsText}>You have no upcoming appointments. Sign up for a consultation.</Text>
+          </View>
+        )}
+
+        {previousAppointments.length > 0 ? (
+          <View style={styles.section}>
+            <Text style={styles.sectionHeading}>Previous Appointments</Text>
+            <View style={styles.appointmentsContainer}>
+              {previousAppointments.map((appointment) => (
+                <AppointmentItem key={appointment.id} appointment={appointment} />
+              ))}
+            </View>
+          </View>
+        ) : (
+          <View style={styles.noAppointmentsContainer}>
+            <Text style={styles.noAppointmentsText}>You have no previous appointments.</Text>
+          </View>
+        )}
+      </ScrollView>
+
+      <Animated.View style={[styles.fab]}>
+        <TouchableOpacity onPress={() => navigation.navigate('PractitionerSelection')}>
+          <View style={styles.fabContent}>
+            <Image source={require('../assets/fab_icon.png')} style={styles.fabImage} />
+            <Animated.Text style={[styles.fabText, { opacity: fabTextOpacity }]}>Sign up</Animated.Text>
+          </View>
+        </TouchableOpacity>
+      </Animated.View>
+
     </View>
   );
 };
@@ -118,73 +184,171 @@ const AppointmentsPage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 10,
+    backgroundColor: '#f8f8f8',
   },
-  dateHeading: {
-    fontSize: 18,
-    marginBottom: 10,
-    paddingHorizontal: 20,
+  scrollContainer: {
+    flexGrow: 1,
   },
-  appointmentsContainer: {
-    paddingHorizontal: 20,
-  },
-  appointmentBox: {
-    backgroundColor: 'white',
-    borderRadius: 8,
-    marginBottom: 10,
-    padding: 10,
-  },
-  dateAndOptions: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 5,
-  },
-  date: {
-  },
-  optionsButton: {
-    padding: 5,
-  },
-  appointmentButton: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-  },
-  appointmentButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  popupBackground: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  header: {
+    height: 70,
     justifyContent: 'center',
     alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#dfdfdf',
+    backgroundColor: '#ffffff',
   },
-  popupContainer: {
-    backgroundColor: 'white',
-    borderRadius: 8,
+  titleText: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: '#353535',
+  },
+  headerLine: {
+    height: 1,
+    backgroundColor: '#dfdfdf',
+  },
+  section: {
+    marginBottom: 20,
+  },
+  sectionHeading: {
+    paddingTop: 10, 
+        fontWeight: 'bold',
+    fontSize: 16,
+    color: '#353535',
+    marginBottom: 10,
+    marginLeft: 10,
+  },
+  appointmentsContainer: {
     padding: 10,
-    minWidth: 100,
-    position: 'absolute',
   },
-  popupOption: {
+  appointmentItem: {
+    marginBottom: 10,
+    padding: 10,
+    backgroundColor: '#ffffff',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#dfdfdf',
+  },
+  appointmentTitle: {
+    fontWeight: 'bold',
     fontSize: 16,
-    paddingVertical: 5,
+    color: '#3269bd',
+    marginBottom: 5,
   },
-  popupCloseButton: {
+  appointmentDate: {
+    fontWeight: 'bold',
     fontSize: 16,
-    paddingVertical: 5,
-    color: 'blue',
-    marginTop: 5,
+    color: '#353535',
   },
-  practitionerInfo: {
-    marginBottom: 10, 
+  appointmentTime: {
+    fontSize: 14,
+    color: '#353535',
   },
-  AppointmentOptions: {
+  appointmentDetails: {
+    fontSize: 16,
+    color: '#353535',
+    marginBottom: 5,
+  },
+  appointmentText: {
+    fontSize: 14,
+    color: '#353535',
+  },
+  uploadedFilesContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: 5,
+  },
+  uploadedFile: {
+    fontSize: 14,
+    color: '#353535',
+    backgroundColor: '#e6ecf0',
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    marginRight: 5,
+    marginBottom: 5,
+    borderRadius: 5,
+  },
+  buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  modifyButton: {
+    backgroundColor: '#ffffff',
+    borderColor: '#000000',
+    borderWidth: 1,
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    borderRadius: 5,
+    flexDirection: 'row', 
+    alignItems: 'center'
+  },
+  buttonImage: {
+    width: 20,
+    height: 20,
+    marginRight: 5,
+  },
+  modifyButtonText: {
+    color: '#3269bd',
+    fontWeight: 'bold',
+  },
+  joinButton: {
+    backgroundColor: '#8a8a8a',
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    borderRadius: 5,
+  },
+  joinButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  joinButtonActive: {
+    backgroundColor: '#3269bd',
+  },
+  joinButtonTextActive: {
+    color: 'white',
+  },
+  disabledButton: {
+    opacity: 0.5,
+  },
+  noAppointmentsContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  noAppointmentsText: {
+    fontSize: 16,
+    color: '#353535',
+    textAlign: 'center',
+  },
+  fab: {
+    position: 'absolute',
+    width: 'auto', // Adjust width to content
+    height: 60, // Set height to your desired value
+    backgroundColor: '#3269bd',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10, // Adjust border radius to round corners
+    right: 20,
+    bottom: 20,
+    elevation: 8,
+  },
+  fabContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10, 
+    paddingVertical: 5,
+    borderRadius: 30,
+    backgroundColor: '#3269bd',
+  },
+  fabImage: {
+    width: 40,
+    height: 40,
+    marginRight: 10,
+  },
+  fabText: {
+    fontSize: 16,
+    color: 'white',
   }
 });
 

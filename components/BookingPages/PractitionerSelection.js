@@ -23,7 +23,7 @@ const practitionersData = [
   },
 ];
 
-const SelectPractitioner = () => {
+const PractitionerSelection = () => {
   const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -40,7 +40,7 @@ const SelectPractitioner = () => {
   };
 
   const handleClose = () => {
-    navigation.navigate('AppointmentsPage');
+    navigation.navigate('AppNavigator');
   };
 
   return (
@@ -232,4 +232,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SelectPractitioner;
+export default PractitionerSelection;

@@ -27,7 +27,7 @@ const MentalIssueSelection = () => {
     };
 
     const handleClose = () => {
-      navigation.navigate('AppointmentsPage');
+      navigation.navigate('AppNavigator');
     };
 
     const filteredMentalIssueTypes = MentalIssueTypes.filter(issue =>

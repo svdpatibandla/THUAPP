@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
+    "@expo/vector-icons": "^13.0.0",
     "@expo/webpack-config": "^0.12.52",
     "@react-native-async-storage/async-storage": "^1.19.5",
     "@react-native-community/viewpager": "^5.0.11",

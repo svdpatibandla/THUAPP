@@ -34,7 +34,7 @@ const HealthTypeSelection = () => {
   };
 
   const handleClose = () => {
-    navigation.navigate('AppointmentsPage'); 
+    navigation.navigate('AppNavigator'); 
   };
 
   const handleBack = () => {

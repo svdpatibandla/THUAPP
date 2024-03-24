@@ -19,28 +19,28 @@ import BookingPage from './components/BookingPage';
 import PractitionerPage from './components/PractitionerPage';
 import AppointmentsPage from './components/AppointmentsPage';
 import ConfirmAppointment from './components/ConfirmAppointment';
-import SelectPractitioner from './components/BookingPages/PractitionerSelection';
+import PractitionerSelection from './components/BookingPages/PractitionerSelection';
 import AgeGroupSelection from './components/BookingPages/AgeGroupSelection';
 import HealthTypeSelection from './components/BookingPages/HealthTypeSelection';
 import MentalIssueSelection from './components/BookingPages/MentalIssueSelection';
-import MentalPractitionerSelection from './components/BookingPages/MedicalPractitionerSelection';
+import MentalPractitionerSelection from './components/BookingPages/MentalPractitionerSelection';
 import MedicalPractitionerSelection from './components/BookingPages/MedicalPractitionerSelection';
 
 const Stack = createStackNavigator();
 
 const LoggedInNavigator = () => (
   <Stack.Navigator initialRouteName="AppNavigator" screenOptions={{ headerShown: true }}>
-    <Stack.Screen name="AppNavigator" component={AppNavigator} options={{ title: 'My Appointments', headerLeft: null, headerTitleAlign: 'center' }} />
+    <Stack.Screen name="AppNavigator" component={AppNavigator} options={{ title: 'My Appointments', headerLeft: null, headerTitleAlign: 'center', headerShown: false }} />
     <Stack.Screen name="Account" component={AccountPage} />
     <Stack.Screen name="MentalContent" component={MentalContent} />
     <Stack.Screen name="PlanPage" component={PlanPage} />
     <Stack.Screen name="AvailableAppointments" component={AvailableAppointments} />
     <Stack.Screen name="LandingPage" component={LandingPage} />
     <Stack.Screen name="BookingPage" component={BookingPage} />
-    <Stack.Screen name="AppointmentsPage" component={AppointmentsPage} />
+    <Stack.Screen name="AppointmentsPage" component={AppointmentsPage} options={{ headerShown: false }} />
     <Stack.Screen name="PractitionerPage" component={PractitionerPage} />
     <Stack.Screen name="ConfirmAppointment" component={ConfirmAppointment} />
-    <Stack.Screen name="SelectPractitioner" component={SelectPractitioner} options={{ headerShown: false}} />
+    <Stack.Screen name="PractitionerSelection" component={PractitionerSelection} options={{ headerShown: false}} />
     <Stack.Screen name="AgeGroupSelection" component={AgeGroupSelection} options={{ headerShown: false}} />
     <Stack.Screen name="HealthTypeSelection" component={HealthTypeSelection} options={{ headerShown: false}} />
     <Stack.Screen name="MentalIssueSelection" component={MentalIssueSelection} options={{ headerShown: false}} />

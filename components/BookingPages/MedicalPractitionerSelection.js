@@ -20,7 +20,7 @@ const MedicalPractitionerSelection = () => {
   };
 
   const handleClose = () => {
-    navigation.navigate('AppointmentsPage');
+    navigation.navigate('AppNavigator');
   };
 
   const handleBack = () => {
