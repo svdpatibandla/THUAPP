@@ -81,8 +81,8 @@ const MentalPractitionerSelection = () => {
                 {selectedMentalPractitionerType === mentalPractitionerType && <View style={styles.innerCircle} />}
               </View>
               <View style={styles.mentalPractitionerTypeContent}>
-                <Text style={styles.mentalPractitionerTypeName}>{mentalPractitionerType.name}</Text>
-                <Text style={styles.mentalPractitionerTypeDescription}>{mentalPractitionerType.description}</Text>
+                <Text style={styles.MentalPractitionerTypeName}>{mentalPractitionerType.name}</Text>
+                <Text style={styles.MentalPractitionerTypeDescription}>{mentalPractitionerType.description}</Text>
               </View>
             </View>
           </TouchableOpacity>

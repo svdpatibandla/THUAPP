@@ -34,8 +34,6 @@ const LandingPage = () => {
       console.log('ID Token:', credentials?.idToken);
       console.log('User ID:', user_id);
 
-
-      //AsyncStorage.setItem('@user_info', JSON.stringify({ name: userType, ...credentials }));
       AsyncStorage.setItem('isLoggedIn', JSON.stringify(true));
       dispatch(setUser({ name: userType, ...credentials }));
 
@@ -54,21 +52,6 @@ const LandingPage = () => {
     }
   };
 
-  const onLogout = async () => {
-    console.log('Logging out...');
-    try {
-      await AsyncStorage.removeItem('@user_info');
-      AsyncStorage.removeItem('isLoggedIn');
-      await clearSession({ federated: false }); // Ensure parameters match your Auth0 setup requirements
-      dispatch(clearUser());
-      console.log('Logged out successfully!');
-      navigation.navigate('LandingPage'); // Navigate to the landing page or another initial screen
-    } catch (e) {
-      console.error('Logout Error:', e);
-      // Optionally, update the UI to show an error message
-    }
-  };
-  
 
   if (isLoading) {
     return (

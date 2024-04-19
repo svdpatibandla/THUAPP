@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const MentalIssueTypes = ["Addiction / substance abuse", "Anger management", "Bipolar disorder", "Depression", "Grief", "Attention-deficit / hyperactivity disorder(ADHD)", "Post-traumatic stress disorder (PTSD)", "Stress", "Obsessive-compulsive disorder (OCD)","Other"];
+const MentalIssueTypes = ["Addiction / substance abuse", "Anger management", "Bipolar disorder", "Depression", "Grief", "Attention-deficit / hyperactivity disorder(ADHD)", "Post-traumatic stress disorder (PTSD)", "Stress", "Obsessive-compulsive disorder (OCD)", "Suicidal ideation or self-harm", "Other"];
 
 const MentalIssueSelection = () => {
     const navigation = useNavigation();
@@ -66,11 +66,11 @@ const MentalIssueSelection = () => {
                 <Text style={styles.titleText}>What type of issue do you want to address</Text>
             </View>
 
-            <View style={styles.datacontainer}>
+            <ScrollView style={styles.datacontainer}>
                 {filteredMentalIssueTypes.map((MentalIssueType, index) => (
                     <TouchableOpacity
                         key={index}
-                        style={[styles.practitionerBox, selectedMentalIssueType === MentalIssueType && styles.selected]}
+                        style={[styles.IssueBox, selectedMentalIssueType === MentalIssueType && styles.selected]}
                         onPress={() => handleMentalIssueTypeSelection(MentalIssueType)}
                     >
                         <View style={styles.radioContainer}>
@@ -81,7 +81,7 @@ const MentalIssueSelection = () => {
                         </View>
                     </TouchableOpacity>
                 ))}
-            </View>
+            </ScrollView>
 
             <View style={styles.bottomLine} />
 
@@ -182,12 +182,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
   },
-  practitionerBox: {
+  IssueBox: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    height: 45,
+    height: 40,
     backgroundColor: 'white',
     marginVertical: 5,
     paddingHorizontal: 20, 
@@ -219,8 +219,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#3269bd',
   },
   MentalIssueTypeText: {
-    fontSize: 16, 
-    fontWeight: '500',
+    fontSize: 15, 
     color: '#353535',
     },
 });

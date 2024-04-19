@@ -11,11 +11,9 @@ import config from './components/auth0-configuration';
 import NewPatientForm from './components/NewPatientForm';
 import AppNavigator from './components/AppNavigator';
 import AccountPage from './components/AccountPage';
-import { useSelector } from 'react-redux';
-import AvailableAppointments from './components/BookingPage';
+
 import MentalContent from './temp/MentalContentPage';
 import PlanPage from './temp/PlanPage';
-import BookingPage from './components/BookingPage';
 import PractitionerPage from './components/PractitionerPage';
 import AppointmentsPage from './components/AppointmentsPage';
 import ConfirmAppointment from './components/ConfirmAppointment';
@@ -25,6 +23,7 @@ import HealthTypeSelection from './components/BookingPages/HealthTypeSelection';
 import MentalIssueSelection from './components/BookingPages/MentalIssueSelection';
 import MentalPractitionerSelection from './components/BookingPages/MentalPractitionerSelection';
 import MedicalPractitionerSelection from './components/BookingPages/MedicalPractitionerSelection';
+import SlotSelection from './components/BookingPages/SlotSelection';
 
 const Stack = createStackNavigator();
 
@@ -34,9 +33,7 @@ const LoggedInNavigator = () => (
     <Stack.Screen name="Account" component={AccountPage} />
     <Stack.Screen name="MentalContent" component={MentalContent} />
     <Stack.Screen name="PlanPage" component={PlanPage} />
-    <Stack.Screen name="AvailableAppointments" component={AvailableAppointments} />
     <Stack.Screen name="LandingPage" component={LandingPage} />
-    <Stack.Screen name="BookingPage" component={BookingPage} />
     <Stack.Screen name="AppointmentsPage" component={AppointmentsPage} options={{ headerShown: false }} />
     <Stack.Screen name="PractitionerPage" component={PractitionerPage} />
     <Stack.Screen name="ConfirmAppointment" component={ConfirmAppointment} />
@@ -46,27 +43,25 @@ const LoggedInNavigator = () => (
     <Stack.Screen name="MentalIssueSelection" component={MentalIssueSelection} options={{ headerShown: false}} />
     <Stack.Screen name="MentalPractitionerSelection" component={MentalPractitionerSelection} options={{ headerShown: false}} />
     <Stack.Screen name="MedicalPractitionerSelection" component={MedicalPractitionerSelection} options={{ headerShown: false}} />
+    <Stack.Screen name="SlotSelection" component={SlotSelection} options={{ headerShown: false}} />
   </Stack.Navigator>
 );
 
-// Guest user navigator
 const GuestNavigator = () => (
   <Stack.Navigator initialRouteName="LandingPage" screenOptions={{ headerShown: false }}>
     <Stack.Screen name="LandingPage" component={LandingPage} />
     <Stack.Screen name="NewPatientForm" component={NewPatientForm} screenOptions={{ headerShown: true }} />
     <Stack.Screen name="AppNavigator" component={AppNavigator} />
-    <Stack.Screen name="MentalContent" component={MentalContent} />
   </Stack.Navigator>
 );
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
   const [isLoggedIn, setLoggedIn] = useState(false);
 
   async function getData() {
     const data = await AsyncStorage.getItem('isLoggedIn');
     console.log('Data at app:', data);
-    setLoggedIn(data === 'true'); // Assuming 'isLoggedIn' is stored as a string
+    setLoggedIn(data === 'true'); 
   }
 
   useEffect(() => {

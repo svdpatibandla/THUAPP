@@ -4,9 +4,7 @@ import { Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import AppointmentsPage from './AppointmentsPage';
-import PlanPage from '../temp/PlanPage';
 import AccountPage from './AccountPage';
-import BookingPage from './BookingPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,19 +26,6 @@ const AppNavigator = () => {
       <Tab.Screen
         name="Appointments"
         component={AppointmentsPage}
-        options={{
-          headerShown: false,
-          tabBarIcon: () => (
-            <Image
-              source={require('../assets/PlusSign.png')}
-              style={{ width: 20, height: 20 }}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Book/Plan"
-        component={BookingPage}
         options={{
           headerShown: false,
           tabBarIcon: () => (

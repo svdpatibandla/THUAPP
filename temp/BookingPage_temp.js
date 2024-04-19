@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import jsonData from './avail_appointments.json';
+import jsonData from '../components/avail_appointments.json';
 
 const BookingPage = () => {
   console.log('JsonData: ', jsonData);
   const navigation = useNavigation();
-  const [searchQuery, setSearchQuery] = useState('');
 
   const todayDate = new Date().toISOString().split('T')[0];
   const groupedSlotsByPractitioner = () => {
@@ -17,10 +16,6 @@ const BookingPage = () => {
         service.practitioners.forEach(practitioner => {
           const practitionerId = practitioner.cliniko_practitioner_id;
           const practitionerName = practitioner.name.toLowerCase();
-  
-          if (!practitionerName.includes(searchQuery.toLowerCase())) {
-            return;
-          }
   
           if (!groupedSlots[practitionerId]) {
             groupedSlots[practitionerId] = {
@@ -97,12 +92,6 @@ const BookingPage = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <TextInput
-        style={styles.searchBar}
-        placeholder="Search Practitioner"
-        value={searchQuery}
-        onChangeText={text => setSearchQuery(text)}
-      />
       {Object.keys(groupedSlots).map(practitionerId => (
         <View key={practitionerId} style={styles.practitionerBlock}>
           <Text style={styles.practitionerName}>{groupedSlots[practitionerId].name}</Text>
@@ -135,16 +124,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     padding: 10,
-  },
-  searchBar: {
-    height: 40,
-    borderColor: '#2989F6', // Change border color to a blue shade
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    borderRadius: 8, // Add border radius for rounded corners
-    fontSize: 16, // Increase font size
-    color: '#333', // Change text color
   },
   practitionerBlock: {
     marginBottom: 20,

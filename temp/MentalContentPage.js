@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, Image, StyleSheet, Dimensions } from 'react-native';
-import { AvailableAppointments } from '../components/BookingPage';
+import { AvailableAppointments } from './BookingPage_temp';
 import { useNavigation } from '@react-navigation/native';
 
 const MentalHealthItems = [

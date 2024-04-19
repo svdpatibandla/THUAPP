@@ -15,7 +15,7 @@ const MedicalPractitionerSelection = () => {
 
   const handleContinue = () => {
     if (selectedMedicalPractitionerType) {
-      navigation.navigate('BookingPage', { selectedMedicalPractitionerType });
+      navigation.navigate('SlotSelection', { selectedMedicalPractitionerType });
     }
   };
 

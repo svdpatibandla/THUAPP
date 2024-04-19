@@ -12179,7 +12179,7 @@
                             "cliniko_appointment_type_id": 1088363698734500295,
                             "created_at": null,
                             "id": 46,
-                            "name": "Talk therapy"
+                            "name": "Adult Talk therapy"
                         },
                         "slots": {
                             "all_slots": {
@@ -37035,7 +37035,7 @@
                             "cliniko_appointment_type_id": 1360290469786946125,
                             "created_at": "Sat, 24 Feb 2024 17:48:33 GMT",
                             "id": 48,
-                            "name": "Peds Psychiatrist | Підтримка психіатра для дітей та підлітків"
+                            "name": "Peds Psychiatrist"
                         },
                         "slots": {
                             "all_slots": {
