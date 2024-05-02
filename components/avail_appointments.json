@@ -1,136 +1,263 @@
 {
-    "cliniko_appointment_type_id": "<cliniko_appointment_type_id>",
-    "all_slots": {
-      "2024-03-28": [
-        {
-          "cliniko_practitioner_id": "933300557148326133",
-          "human_readable_UA": "12:15, четвер, 28 березня",
-          "id": null,
-          "interpreter_id": null,
-          "interpreter_name": null,
-          "language": "U",
-          "language_id": 1,
-          "patient_date": "2024-03-28",
-          "patient_datetime": "Thu, 28 Mar 2024 10:15:00 GMT",
-          "practitioner": {
-            "cliniko_account_id": 1,
-            "cliniko_practitioner_id": 933300557148326133,
-            "information": "",
-            "name": "Bender Rodríguez",
-            "specialization": "Physician, practitioner in online bookings.",
-            "tz": "UTC"
-          },
-          "time": "2024-03-28 10:15:00",
-          "utc_date": "2024-03-28"
-        }],
-        "2024-04-05": [
-        {
-          "cliniko_practitioner_id": "933300557148326133",
-          "human_readable_UA": "00:15, пʼятниця, 5 квітня",
-          "id": null,
-          "interpreter_id": null,
-          "interpreter_name": null,
-          "language": "U",
-          "language_id": 1,
-          "patient_date": "2024-04-05",
-          "patient_datetime": "Thu, 04 Apr 2024 21:15:00 GMT",
-          "practitioner": {
-            "cliniko_account_id": 1,
-            "cliniko_practitioner_id": 933300557148326133,
-            "information": "",
-            "name": "Bender Rodríguez",
-            "specialization": "Physician, practitioner in online bookings.",
-            "tz": "UTC"
-          },
-          "time": "2024-04-04 21:15:00",
-          "utc_date": "2024-04-04"
-        }],
-        "2024-04-30": [
-        {
-            "cliniko_practitioner_id": "933300557148326133",
-            "human_readable_UA": "00:15, пʼятниця, 5 квітня",
-            "id": null,
-            "interpreter_id": null,
-            "interpreter_name": null,
-            "language": "U",
-            "language_id": 1,
-            "patient_date": "2024-04-05",
-            "patient_datetime": "Thu, 04 Apr 2024 21:15:00 GMT",
-            "practitioner": {
-            "cliniko_account_id": 1,
-            "cliniko_practitioner_id": 933300557148326133,
-            "information": "",
-            "name": "Bender Rodríguez",
-            "specialization": "Physician, practitioner in online bookings.",
-            "tz": "UTC"
-            },
-            "time": "2024-04-30 21:15:00",
-            "utc_date": "2024-04-30"
+  "cliniko_appointment_type_id": "<cliniko_appointment_type_id>",
+  "all_slots": {
+    "2024-05-02": [
+      {
+        "cliniko_practitioner_id": "933300557148326133",
+        "human_readable_UA": "10:00, Monday, May 2",
+        "id": null,
+        "interpreter_id": null,
+        "interpreter_name": null,
+        "language": "U",
+        "language_id": 1,
+        "patient_date": "2024-05-02",
+        "patient_datetime": "Mon, 02 May 2024 10:00:00 GMT",
+        "practitioner": {
+          "cliniko_account_id": 1,
+          "cliniko_practitioner_id": 933300557148326133,
+          "information": "",
+          "name": "Bender Rodríguez",
+          "specialization": "Physician, practitioner in online bookings.",
+          "tz": "UTC"
         },
-        {
-            "cliniko_practitioner_id": "933300557148326133",
-            "human_readable_UA": "00:15, пʼятниця, 5 квітня",
-            "id": null,
-            "interpreter_id": null,
-            "interpreter_name": null,
-            "language": "U",
-            "language_id": 1,
-            "patient_date": "2024-04-05",
-            "patient_datetime": "Thu, 04 Apr 2024 21:15:00 GMT",
-            "practitioner": {
-            "cliniko_account_id": 1,
-            "cliniko_practitioner_id": 933300557148326133,
-            "information": "",
-            "name": "Bender Rodríguez",
-            "specialization": "Physician, practitioner in online bookings.",
-            "tz": "UTC"
-            },
-            "time": "2024-04-30 21:15:00",
-            "utc_date": "2024-04-30"
-        }],
-        "2024-05-01": [
-        {
-            "cliniko_practitioner_id": "933300557148326133",
-            "human_readable_UA": "00:15, пʼятниця, 5 квітня",
-            "id": null,
-            "interpreter_id": null,
-            "interpreter_name": null,
-            "language": "U",
-            "language_id": 1,
-            "patient_date": "2024-04-05",
-            "patient_datetime": "Thu, 04 Apr 2024 21:15:00 GMT",
-            "practitioner": {
-            "cliniko_account_id": 1,
-            "cliniko_practitioner_id": 933300557148326133,
-            "information": "",
-            "name": "Bender Rodríguez",
-            "specialization": "Physician, practitioner in online bookings.",
-            "tz": "UTC"
-            },
-            "time": "2024-04-30 21:15:00",
-            "utc_date": "2024-04-30"
+        "time": "2024-05-02 10:00:00",
+        "utc_date": "2024-05-02"
+      },
+      {
+        "cliniko_practitioner_id": "933300557148326133",
+        "human_readable_UA": "10:30, Monday, May 2",
+        "id": null,
+        "interpreter_id": null,
+        "interpreter_name": null,
+        "language": "U",
+        "language_id": 1,
+        "patient_date": "2024-05-02",
+        "patient_datetime": "Mon, 02 May 2024 10:30:00 GMT",
+        "practitioner": {
+          "cliniko_account_id": 1,
+          "cliniko_practitioner_id": 933300557148326133,
+          "information": "",
+          "name": "Bender Rodríguez",
+          "specialization": "Physician, practitioner in online bookings.",
+          "tz": "UTC"
         },
-        {
-            "cliniko_practitioner_id": "933300557148326133",
-            "human_readable_UA": "00:15, пʼятниця, 5 квітня",
-            "id": null,
-            "interpreter_id": null,
-            "interpreter_name": null,
-            "language": "U",
-            "language_id": 1,
-            "patient_date": "2024-04-05",
-            "patient_datetime": "Thu, 04 Apr 2024 21:15:00 GMT",
-            "practitioner": {
-            "cliniko_account_id": 1,
-            "cliniko_practitioner_id": 933300557148326133,
-            "information": "",
-            "name": "Bender Rodríguez",
-            "specialization": "Physician, practitioner in online bookings.",
-            "tz": "UTC"
-            },
-            "time": "2024-04-30 21:15:00",
-            "utc_date": "2024-04-30"
-        }]
-    }
+        "time": "2024-05-02 10:30:00",
+        "utc_date": "2024-05-02"
+      },
+      {
+        "cliniko_practitioner_id": "933300557148326134",
+        "human_readable_UA": "11:00, Monday, May 2",
+        "id": null,
+        "interpreter_id": null,
+        "interpreter_name": null,
+        "language": "U",
+        "language_id": 1,
+        "patient_date": "2024-05-02",
+        "patient_datetime": "Mon, 02 May 2024 11:00:00 GMT",
+        "practitioner": {
+          "cliniko_account_id": 1,
+          "cliniko_practitioner_id": 933300557148326134,
+          "information": "",
+          "name": "John Doe",
+          "specialization": "General Practitioner",
+          "tz": "UTC"
+        },
+        "time": "2024-05-02 11:00:00",
+        "utc_date": "2024-05-02"
+      },
+      {
+        "cliniko_practitioner_id": "933300557148326134",
+        "human_readable_UA": "11:30, Monday, May 2",
+        "id": null,
+        "interpreter_id": null,
+        "interpreter_name": null,
+        "language": "U",
+        "language_id": 1,
+        "patient_date": "2024-05-02",
+        "patient_datetime": "Mon, 02 May 2024 11:30:00 GMT",
+        "practitioner": {
+          "cliniko_account_id": 1,
+          "cliniko_practitioner_id": 933300557148326134,
+          "information": "",
+          "name": "John Doe",
+          "specialization": "General Practitioner",
+          "tz": "UTC"
+        },
+        "time": "2024-05-02 11:30:00",
+        "utc_date": "2024-05-02"
+      }
+    ],
+    "2024-05-03": [
+      {
+        "cliniko_practitioner_id": "933300557148326133",
+        "human_readable_UA": "12:00, Tuesday, May 3",
+        "id": null,
+        "interpreter_id": null,
+        "interpreter_name": null,
+        "language": "U",
+        "language_id": 1,
+        "patient_date": "2024-05-03",
+        "patient_datetime": "Tue, 03 May 2024 12:00:00 GMT",
+        "practitioner": {
+          "cliniko_account_id": 1,
+          "cliniko_practitioner_id": 933300557148326133,
+          "information": "",
+          "name": "Bender Rodríguez",
+          "specialization": "Physician, practitioner in online bookings.",
+          "tz": "UTC"
+        },
+        "time": "2024-05-03 12:00:00",
+        "utc_date": "2024-05-03"
+      },
+      {
+        "cliniko_practitioner_id": "933300557148326133",
+        "human_readable_UA": "12:30, Tuesday, May 3",
+        "id": null,
+        "interpreter_id": null,
+        "interpreter_name": null,
+        "language": "U",
+        "language_id": 1,
+        "patient_date": "2024-05-03",
+        "patient_datetime": "Tue, 03 May 2024 12:30:00 GMT",
+        "practitioner": {
+          "cliniko_account_id": 1,
+          "cliniko_practitioner_id": 933300557148326133,
+          "information": "",
+          "name": "Bender Rodríguez",
+          "specialization": "Physician, practitioner in online bookings.",
+          "tz": "UTC"
+        },
+        "time": "2024-05-03 12:30:00",
+        "utc_date": "2024-05-03"
+      },
+      {
+        "cliniko_practitioner_id": "933300557148326134",
+        "human_readable_UA": "13:00, Tuesday, May 3",
+        "id": null,
+        "interpreter_id": null,
+        "interpreter_name": null,
+        "language": "U",
+        "language_id": 1,
+        "patient_date": "2024-05-03",
+        "patient_datetime": "Tue, 03 May 2024 13:00:00 GMT",
+        "practitioner": {
+          "cliniko_account_id": 1,
+          "cliniko_practitioner_id": 933300557148326134,
+          "information": "",
+          "name": "John Doe",
+          "specialization": "General Practitioner",
+          "tz": "UTC"
+        },
+        "time": "2024-05-03 13:00:00",
+        "utc_date": "2024-05-03"
+      },
+      {
+        "cliniko_practitioner_id": "933300557148326134",
+        "human_readable_UA": "13:30, Tuesday, May 3",
+        "id": null,
+        "interpreter_id": null,
+        "interpreter_name": null,
+        "language": "U",
+        "language_id": 1,
+        "patient_date": "2024-05-03",
+        "patient_datetime": "Tue, 03 May 2024 13:30:00 GMT",
+        "practitioner": {
+          "cliniko_account_id": 1,
+          "cliniko_practitioner_id": 933300557148326134,
+          "information": "",
+          "name": "John Doe",
+          "specialization": "General Practitioner",
+          "tz": "UTC"
+        },
+        "time": "2024-05-03 13:30:00",
+        "utc_date": "2024-05-03"
+      }
+    ],
+    "2024-05-04": [
+      {
+        "cliniko_practitioner_id": "933300557148326133",
+        "human_readable_UA": "14:00, Wednesday, May 4",
+        "id": null,
+        "interpreter_id": null,
+        "interpreter_name": null,
+        "language": "U",
+        "language_id": 1,
+        "patient_date": "2024-05-04",
+        "patient_datetime": "Wed, 04 May 2024 14:00:00 GMT",
+        "practitioner": {
+          "cliniko_account_id": 1,
+          "cliniko_practitioner_id": 933300557148326133,
+          "information": "",
+          "name": "Bender Rodríguez",
+          "specialization": "Physician, practitioner in online bookings.",
+          "tz": "UTC"
+        },
+        "time": "2024-05-04 14:00:00",
+        "utc_date": "2024-05-04"
+      },
+      {
+        "cliniko_practitioner_id": "933300557148326133",
+        "human_readable_UA": "14:30, Wednesday, May 4",
+        "id": null,
+        "interpreter_id": null,
+        "interpreter_name": null,
+        "language": "U",
+        "language_id": 1,
+        "patient_date": "2024-05-04",
+        "patient_datetime": "Wed, 04 May 2024 14:30:00 GMT",
+        "practitioner": {
+          "cliniko_account_id": 1,
+          "cliniko_practitioner_id": 933300557148326133,
+          "information": "",
+          "name": "Bender Rodríguez",
+          "specialization": "Physician, practitioner in online bookings.",
+          "tz": "UTC"
+        },
+        "time": "2024-05-04 14:30:00",
+        "utc_date": "2024-05-04"
+      },
+      {
+        "cliniko_practitioner_id": "933300557148326134",
+        "human_readable_UA": "15:00, Wednesday, May 4",
+        "id": null,
+        "interpreter_id": null,
+        "interpreter_name": null,
+        "language": "U",
+        "language_id": 1,
+        "patient_date": "2024-05-04",
+        "patient_datetime": "Wed, 04 May 2024 15:00:00 GMT",
+        "practitioner": {
+          "cliniko_account_id": 1,
+          "cliniko_practitioner_id": 933300557148326134,
+          "information": "",
+          "name": "John Doe",
+          "specialization": "General Practitioner",
+          "tz": "UTC"
+        },
+        "time": "2024-05-04 15:00:00",
+        "utc_date": "2024-05-04"
+      },
+      {
+        "cliniko_practitioner_id": "933300557148326134",
+        "human_readable_UA": "15:30, Wednesday, May 4",
+        "id": null,
+        "interpreter_id": null,
+        "interpreter_name": null,
+        "language": "U",
+        "language_id": 1,
+        "patient_date": "2024-05-04",
+        "patient_datetime": "Wed, 04 May 2024 15:30:00 GMT",
+        "practitioner": {
+          "cliniko_account_id": 1,
+          "cliniko_practitioner_id": 933300557148326134,
+          "information": "",
+          "name": "John Doe",
+          "specialization": "General Practitioner",
+          "tz": "UTC"
+        },
+        "time": "2024-05-04 15:30:00",
+        "utc_date": "2024-05-04"
+      }
+    ]
   }
-  
+}

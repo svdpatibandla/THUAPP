@@ -4,11 +4,10 @@ import { Calendar } from 'react-native-calendars';
 import { useNavigation } from '@react-navigation/native';
 
 const PractitionerPage = ({ route }) => {
-  const { practitioner } = route.params; // Receive practitioner details as route params
+  const { practitioner } = route.params; 
   const [selectedDate, setSelectedDate] = useState(null);
-  const navigation = useNavigation(); // Hook to access navigation
+  const navigation = useNavigation(); 
 
-  // Parse the slots data from practitioner
   const slots = practitioner.slots.reduce((acc, slot) => {
     const date = slot.date;
     if (!acc[date]) {
