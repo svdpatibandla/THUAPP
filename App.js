@@ -28,7 +28,7 @@ import SlotSelection from './components/BookingPages/SlotSelection';
 const Stack = createStackNavigator();
 
 const LoggedInNavigator = () => (
-  <Stack.Navigator initialRouteName="AppNavigator" screenOptions={{ headerShown: true }}>
+  <Stack.Navigator initialRouteName="SlotSelection" screenOptions={{ headerShown: true }}>
     <Stack.Screen name="AppNavigator" component={AppNavigator} options={{ title: 'My Appointments', headerLeft: null, headerTitleAlign: 'center', headerShown: false }} />
     <Stack.Screen name="Account" component={AccountPage} />
     <Stack.Screen name="MentalContent" component={MentalContent} />
@@ -44,6 +44,7 @@ const LoggedInNavigator = () => (
     <Stack.Screen name="MentalPractitionerSelection" component={MentalPractitionerSelection} options={{ headerShown: false}} />
     <Stack.Screen name="MedicalPractitionerSelection" component={MedicalPractitionerSelection} options={{ headerShown: false}} />
     <Stack.Screen name="SlotSelection" component={SlotSelection} options={{ headerShown: false}} />
+    <Stack.Screen name="NewPatientForm" component={NewPatientForm} screenOptions={{ headerShown: true }} />
   </Stack.Navigator>
 );
 

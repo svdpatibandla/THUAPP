@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Header from './Header';
 
 const AgeGroups = ["Adult", "Child / Teen"];
 
@@ -19,7 +20,7 @@ const AgeGroupSelection = () => {
       navigation.navigate('HealthTypeSelection', { selectedAgeGroup });
     }
   };
-  
+
   const handleGoBack = () => {
     navigation.goBack();
   };
@@ -35,27 +36,7 @@ const AgeGroupSelection = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={handleGoBack}>
-          <Image source={require('../../assets/goBack.png')} style={styles.headerImage} />
-        </TouchableOpacity>
-        <View style={styles.searchBarContainer}>
-          <TextInput
-            style={styles.searchBar}
-            placeholder="Search Age Groups"
-            textAlign='center'
-            value={searchText}
-            onChangeText={(text) => setSearchText(text)}
-          />
-          <Image source={require('../../assets/search.png')} style={styles.searchImage} />
-          <Image source={require('../../assets/mic.png')} style={styles.micImage} />
-        </View>
-        <TouchableOpacity onPress={handleClose}>
-          <Image source={require('../../assets/cancel.png')} style={styles.headerImage} />
-        </TouchableOpacity>
-      </View>
-      
-      <View style={styles.headerLine} />
+      <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchText} setSearchQuery={setSearchText} />
       
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>Who needs help?</Text>
@@ -89,8 +70,6 @@ const AgeGroupSelection = () => {
   );
 };
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -99,50 +78,6 @@ const styles = StyleSheet.create({
   datacontainer: {
     flex: 1,
     paddingHorizontal: 20,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 70,
-    borderBottomWidth: 1,
-    borderBottomColor: '#dfdfdf', 
-    backgroundColor: '#ffffff',
-  },
-  headerImage: {
-    width: 20,
-    height: 20,
-    marginHorizontal: 10,
-  },
-  searchBarContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    position: 'relative',
-  },
-  searchBar: {
-    flex: 1,
-    height: 40,
-    paddingHorizontal: 10,
-    backgroundColor: '#ffffff', 
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#dfdfdf',
-  },
-  micImage: {
-    width: 20,
-    height: 20,
-    position: 'absolute',
-    right: 10,
-  },
-  searchImage: { 
-    width: 20,
-    height: 20,
-    position: 'absolute',
-    left: 10,
-  },
-  headerLine: {
-    height: 1,
   },
   titleContainer: {
     paddingHorizontal: 20,
@@ -222,5 +157,3 @@ const styles = StyleSheet.create({
 });
 
 export default AgeGroupSelection;
-
-//implement same close, back and console log selected item for this as well and update variable names according to the file

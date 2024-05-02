@@ -4,18 +4,21 @@ import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, Text, StyleSheet, Alert, ScrollView } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { RadioButton } from 'react-native-paper';
-import CountryPicker from 'react-native-country-picker-modal';
-import { CheckBox } from 'react-native-elements';
 import moment from 'moment-timezone';
+import { CheckBox } from 'react-native-elements';
 import axios from 'axios';
-import { useAuth0 } from 'react-native-auth0';
-
+import { useDispatch, useSelector } from 'react-redux'; 
 
 const NewPatientForm = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.auth.user);
+  const token = useSelector(state => state.auth.token.idToken);
+  const firstName = useSelector(state => state.auth.firstName);
+  const lastName = useSelector(state => state.auth.lastName);
 
-  const { authorize, clearSession, user, getCredentials, error, isLoading, isAuthenticated } = useAuth0();
-  console.log('User::', user);
-  console.log('auth:', isAuthenticated);
+  console.log('user: ',user);
+  console.log('token: ',token);
+
   const [FirstName, setFirstName] = useState('vamsi');
   const [LastName, setLastName] = useState('P');
   const [Email, setEmail] = useState('psvdutt@gmail.com');
@@ -23,7 +26,7 @@ const NewPatientForm = ({ navigation }) => {
   const [FirstLanguage, setFirstLanguage] = useState('Ukranian');
   const [AdditionalLanguage, setAdditionalLanguage] = useState('');
   const [Country, setCountry] = useState('Ukraine');
-  const [CountryCode, setCountryCode] = useState('+380'); // Default country code
+  const [CountryCode, setCountryCode] = useState('+380'); 
   const [PhoneNumber, setPhoneNumber] = useState('6692209884');
   const [TelegramId, setTelegramId] = useState('psvdutt');
   const [CheifConcern, setCheifConcern] = useState('concern-1');
@@ -43,7 +46,6 @@ const NewPatientForm = ({ navigation }) => {
   };
 
   const handlePhoneNumberChange = (text) => {
-    // Ensure phone number input only accepts digits
     const numericText = text.replace(/\D/g, '');
     setPhoneNumber(numericText);
   };
@@ -54,9 +56,8 @@ const NewPatientForm = ({ navigation }) => {
         return '+380';
       case 'Poland':
         return '+48';
-      // Add more cases for other countries as needed
       default:
-        return '+380'; // Default to Ukraine
+        return '+380'; 
     }
   };
 
@@ -86,14 +87,50 @@ const NewPatientForm = ({ navigation }) => {
         notes: `${CheifConcern} Telegram: ${TelegramId} Local practitioner: ${LocalPhysician}`,
         telegram: TelegramId,
         practitioner: LocalPhysician,
-        health_concerns: CheifConcern
+        health_concerns: CheifConcern,
+        token: token,
       };
 
-      console.log('Sending JSON:', patientData);
+      const jsonData = JSON.stringify(patientData);
+      console.log('Sending JSON:', jsonData);
 
-      // const response = await axios.post('YOUR_API_ENDPOINT', formData);
+      const response = await axios.post('https://mobile-app-thu-e036558309fd.herokuapp.com/mobile/onboard', jsonData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      console.log('API Response:', response.data);
       Alert.alert('Success', 'Patient information saved successfully.');
+      
       navigation.navigate('AppNavigator');
+
+      const tokenResponse = await axios.post('https://dev-telehelpukraine.us.auth0.com/oauth/token', {
+        client_id: 'p0kAe8cN24qvpOxapv6piX0ph8SPdepJ',
+        client_secret: 'dN9KyW_5yC-VVu2PL5Tg8mYJbiAnxZXL-YxGDIKQB4ntmqbs1JPtjJWm2iQGCdic',
+        audience: 'https://dev-telehelpukraine.us.auth0.com/api/v2/',
+        grant_type: 'client_credentials',
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const accessToken = tokenResponse.data.access_token;
+
+      const roleResponse = await axios.post(
+        `https://dev-telehelpukraine.us.auth0.com/api/v2/users/auth0%7C${user.sub}/roles`,
+        { roles: ['rol_2uV5KBYIEa1bZWyN'] },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`,
+            'Cache-Control': 'no-cache',
+          },
+        }
+      );
+
+      console.log('Role Assignment Response:', roleResponse.data);
 
     } catch (error) {
       console.error('Error saving patient information:', error);

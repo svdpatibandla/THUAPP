@@ -1,187 +1,2834 @@
 {
-  "data": [
-      {
-          "account.name": {
-              "account": " account.name",
-              "services": [
-                  {
-                      "service": "service_dict",
-                      "practitioners": [
-                          {
-                              "name": "Dr. John Doe",
-                              "cliniko_account_id": 123,
-                              "cliniko_practitioner_id": 456,
-                              "first_lang_id": 1,
-                              "second_lang_id": 2,
-                              "third_lang_id": 3,
-                              "specialization": "General Medicine"
-                          },
-                          {
-                              "name": "Dr. Jane Smith",
-                              "cliniko_account_id": 789,
-                              "cliniko_practitioner_id": 1011,
-                              "first_lang_id": 2,
-                              "second_lang_id": 3,
-                              "third_lang_id": 1,
-                              "specialization": "Dermatology"
-                          }
-                      ],
-                      "slots": {
-                          "all_slots": {
-                              "2024-03-25 10:00:00": [
-                                  {
-                                      "cliniko_practitioner_id": 123,
-                                      "human_readable_UA": "10:00, Monday, March 25th",
-                                      "interpreter_id": null,
-                                      "interpreter_name": null,
-                                      "language": "E",
-                                      "language_id": 1,
-                                      "patient_datetime": "Mon, 25 Mar 2024 10:00:00 GMT"
-                                  },
-                                  {
-                                      "cliniko_practitioner_id": 456,
-                                      "human_readable_UA": "10:00, Monday, March 25th",
-                                      "interpreter_id": null,
-                                      "interpreter_name": null,
-                                      "language": "U",
-                                      "language_id": 2,
-                                      "patient_datetime": "Mon, 25 Mar 2024 10:00:00 GMT"
-                                  }
-                              ],
-                              "2024-03-26 10:00:00": [
-                                  {
-                                      "cliniko_practitioner_id": 123,
-                                      "human_readable_UA": "10:00, Monday, March 26th",
-                                      "interpreter_id": null,
-                                      "interpreter_name": null,
-                                      "language": "E",
-                                      "language_id": 1,
-                                      "patient_datetime": "Mon, 26 Mar 2024 10:00:00 GMT"
-                                  },
-                                  {
-                                      "cliniko_practitioner_id": 456,
-                                      "human_readable_UA": "10:00, Monday, March 26th",
-                                      "interpreter_id": null,
-                                      "interpreter_name": null,
-                                      "language": "U",
-                                      "language_id": 2,
-                                      "patient_datetime": "Mon, 26 Mar 2024 10:00:00 GMT"
-                                  }
-                              ],
-                              "2024-03-27 14:00:00": [
-                                  {
-                                      "cliniko_practitioner_id": 789,
-                                      "human_readable_UA": "14:00, Tuesday, March 27th",
-                                      "interpreter_id": null,
-                                      "interpreter_name": null,
-                                      "language": "R",
-                                      "language_id": 3,
-                                      "patient_datetime": "Tue, 27 Mar 2024 14:00:00 GMT"
-                                  }
-                              ]
-                          },
-                          "first_language_slots": "",
-                          "second_language_slots": ""
-                      }
-                  }
-              ]
-          }
-      }
-  ],
-  "patient": {
-      "auth0_id": "str",
-      "first_lang_id": 1,
-      "first_name": "str",
-      "last_name": "str",
-      "second_lang_id": 2,
-      "tz": "str(pytz)",
-      "attachments": [
-          {
-              "id": 1,
-              "filename": "str"
-          }
-      ],
-      "appointments": [
-          {
-              "id": "1",
-              "starts_at": "2024-03-25T10:00:00Z",
-              "ends_at": "2024-03-25T11:00:00Z",
-              "human_readable_UA": "Sample Appointment 1",
-              "telehealth_url": "sample-url-1",
-              "practitioner": {
-                  "cliniko_account_id": 123,
-                  "cliniko_practitioner_id": 456,
-                  "information": "no interpreter",
-                  "name": "Dr. Smith",
-                  "specialization": "General Medicine",
-                  "tz": "America/New_York"
-              },
-              "datetime": "03/25/2024, 10:00",
-              "api_key": "sample-api-key-1",
-              "future_appt": true,
-              "cancel": false,
-              "video_link": "sample-video-link-1"
-          },
-          {
-              "id": "2",
-              "starts_at": "2024-03-25T12:00:00Z",
-              "ends_at": "2024-03-25T13:00:00Z",
-              "human_readable_UA": "Sample Appointment 2",
-              "telehealth_url": "sample-url-2",
-              "practitioner": {
-                  "cliniko_account_id": 789,
-                  "cliniko_practitioner_id": 768,
-                  "information": "no interpreter",
-                  "name": "Dr. Prasanth",
-                  "specialization": "General Medicine",
-                  "tz": "America/New_York"
-              },
-              "datetime": "03/25/2024, 12:00",
-              "api_key": "sample-api-key-1",
-              "future_appt": true,
-              "cancel": false,
-              "video_link": "sample-video-link-2"
-          },
-          {
-              "id": "3",
-              "starts_at": "2024-03-28T14:00:00Z",
-              "ends_at": "2024-03-28T15:00:00Z",
-              "human_readable_UA": "Sample Appointment 3",
-              "telehealth_url": "sample-url-2",
-              "practitioner": {
-                  "cliniko_account_id": 878,
-                  "cliniko_practitioner_id": 1011,
-                  "information": "interpreter available",
-                  "name": "Dr. Johnson",
-                  "specialization": "Dermatology",
-                  "tz": "America/Los_Angeles"
-              },
-              "datetime": "03/28/2024, 14:00",
-              "api_key": "sample-api-key-3",
-              "future_appt": true,
-              "cancel": false,
-              "video_link": "sample-video-link-3"
-          },
-          {
-              "id": "4",
-              "starts_at": "2024-03-25T16:30:00Z",
-              "ends_at": "2024-03-25T17:30:00Z",
-              "human_readable_UA": "Sample Appointment 4",
-              "telehealth_url": "sample-url-4",
-              "practitioner": {
-                  "cliniko_account_id": 123,
-                  "cliniko_practitioner_id": 456,
-                  "information": "no interpreter",
-                  "name": "Dr. Smith",
-                  "specialization": "General Medicine",
-                  "tz": "America/New_York"
-              },
-              "datetime": "03/25/2024, 16:30",
-              "api_key": "sample-api-key-4",
-              "future_appt": true,
-              "cancel": false,
-              "video_link": "sample-video-link-4"
-          }
-      ]
-  }
+    "patient": {
+        "appointments": [
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": true,
+                "datetime": "05/15/2024, 00:00",
+                "ends_at": "2024-05-14T22:00:00Z",
+                "future_appt": true,
+                "human_readable_UA": "00:00, середа, 15 травня",
+                "id": "1364570146068237161",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-05-14T21:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?F4choIeKNC1-tzowGEhqHXh0KP8KK77NO",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "04/27/2024, 00:00",
+                "ends_at": "2024-04-26T22:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "00:00, субота, 27 квітня",
+                "id": "1355173060604332780",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-04-26T21:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?EyrFDKPH6C1-sBjW7MD0UFbEQ6ax6zvvP1",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "04/26/2024, 14:10",
+                "ends_at": "2024-04-26T12:10:00Z",
+                "future_appt": false,
+                "human_readable_UA": "14:10, пʼятниця, 26 квітня",
+                "id": "1406682721907903419",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2024-04-26T11:10:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?bHdmGfyCUF1-qNNoGSIsYzzmv0BsKCeol7",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "04/18/2024, 13:00",
+                "ends_at": "2024-04-18T10:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "13:00, четвер, 18 квітня",
+                "id": "1371327684428172075",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933334552527505658,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. ",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-04-18T10:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?daEeWV6HiD1-5DuaWyvO8Phhrhnjw4IzH6",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "04/18/2024, 00:15",
+                "ends_at": "2024-04-17T22:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "00:15, четвер, 18 квітня",
+                "id": "1393750846876944942",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933334552527505658,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. ",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-04-17T21:15:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?Lj1XBhpoXE1-oC7LnVVXYiJxsm8EYi5Wc3",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "04/15/2024, 17:00",
+                "ends_at": "2024-04-15T15:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:00, понеділок, 15 квітня",
+                "id": "1396092425667086843",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1182172040988199693,
+                    "information": "",
+                    "name": "Amy Wong",
+                    "specialization": "Diagnose and treat the diseases, physiological disorders and injuries of patients",
+                    "tz": "Asia/Tokyo"
+                },
+                "starts_at": "2024-04-15T14:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?szR9x5k78F1-R7QNHsMqRLy9doUrJHZW14",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "04/13/2024, 14:00",
+                "ends_at": "2024-04-13T11:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "14:00, субота, 13 квітня",
+                "id": "1391409479622330480",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933334552527505658,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. ",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-04-13T11:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?WCqbjfyFME1-5LEgN2JNaPC737WbgTjq8",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "04/08/2024, 21:00",
+                "ends_at": "2024-04-08T18:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "21:00, понеділок, 8 квітня",
+                "id": "1393795194251381675",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1182172040988199693,
+                    "information": "",
+                    "name": "Amy Wong",
+                    "specialization": "Diagnose and treat the diseases, physiological disorders and injuries of patients",
+                    "tz": "Asia/Tokyo"
+                },
+                "starts_at": "2024-04-08T18:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?lYwtW50BXE1-Fun3hQo5QW94H2EPRPMt24",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "04/08/2024, 19:30",
+                "ends_at": "2024-04-08T17:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "19:30, понеділок, 8 квітня",
+                "id": "1393791438285704102",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2024-04-08T16:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?0GoIOXVzXE1-5IUtWggleeQtdb6Z8rMwd2",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "04/08/2024, 15:05",
+                "ends_at": "2024-04-08T12:50:00Z",
+                "future_appt": false,
+                "human_readable_UA": "15:05, понеділок, 8 квітня",
+                "id": "1393765592690854473",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2024-04-08T12:05:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?WAXd5WAsXE1-l7CnZgjncfo4jE9JzrAwk5",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "04/08/2024, 13:35",
+                "ends_at": "2024-04-08T11:20:00Z",
+                "future_appt": false,
+                "human_readable_UA": "13:35, понеділок, 8 квітня",
+                "id": "1393765279107910215",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2024-04-08T10:35:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?vGQhjovsXE1-qjxqoj7Qbg9NHFxjVbkzv4",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "04/08/2024, 13:00",
+                "ends_at": "2024-04-08T10:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "13:00, понеділок, 8 квітня",
+                "id": "1393752526116882994",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933334552527505658,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. ",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-04-08T10:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?7mapbQSoXE1-Tyhh9CtHOYKsfwOO6crjX3",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "04/08/2024, 08:30",
+                "ends_at": "2024-04-08T06:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "08:30, понеділок, 8 квітня",
+                "id": "1393807529170963388",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2024-04-08T05:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?LzbuigvEXE1-g616BjHmuhxaPo8vnUIk14",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "04/08/2024, 06:10",
+                "ends_at": "2024-04-08T03:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "06:10, понеділок, 8 квітня",
+                "id": "1393741919418321425",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933334552527505658,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. ",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-04-08T03:10:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?ieJUyaSlXE1-YhoqHTeb0BY2eEBfzFXlI4",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "04/02/2024, 06:20",
+                "ends_at": "2024-04-02T04:05:00Z",
+                "future_appt": false,
+                "human_readable_UA": "06:20, вівторок, 2 квітня",
+                "id": "1388665750553627364",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933334552527505658,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. ",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-04-02T03:20:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?uJVqskr6AE1-Az7Me2auZJBIUDVFhaNTD6",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "03/22/2024, 17:55",
+                "ends_at": "2024-03-22T16:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:55, пʼятниця, 22 березня",
+                "id": "1380863853155322280",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 940862081979124002,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Therapist",
+                    "tz": "Europe/Kyiv"
+                },
+                "starts_at": "2024-03-22T15:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?MY61Tw0n0E1-3ev6SAzfaBtrb6BbpGqji6",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "03/11/2024, 04:55",
+                "ends_at": "2024-03-11T03:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "04:55, понеділок, 11 березня",
+                "id": "1371836901773806451",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2024-03-11T02:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?5v0wT1I1lD1-BEyL6vrUci0M6eHaPTejy2",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "03/10/2024, 10:05",
+                "ends_at": "2024-03-10T08:50:00Z",
+                "future_appt": false,
+                "human_readable_UA": "10:05, неділя, 10 березня",
+                "id": "1371854140388411448",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2024-03-10T08:05:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?jN8CtwB6lD1-GgsnM5tuFIzHPt4IF8HyH3",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "03/10/2024, 00:15",
+                "ends_at": "2024-03-09T23:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "00:15, неділя, 10 березня",
+                "id": "1371910129514973761",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933334552527505658,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. ",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-03-09T22:15:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?fNkSHcvmlD1-zeTM4Kdc1LfuKJKvclKuf2",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "03/09/2024, 10:00",
+                "ends_at": "2024-03-09T08:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "10:00, субота, 9 березня",
+                "id": "1371909667319450174",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933334552527505658,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. ",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-03-09T08:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?WBctk8nmlD1-6WN7qYRplKjz2hgt2ZLXZ4",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "03/09/2024, 06:45",
+                "ends_at": "2024-03-09T05:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "06:45, субота, 9 березня",
+                "id": "1371908828567702069",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933334552527505658,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. ",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-03-09T04:45:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?oHZNAm8mlD1-mR42yi8zBNZRutTvPBbd55",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "03/09/2024, 06:00",
+                "ends_at": "2024-03-09T04:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "06:00, субота, 9 березня",
+                "id": "1371857026396719193",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933334552527505658,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. ",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-03-09T04:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?YiI2nlq7lD1-3hn7vqGo3MS0ITqjW1KSn",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "03/09/2024, 00:00",
+                "ends_at": "2024-03-08T23:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "00:00, субота, 9 березня",
+                "id": "1371835797916879725",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-03-08T22:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?e57QFAo1lD1-0zAbGruhZrkeXxpp5detL5",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "03/08/2024, 23:30",
+                "ends_at": "2024-03-08T22:15:00Z",
+                "future_appt": false,
+                "human_readable_UA": "23:30, пʼятниця, 8 березня",
+                "id": "1371795009610713376",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2024-03-08T21:30:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?mnlw6sOPkD1-WhjVXrVHZmaHGINuMtt4b5",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "03/08/2024, 22:45",
+                "ends_at": "2024-03-08T21:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "22:45, пʼятниця, 8 березня",
+                "id": "1371885579700013402",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933334552527505658,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. ",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-03-08T20:45:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?V3SWn3xflD1-CBMO6TL4sRqQv8p16Llr75",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "03/08/2024, 22:45",
+                "ends_at": "2024-03-08T21:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "22:45, пʼятниця, 8 березня",
+                "id": "1371787845613652163",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2024-03-08T20:45:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?McVxqkMNkD1-L0UfbYTn7Lco1mxR7oWNV6",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "03/08/2024, 22:00",
+                "ends_at": "2024-03-08T20:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "22:00, пʼятниця, 8 березня",
+                "id": "1371787181839878336",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2024-03-08T20:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?9rBpVDANkD1-jSYsxWLCzcuGx1PJdQA924",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "03/03/2024, 10:00",
+                "ends_at": "2024-03-03T08:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "10:00, неділя, 3 березня",
+                "id": "1367547664249391976",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933334552527505658,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. ",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-03-03T08:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?UDit7RJn1D1-hS8k1brtI7ZiBEeJkDNyF",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "03/02/2024, 22:45",
+                "ends_at": "2024-03-02T21:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "22:45, субота, 2 березня",
+                "id": "1367538596432579371",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933334552527505658,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. ",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-03-02T20:45:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?F9rso8al1D1-sbG8GVrTrxiHpSRsylC0k4",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "03/01/2024, 17:00",
+                "ends_at": "2024-03-01T16:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:00, пʼятниця, 1 березня",
+                "id": "1365515869253274043",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1182172040988199693,
+                    "information": "",
+                    "name": "Amy Wong",
+                    "specialization": "Diagnose and treat the diseases, physiological disorders and injuries of patients",
+                    "tz": "Asia/Tokyo"
+                },
+                "starts_at": "2024-03-01T15:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?OVKLzMM4SC1-wiD8VD7XgsN1lhDvHsyav6",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "02/29/2024, 00:00",
+                "ends_at": "2024-02-28T23:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "00:00, четвер, 29 лютого",
+                "id": "1364529510661228917",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1182172040988199693,
+                    "information": "",
+                    "name": "Amy Wong",
+                    "specialization": "Diagnose and treat the diseases, physiological disorders and injuries of patients",
+                    "tz": "Asia/Tokyo"
+                },
+                "starts_at": "2024-02-28T22:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?eG2FfkHyNC1-PetqfM1cwVEVbwkz8eUZ27",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "02/27/2024, 21:00",
+                "ends_at": "2024-02-27T20:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "21:00, вівторок, 27 лютого",
+                "id": "1364534766912670121",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-02-27T19:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?irLSVRbANC1-lnbdFTNTjG1BuGEnuwO1F7",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "02/27/2024, 20:00",
+                "ends_at": "2024-02-27T19:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "20:00, вівторок, 27 лютого",
+                "id": "1364560725317520145",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-02-27T18:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?8FwvmTyHNC1-FqtP0Y0mrqHM0kcQdnMnH1",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "02/27/2024, 19:45",
+                "ends_at": "2024-02-27T18:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "19:45, вівторок, 27 лютого",
+                "id": "1363983543083993790",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2024-02-27T17:45:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?G5NJshF3LC1-FQJAN93KIXeyWGymNrZpN3",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "02/26/2024, 10:25",
+                "ends_at": "2024-02-26T09:25:00Z",
+                "future_appt": false,
+                "human_readable_UA": "10:25, понеділок, 26 лютого",
+                "id": "1363224717858704146",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 940862081979124002,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Therapist",
+                    "tz": "Europe/Kyiv"
+                },
+                "starts_at": "2024-02-26T08:25:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?Aptl8FbAHC1-YlxUvdHZRJclFtGjs80rB6",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "02/15/2024, 10:00",
+                "ends_at": "2024-02-15T08:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "10:00, четвер, 15 лютого",
+                "id": "1355175460878682889",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 949503992914774365,
+                    "information": "",
+                    "name": "Sol Savchuk",
+                    "specialization": "Cardiologist",
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2024-02-15T08:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?BJ6wt3wI6C1-V2lXXgV5WRu8JVhjrX9YU5",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "02/14/2024, 22:00",
+                "ends_at": "2024-02-14T20:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "22:00, середа, 14 лютого",
+                "id": "1355174904395205379",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 1169749605676485305,
+                    "information": "",
+                    "name": "Lila Turanga",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. Proin faucibus sapien in pretium euismod. Duis lorem eros, tincidunt et sodales in, dignissim vitae ex. Aliquam augue ante, vestibulum et massa vel, dapibus ullamcorper lacus.",
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2024-02-14T20:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?JEGTMmmI6C1-c9XLhAHDFdvhqlMaoc9413",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "01/26/2024, 13:10",
+                "ends_at": "2024-01-26T12:10:00Z",
+                "future_appt": false,
+                "human_readable_UA": "13:10, пʼятниця, 26 січня",
+                "id": "1340840852523584269",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2024-01-26T11:10:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?DUXnRb343B1-2q0ZXxIlxLZAAIJTbYaIh6",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "01/26/2024, 04:30",
+                "ends_at": "2024-01-26T03:15:00Z",
+                "future_appt": false,
+                "human_readable_UA": "04:30, пʼятниця, 26 січня",
+                "id": "1334914384983492910",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 949503992914774365,
+                    "information": "",
+                    "name": "Sol Savchuk",
+                    "specialization": "Cardiologist",
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2024-01-26T02:30:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?P8ZSDpaVBA1-qeuLgb3DChUDZTBfYM7pR3",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "01/18/2024, 06:00",
+                "ends_at": "2024-01-18T04:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "06:00, четвер, 18 січня",
+                "id": "1334917269943224667",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933334552527505658,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. ",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2024-01-18T04:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?VOjC5dZVBA1-G5N1Ox60PlcrqOaxCk51j4",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "11/26/2023, 02:25",
+                "ends_at": "2023-11-26T01:10:00Z",
+                "future_appt": false,
+                "human_readable_UA": "02:25, неділя, 26 листопада",
+                "id": "1296028074097249184",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-11-26T00:25:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?8AuaE7ZOJx1-728IUuIpaRN9hXvVqNNFH7",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "11/26/2023, 01:40",
+                "ends_at": "2023-11-26T00:25:00Z",
+                "future_appt": false,
+                "human_readable_UA": "01:40, неділя, 26 листопада",
+                "id": "1296018250584296347",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-11-25T23:40:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?dcMHYbcMJx1-Z7flHcVx8uBBIylZaLNMQ3",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "11/26/2023, 00:55",
+                "ends_at": "2023-11-25T23:40:00Z",
+                "future_appt": false,
+                "human_readable_UA": "00:55, неділя, 26 листопада",
+                "id": "1296010094600784784",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-11-25T22:55:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?eEoqGySJJx1-MKP1XPDMtPFxcB8KQqnKz4",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "11/21/2023, 18:00",
+                "ends_at": "2023-11-21T17:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "18:00, вівторок, 21 листопада",
+                "id": "1293557291349444768",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2023-11-21T16:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?n7Sn0Bnvyx1-FjEBCYt9t9etO0huq66Lw6",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "11/09/2023, 10:00",
+                "ends_at": "2023-11-09T08:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "10:00, четвер, 9 листопада",
+                "id": "1280442250802760439",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 949503992914774365,
+                    "information": "",
+                    "name": "Sol Savchuk",
+                    "specialization": "Cardiologist",
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2023-11-09T08:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?eJenyUdrAw1-EZbPdqzzfFkMISgFU79uY3",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "11/09/2023, 08:00",
+                "ends_at": "2023-11-09T07:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "08:00, четвер, 9 листопада",
+                "id": "1285025358646610485",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 940862081979124002,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Therapist",
+                    "tz": "Europe/Kyiv"
+                },
+                "starts_at": "2023-11-09T06:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?NAShOmEqVw1-YwHtzNqJ0GJlB9mPyWEdR5",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "11/09/2023, 06:45",
+                "ends_at": "2023-11-09T05:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "06:45, четвер, 9 листопада",
+                "id": "1280414267547322869",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-11-09T04:45:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?PvsojfhjAw1-HCaYarscfgufY9oM3A1s93",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "11/07/2023, 17:45",
+                "ends_at": "2023-11-07T16:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:45, вівторок, 7 листопада",
+                "id": "1283469683994921328",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 949503992914774365,
+                    "information": "",
+                    "name": "Sol Savchuk",
+                    "specialization": "Cardiologist",
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2023-11-07T15:45:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?K0vL4OTiOw1-Iuq2xpW1wzDh6dSWGLjXq1",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "11/07/2023, 17:00",
+                "ends_at": "2023-11-07T15:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:00, вівторок, 7 листопада",
+                "id": "1283340155750451958",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 949503992914774365,
+                    "information": "",
+                    "name": "Sol Savchuk",
+                    "specialization": "Cardiologist",
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2023-11-07T15:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?v2bGNb7INw1-qBtLQ5LBO2XAm1ViImc2F5",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "11/07/2023, 17:00",
+                "ends_at": "2023-11-07T16:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:00, вівторок, 7 листопада",
+                "id": "1283450838903163857",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2023-11-07T15:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?Yf9BMPxdOw1-fF1R7dxANPpAE9dl2BMrN4",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "11/05/2023, 09:05",
+                "ends_at": "2023-11-05T07:50:00Z",
+                "future_appt": false,
+                "human_readable_UA": "09:05, неділя, 5 листопада",
+                "id": "1281832682174548558",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-11-05T07:05:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?YxCYLi3OGw1-Nv055kKoBwDuaeUIOgfDR1",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "11/04/2023, 23:55",
+                "ends_at": "2023-11-04T22:40:00Z",
+                "future_appt": false,
+                "human_readable_UA": "23:55, субота, 4 листопада",
+                "id": "1280764426911222761",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-11-04T21:55:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?fc82q0IUBw1-dcLRSgijJhlAJswDyECgd7",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "11/03/2023, 16:00",
+                "ends_at": "2023-11-03T15:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "16:00, пʼятниця, 3 листопада",
+                "id": "1280558331177470962",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1182172040988199693,
+                    "information": "",
+                    "name": "Amy Wong",
+                    "specialization": "Diagnose and treat the diseases, physiological disorders and injuries of patients",
+                    "tz": "Asia/Tokyo"
+                },
+                "starts_at": "2023-11-03T14:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?niqhhzbYAw1-YfgiVRFTZm6afInJbqpHW",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "11/03/2023, 16:00",
+                "ends_at": "2023-11-03T15:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "16:00, пʼятниця, 3 листопада",
+                "id": "1280445176497572624",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2023-11-03T14:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?W7Wh2u3sAw1-8VWBU7ICm40aX6cdi6s043",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "11/01/2023, 09:00",
+                "ends_at": "2023-11-01T07:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "09:00, середа, 1 листопада",
+                "id": "1278533925496424944",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 1169749605676485305,
+                    "information": "",
+                    "name": "Lila Turanga",
+                    "specialization": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dictum purus at elementum pellentesque. Proin faucibus sapien in pretium euismod. Duis lorem eros, tincidunt et sodales in, dignissim vitae ex. Aliquam augue ante, vestibulum et massa vel, dapibus ullamcorper lacus.",
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2023-11-01T07:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?7ruojSkHrw1-4CtgixA7y44D9TEzDyfaL1",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "10/24/2023, 20:00",
+                "ends_at": "2023-10-24T17:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "20:00, вівторок, 24 жовтня",
+                "id": "1273332297273182938",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 949503992914774365,
+                    "information": "",
+                    "name": "Sol Savchuk",
+                    "specialization": "Cardiologist",
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2023-10-24T17:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?QwN0PehS3w1-KVRpBlMfDGMaF8haHgJdH7",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "10/24/2023, 19:45",
+                "ends_at": "2023-10-24T17:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "19:45, вівторок, 24 жовтня",
+                "id": "1273322338678475331",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-10-24T16:45:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?7dMD0VrP3w1-DIFZLEMdAKZUGXSp9UHQf1",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "10/24/2023, 19:45",
+                "ends_at": "2023-10-24T17:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "19:45, вівторок, 24 жовтня",
+                "id": "1273319946029369901",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-10-24T16:45:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?b4n4GLLO3w1-yPJZRhqqFN2eLpSBFMzHW5",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "10/24/2023, 19:15",
+                "ends_at": "2023-10-24T17:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "19:15, вівторок, 24 жовтня",
+                "id": "1273288872251361587",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 949503992914774365,
+                    "information": "",
+                    "name": "Sol Savchuk",
+                    "specialization": "Cardiologist",
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2023-10-24T16:15:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?0Fr6OHWF3w1-qp4D0G6QbnYhSJvun9QjQ4",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "10/24/2023, 18:30",
+                "ends_at": "2023-10-24T16:15:00Z",
+                "future_appt": false,
+                "human_readable_UA": "18:30, вівторок, 24 жовтня",
+                "id": "1273277137243080892",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 949503992914774365,
+                    "information": "",
+                    "name": "Sol Savchuk",
+                    "specialization": "Cardiologist",
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2023-10-24T15:30:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?yhMoF6CC3w1-35hhjZWcWfCkaUs90BRzM7",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "10/24/2023, 17:45",
+                "ends_at": "2023-10-24T15:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:45, вівторок, 24 жовтня",
+                "id": "1271164265528560123",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 949503992914774365,
+                    "information": "",
+                    "name": "Sol Savchuk",
+                    "specialization": "Cardiologist",
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2023-10-24T14:45:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?rxOeTLDWTv1-NijIO1uTVUqveAklQ5wIB7",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "10/24/2023, 17:00",
+                "ends_at": "2023-10-24T14:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:00, вівторок, 24 жовтня",
+                "id": "1271165067051665923",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 949503992914774365,
+                    "information": "",
+                    "name": "Sol Savchuk",
+                    "specialization": "Cardiologist",
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2023-10-24T14:00:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?HDTwJSRWTv1-dTGXfMav0Dm3Wv7yQARh13",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "10/23/2023, 17:00",
+                "ends_at": "2023-10-23T15:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:00, понеділок, 23 жовтня",
+                "id": "1271170251957996084",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1182172040988199693,
+                    "information": "",
+                    "name": "Amy Wong",
+                    "specialization": "Diagnose and treat the diseases, physiological disorders and injuries of patients",
+                    "tz": "Asia/Tokyo"
+                },
+                "starts_at": "2023-10-23T14:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?XkphwalYTv1-g62YiE4oy8mDXKr7nLgt01",
+                "video_link": true
+            },
+            {
+                "api_key": "API_KEY",
+                "cancel": false,
+                "datetime": "10/22/2023, 10:05",
+                "ends_at": "2023-10-22T07:50:00Z",
+                "future_appt": false,
+                "human_readable_UA": "10:05, неділя, 22 жовтня",
+                "id": "1271883814813043431",
+                "practitioner": {
+                    "cliniko_account_id": 3,
+                    "cliniko_practitioner_id": 933300557148326133,
+                    "information": "",
+                    "name": "Bender Rodríguez",
+                    "specialization": "Physician, practitioner in online bookings.",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-10-22T07:05:00Z",
+                "telehealth_url": "https://telehelp-ukraine.ca1.cliniko.com/c?38DZfQXeXv1-kZeHfKI4BtGoMBIy8OePh5",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "10/16/2023, 17:00",
+                "ends_at": "2023-10-16T15:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:00, понеділок, 16 жовтня",
+                "id": "1265959318260287720",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1182172040988199693,
+                    "information": "",
+                    "name": "Amy Wong",
+                    "specialization": "Diagnose and treat the diseases, physiological disorders and injuries of patients",
+                    "tz": "Asia/Tokyo"
+                },
+                "starts_at": "2023-10-16T14:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?aV89jOD6wv1-uLF6yWRg3ixhfrvIy9E7D1",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "10/12/2023, 20:00",
+                "ends_at": "2023-10-12T18:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "20:00, четвер, 12 жовтня",
+                "id": "1264634572021172582",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2023-10-12T17:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?0qd59Xs2qv1-BLWziEV1rYEeD0vvbU7Ua",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "10/12/2023, 19:00",
+                "ends_at": "2023-10-12T17:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "19:00, четвер, 12 жовтня",
+                "id": "1264611556541335601",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2023-10-12T16:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?FaxS3JVVpv1-VPdOT90TASpefJey9AaJ13",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "10/12/2023, 18:00",
+                "ends_at": "2023-10-12T16:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "18:00, четвер, 12 жовтня",
+                "id": "1264572197125491258",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2023-10-12T15:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?jQPmBKKKpv1-351xxvXMWbS4tQeuua3AL2",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "10/12/2023, 17:00",
+                "ends_at": "2023-10-12T15:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:00, четвер, 12 жовтня",
+                "id": "1264544152616438002",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2023-10-12T14:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?8LgLJ0NCpv1-XuXgM0ub3qbxQpWPiyT4e4",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "10/01/2023, 15:55",
+                "ends_at": "2023-10-01T13:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "15:55, неділя, 1 жовтня",
+                "id": "1252236361784625663",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-10-01T12:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?lAeCwpRfvu1-6WLfSAprgvb96DIiqQtUQ2",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "10/01/2023, 13:55",
+                "ends_at": "2023-10-01T11:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "13:55, неділя, 1 жовтня",
+                "id": "1252227529930967534",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-10-01T10:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?EDYp0Vldvu1-jhtY8LnI69pyCkiSNYGqJ2",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "09/29/2023, 00:00",
+                "ends_at": "2023-09-28T22:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "00:00, пʼятниця, 29 вересня",
+                "id": "1251517523694717938",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-09-28T21:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?4AUoIRJXru1-NhL5f4DilGN8t1QT7mQS24",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "09/26/2023, 11:30",
+                "ends_at": "2023-09-26T09:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "11:30, вівторок, 26 вересня",
+                "id": "1252994530819443071",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-09-26T08:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?ZFHJms9Jyu1-uFvi1eq17lFknH8592vgD1",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "09/21/2023, 22:30",
+                "ends_at": "2023-09-21T20:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "22:30, четвер, 21 вересня",
+                "id": "1250121582592920047",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2023-09-21T19:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?IeDhxJpzlu1-jtyUkHU0cp1RYhGfvpdWA6",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "09/21/2023, 20:15",
+                "ends_at": "2023-09-21T18:15:00Z",
+                "future_appt": false,
+                "human_readable_UA": "20:15, четвер, 21 вересня",
+                "id": "1250140810423306965",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-09-21T17:15:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?WArtXqPElu1-LQz1xrkO3vqSniaY7Q0LI2",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "09/15/2023, 17:00",
+                "ends_at": "2023-09-15T15:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:00, пʼятниця, 15 вересня",
+                "id": "1244701213539175130",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1182172040988199693,
+                    "information": "",
+                    "name": "Amy Wong",
+                    "specialization": "Diagnose and treat the diseases, physiological disorders and injuries of patients",
+                    "tz": "Asia/Tokyo"
+                },
+                "starts_at": "2023-09-15T14:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?vZxfcVaKWt1-ACPDvt9MwWgR8tji5KmKs4",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "09/13/2023, 16:35",
+                "ends_at": "2023-09-13T14:35:00Z",
+                "future_appt": false,
+                "human_readable_UA": "16:35, середа, 13 вересня",
+                "id": "1243566927339588087",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-09-13T13:35:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?f9mYp95yRt1-3pu3qj90OQDLgjeYOwIv22",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/31/2023, 10:00",
+                "ends_at": "2023-08-31T08:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "10:00, четвер, 31 серпня",
+                "id": "1234235685972478874",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-08-31T07:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?aKa3jqnOat1-OT1cbROdGea9pG9Aa7uky3",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/31/2023, 10:00",
+                "ends_at": "2023-08-31T08:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "10:00, четвер, 31 серпня",
+                "id": "1234235112812448661",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 940862081979124002,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Therapist",
+                    "tz": "Europe/Kyiv"
+                },
+                "starts_at": "2023-08-31T07:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?yloElodOat1-cF9HKXyz6iX062Z2p9Tyf",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/24/2023, 08:00",
+                "ends_at": "2023-08-24T06:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "08:00, четвер, 24 серпня",
+                "id": "1229106227795986502",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-08-24T05:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?S3XxrPOjNs1-lVzRBCurT077yR14jtzKe2",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/24/2023, 06:45",
+                "ends_at": "2023-08-24T04:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "06:45, четвер, 24 серпня",
+                "id": "1227639574201632850",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-08-24T03:45:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?rkhI0blBGs1-DvXoDpdYHXFHsJRIzpWLh7",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/24/2023, 04:45",
+                "ends_at": "2023-08-24T02:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "04:45, четвер, 24 серпня",
+                "id": "1227631274613541792",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-08-24T01:45:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?ys8LZ8ZyGs1-T2n1AhsUjR3vqbRrMgkns",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/22/2023, 17:00",
+                "ends_at": "2023-08-22T15:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:00, вівторок, 22 серпня",
+                "id": "1227652878710081768",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2023-08-22T14:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?mbRtwp7FGs1-ei5fp40KGxn49jbZ5Dwb2",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/06/2023, 14:55",
+                "ends_at": "2023-08-06T12:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "14:55, неділя, 6 серпня",
+                "id": "1215286344243218918",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-08-06T11:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?y5uBtMv1Mr1-WP71BkybnKeofY3kEApFm1",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/02/2023, 20:00",
+                "ends_at": "2023-08-02T18:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "20:00, середа, 2 серпня",
+                "id": "1213203937570589482",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 940862081979124002,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Therapist",
+                    "tz": "Europe/Kyiv"
+                },
+                "starts_at": "2023-08-02T17:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?ZLsVsPfuCr1-8AluKtAfesYeddxPjnUZW",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/02/2023, 17:30",
+                "ends_at": "2023-08-02T15:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:30, середа, 2 серпня",
+                "id": "1213182039939877555",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 940862081979124002,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Therapist",
+                    "tz": "Europe/Kyiv"
+                },
+                "starts_at": "2023-08-02T14:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?m1sK3Q8oCr1-WIuXXBmT72L90a52aRUEU",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/01/2023, 22:30",
+                "ends_at": "2023-08-01T20:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "22:30, вівторок, 1 серпня",
+                "id": "1212393053776513896",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-08-01T19:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?8tu7SCVLyr1-TOWDAiIy15I4BYVrrUe5D7",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/01/2023, 20:30",
+                "ends_at": "2023-08-01T18:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "20:30, вівторок, 1 серпня",
+                "id": "1213031572689652166",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-08-01T17:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?QcY1DuhHBr1-G4r0NRvxXYWfqb87IUxPI6",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/01/2023, 20:30",
+                "ends_at": "2023-08-01T18:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "20:30, вівторок, 1 серпня",
+                "id": "1213018391904782683",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 940862081979124002,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Therapist",
+                    "tz": "Europe/Kyiv"
+                },
+                "starts_at": "2023-08-01T17:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?7axifGyDBr1-EB4aAbX42cg4pR5rAJpRh3",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/01/2023, 19:30",
+                "ends_at": "2023-08-01T17:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "19:30, вівторок, 1 серпня",
+                "id": "1213033977074420187",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 940862081979124002,
+                    "information": "",
+                    "name": "English Practitioner",
+                    "specialization": "Therapist",
+                    "tz": "Europe/Kyiv"
+                },
+                "starts_at": "2023-08-01T16:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?4P7EhMXHBr1-ObU2ySBsNknCS4Ain45Mg6",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/01/2023, 16:30",
+                "ends_at": "2023-08-01T14:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "16:30, вівторок, 1 серпня",
+                "id": "1212508239707507365",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-08-01T13:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?jrsVfADizr1-76CeGG30bqrKF4OEWtjQu6",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/01/2023, 15:30",
+                "ends_at": "2023-08-01T13:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "15:30, вівторок, 1 серпня",
+                "id": "1212502830229752461",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-08-01T12:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?2IsiDl6hzr1-mDDYq4DercmAl8crNv7Z72",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/01/2023, 14:30",
+                "ends_at": "2023-08-01T12:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "14:30, вівторок, 1 серпня",
+                "id": "1212504027527383695",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-08-01T11:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?49Ha9orhzr1-ZKoSh8rcK56eeMkeJpi0k2",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/01/2023, 13:30",
+                "ends_at": "2023-08-01T11:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "13:30, вівторок, 1 серпня",
+                "id": "1212490089058273877",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-08-01T10:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?M8lE53udzr1-g0Wxz8uJ92maKhwtwijW43",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "08/01/2023, 11:30",
+                "ends_at": "2023-08-01T09:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "11:30, вівторок, 1 серпня",
+                "id": "1212464583915080048",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-08-01T08:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?iTDlC0f6zr1-rbA2N2vm4pDwgURF2pEsb2",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/26/2023, 21:00",
+                "ends_at": "2023-07-26T19:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "21:00, середа, 26 липня",
+                "id": "1207509045229914644",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1182172040988199693,
+                    "information": "",
+                    "name": "Amy Wong",
+                    "specialization": "Diagnose and treat the diseases, physiological disorders and injuries of patients",
+                    "tz": "Asia/Tokyo"
+                },
+                "starts_at": "2023-07-26T18:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?2sK7UY3pcr1-gUihYufw3N0Y4qjm2fOLJ7",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/26/2023, 19:00",
+                "ends_at": "2023-07-26T17:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "19:00, середа, 26 липня",
+                "id": "1207513866263595551",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2023-07-26T16:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?jnadzYqqcr1-YOpW7stize6dZXxU7u3cC2",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/25/2023, 17:00",
+                "ends_at": "2023-07-25T15:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:00, вівторок, 25 липня",
+                "id": "1207459862074624418",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2023-07-25T14:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?5P6iC16bcr1-JvFLpZgHUDfq494ms4UI46",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/23/2023, 23:55",
+                "ends_at": "2023-07-23T21:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "23:55, неділя, 23 липня",
+                "id": "1205207024338471095",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-07-23T20:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?g6JE2ynR1r1-1mXZR8rpjijnjjxd4obJb6",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/23/2023, 20:55",
+                "ends_at": "2023-07-23T18:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "20:55, неділя, 23 липня",
+                "id": "1205254312750483807",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-07-23T17:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?MfENL6O42r1-A4iL42sBwVhv5DD8KX3Fj7",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/23/2023, 19:55",
+                "ends_at": "2023-07-23T17:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "19:55, неділя, 23 липня",
+                "id": "1205250126809925970",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-07-23T16:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?xTlFRqC32r1-mA5T7X4bv6oqvhNNwQAr25",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/23/2023, 17:55",
+                "ends_at": "2023-07-23T15:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:55, неділя, 23 липня",
+                "id": "1205208952208361661",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-07-23T14:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?AzkSAxVR1r1-OccZP231oSr4tcHOMi2FI3",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/23/2023, 16:55",
+                "ends_at": "2023-07-23T14:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "16:55, неділя, 23 липня",
+                "id": "1205248320717457739",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-07-23T13:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?4gfx7E632r1-pwsVoqJ8ZWw3O9AckA62L",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/23/2023, 15:55",
+                "ends_at": "2023-07-23T13:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "15:55, неділя, 23 липня",
+                "id": "1205263810424736116",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-07-23T12:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?4NsYGlv72r1-6XVJTaOkhyu6sDR0sgCuW",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/20/2023, 09:00",
+                "ends_at": "2023-07-20T07:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "09:00, четвер, 20 липня",
+                "id": "1203781544213219666",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-07-20T06:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?CETs8bBkVq1-9adSqmKueRdM0OulWvptR1",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/20/2023, 08:00",
+                "ends_at": "2023-07-20T06:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "08:00, четвер, 20 липня",
+                "id": "1203777525189183806",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-07-20T05:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?YQBJeqsjVq1-zwIX8zWw4fLoQYk5ojWAy6",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/19/2023, 13:35",
+                "ends_at": "2023-07-19T11:35:00Z",
+                "future_appt": false,
+                "human_readable_UA": "13:35, середа, 19 липня",
+                "id": "1203038545715923688",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-07-19T10:35:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?5kq3ljCVRq1-iMu8TH0WDNqz3JxOdFLV41",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/13/2023, 06:45",
+                "ends_at": "2023-07-13T04:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "06:45, четвер, 13 липня",
+                "id": "1197793850001721906",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-07-13T03:45:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?PpsKCskUtq1-Slwv0DXhI6VPbl4NhzMR35",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/13/2023, 05:45",
+                "ends_at": "2023-07-13T03:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "05:45, четвер, 13 липня",
+                "id": "1197367550153853533",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-07-13T02:45:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?4RXcGghXrq1-C9VEV0qSmjPhX8xM6Ozcr6",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/13/2023, 04:45",
+                "ends_at": "2023-07-13T02:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "04:45, четвер, 13 липня",
+                "id": "1197357748065405505",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-07-13T01:45:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?QpOU4HuUrq1-Ya2YTSRfU0EYx3qgbFUf85",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/13/2023, 03:45",
+                "ends_at": "2023-07-13T01:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "03:45, четвер, 13 липня",
+                "id": "1197354592505956926",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-07-13T00:45:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?hGq489BTrq1-0LBzCAI5WHLjFFN6hhYb23",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/12/2023, 18:00",
+                "ends_at": "2023-07-12T16:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "18:00, середа, 12 липня",
+                "id": "1189087757348113308",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1182172040988199693,
+                    "information": "",
+                    "name": "Amy Wong",
+                    "specialization": "Diagnose and treat the diseases, physiological disorders and injuries of patients",
+                    "tz": "Asia/Tokyo"
+                },
+                "starts_at": "2023-07-12T15:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?yaWmlR82Qp1-m57PMkh0jYztZkhSzS1XD",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/03/2023, 18:00",
+                "ends_at": "2023-07-03T16:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "18:00, понеділок, 3 липня",
+                "id": "1188600359937903415",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1182172040988199693,
+                    "information": "",
+                    "name": "Amy Wong",
+                    "specialization": "Diagnose and treat the diseases, physiological disorders and injuries of patients",
+                    "tz": "Asia/Tokyo"
+                },
+                "starts_at": "2023-07-03T15:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?u4Mu22KNNp1-3T5XYEj8LQ4kHpE2fqQEs5",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "07/03/2023, 17:00",
+                "ends_at": "2023-07-03T15:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:00, понеділок, 3 липня",
+                "id": "1188597174817000224",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1182172040988199693,
+                    "information": "",
+                    "name": "Amy Wong",
+                    "specialization": "Diagnose and treat the diseases, physiological disorders and injuries of patients",
+                    "tz": "Asia/Tokyo"
+                },
+                "starts_at": "2023-07-03T14:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?1RkHMTPMNp1-N6PWCgRzUBCLYbMPfiO8X5",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/29/2023, 13:00",
+                "ends_at": "2023-06-29T11:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "13:00, четвер, 29 червня",
+                "id": "1186879402428861438",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-06-29T10:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?ieHQUy3VFp1-9LzOAX495XSMM9TbTwkZp3",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/29/2023, 10:00",
+                "ends_at": "2023-06-29T08:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "10:00, четвер, 29 червня",
+                "id": "1188494457083792301",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-06-29T07:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?6kxxRuFjNp1-xTe6FqWLacPTG1GKddNjm",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/29/2023, 09:00",
+                "ends_at": "2023-06-29T07:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "09:00, четвер, 29 червня",
+                "id": "1188386422541781471",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-06-29T06:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?cX2XmuZOMp1-qQ3XPOclcbPg4ZGAEsxWx5",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/29/2023, 06:45",
+                "ends_at": "2023-06-29T04:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "06:45, четвер, 29 червня",
+                "id": "1187860707236907721",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-06-29T03:45:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?AxPoLXHpKp1-1EI4m9sS6k7vg1WbdR83i7",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/29/2023, 04:45",
+                "ends_at": "2023-06-29T02:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "04:45, четвер, 29 червня",
+                "id": "1187843197896755787",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-06-29T01:45:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?7NKYqHJkKp1-tOTjTVm4WA0p1vStPaHfK6",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/29/2023, 03:45",
+                "ends_at": "2023-06-29T01:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "03:45, четвер, 29 червня",
+                "id": "1186896914906351747",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-06-29T00:45:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?Wq1NtR10Gp1-LooSswXkrt6chs8onwhzt7",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/25/2023, 22:06",
+                "ends_at": "2023-06-25T20:06:37Z",
+                "future_appt": false,
+                "human_readable_UA": "22:06, неділя, 25 червня",
+                "id": "1186491413773158791",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-06-25T19:06:37Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?6VQ03OS8Ep1-ix4r0E0bypFtRf0WUKduD2",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/25/2023, 21:42",
+                "ends_at": "2023-06-25T19:42:03Z",
+                "future_appt": false,
+                "human_readable_UA": "21:42, неділя, 25 червня",
+                "id": "1186479098306759025",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-06-25T18:42:03Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?WXmy7Yn5Ep1-2EnpufghfojUGvSSpHSGA5",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/25/2023, 19:49",
+                "ends_at": "2023-06-25T17:49:46Z",
+                "future_appt": false,
+                "human_readable_UA": "19:49, неділя, 25 червня",
+                "id": "1186478382951434607",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-06-25T16:49:46Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?SppsXmb5Ep1-YH3rmGwWIsmbUeIsCUE5C1",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/22/2023, 17:45",
+                "ends_at": "2023-06-22T15:45:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:45, четвер, 22 червня",
+                "id": "1183399857079978138",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-06-22T14:45:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?4yRMXc0Zpp1-NMyd1K8aHgP3DxiXBDARB",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/20/2023, 08:15",
+                "ends_at": "2023-06-20T06:15:00Z",
+                "future_appt": false,
+                "human_readable_UA": "08:15, вівторок, 20 червня",
+                "id": "1171778258753030590",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 921618372905404599,
+                    "information": null,
+                    "name": "Inactive Practitioner",
+                    "specialization": null,
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2023-06-20T05:15:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?F0Y79wVKyo1-RayNJYISXP8Izo1OC77uE4",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/13/2023, 11:30",
+                "ends_at": "2023-06-13T09:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "11:30, вівторок, 13 червня",
+                "id": "1176958082467498005",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-06-13T08:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?vFR4d9NtWo1-wLue2XAfhuyFjL53oZITo6",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/11/2023, 14:55",
+                "ends_at": "2023-06-11T12:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "14:55, неділя, 11 червня",
+                "id": "1174224683466230441",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-06-11T11:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?6Bm1keCXJo1-gdWUGArUxrPDhurGzqKMH3",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/11/2023, 13:55",
+                "ends_at": "2023-06-11T11:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "13:55, неділя, 11 червня",
+                "id": "1174229474753907377",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783092794034372,
+                    "information": "",
+                    "name": "Денис Бондарчук",
+                    "specialization": "Therapist",
+                    "tz": "US/Eastern"
+                },
+                "starts_at": "2023-06-11T10:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?wLdM2AYYJo1-oOqxcWHybojLEVxmsacwt",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/09/2023, 14:55",
+                "ends_at": "2023-06-09T12:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "14:55, пʼятниця, 9 червня",
+                "id": "1173987644456045222",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-06-09T11:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?AxXOCZiSIo1-RtnAEUR4zzKrj18DJuank3",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/08/2023, 08:10",
+                "ends_at": "2023-06-08T06:10:00Z",
+                "future_appt": false,
+                "human_readable_UA": "08:10, четвер, 8 червня",
+                "id": "1173387009897531784",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 921618372905404599,
+                    "information": null,
+                    "name": "Inactive Practitioner",
+                    "specialization": null,
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2023-06-08T05:10:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?X5kCUpK7Go1-OvyzSvE3ODHPbjDPbQEPi1",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/06/2023, 23:30",
+                "ends_at": "2023-06-06T21:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "23:30, вівторок, 6 червня",
+                "id": "1171956566627191624",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-06-06T20:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?g0RT2Eyzzo1-S2OMaj2rUYdoGsToLuerV",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/06/2023, 11:30",
+                "ends_at": "2023-06-06T09:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "11:30, вівторок, 6 червня",
+                "id": "1167436384265308288",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-06-06T08:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?i3RyHm0Seo1-EauseP6UrCoJxBN0FAMBb6",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "06/05/2023, 17:00",
+                "ends_at": "2023-06-05T15:00:00Z",
+                "future_appt": false,
+                "human_readable_UA": "17:00, понеділок, 5 червня",
+                "id": "1169777861989501861",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 923783501042419909,
+                    "information": " no interpreter",
+                    "name": "R,E NoInterpreter",
+                    "specialization": "Family Medicine",
+                    "tz": "Europe/Kiev"
+                },
+                "starts_at": "2023-06-05T14:00:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?k9oD5rTApo1-BfpXWGP4XCNFJrMLWrE1u7",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "05/23/2023, 02:15",
+                "ends_at": "2023-05-23T00:15:00Z",
+                "future_appt": false,
+                "human_readable_UA": "02:15, вівторок, 23 травня",
+                "id": "1154321081734007451",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 921618372905404599,
+                    "information": null,
+                    "name": "Inactive Practitioner",
+                    "specialization": null,
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2023-05-22T23:15:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?dxf6e9MNgn1-cije7v3xhgjeVai51WsD82",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "05/05/2023, 15:55",
+                "ends_at": "2023-05-05T13:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "15:55, пʼятниця, 5 травня",
+                "id": "1148705144968317587",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-05-05T12:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?xLEaLt45Rm1-tCmxXzFL0MrLTW3fKzzPP4",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "05/05/2023, 14:55",
+                "ends_at": "2023-05-05T12:55:00Z",
+                "future_appt": false,
+                "human_readable_UA": "14:55, пʼятниця, 5 травня",
+                "id": "1148243328416876766",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-05-05T11:55:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?mAZUiZVXOm1-pnbHDgXLvAA1ZbsiWcUZr2",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "05/02/2023, 12:30",
+                "ends_at": "2023-05-02T10:30:00Z",
+                "future_appt": false,
+                "human_readable_UA": "12:30, вівторок, 2 травня",
+                "id": "1146583031708912413",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-05-02T09:30:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?51sjWItmHm1-vH6yCEOm3rNyZ87isF9ts3",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "05/02/2023, 00:20",
+                "ends_at": "2023-05-01T22:20:00Z",
+                "future_appt": false,
+                "human_readable_UA": "00:20, вівторок, 2 травня",
+                "id": "1144180113873570478",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-05-01T21:20:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?T6yUSW8mwm1-HLjqzOO8d8pE0T6sS6Yqz2",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "04/26/2023, 00:15",
+                "ends_at": "2023-04-25T22:15:00Z",
+                "future_appt": false,
+                "human_readable_UA": "00:15, середа, 26 квітня",
+                "id": "1141583983738358630",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 921618372905404599,
+                    "information": null,
+                    "name": "Inactive Practitioner",
+                    "specialization": null,
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2023-04-25T21:15:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?7MnQfmWskm1-CC8mr27asPJz5WgDOWa4h",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "04/25/2023, 09:15",
+                "ends_at": "2023-04-25T07:15:00Z",
+                "future_appt": false,
+                "human_readable_UA": "09:15, вівторок, 25 квітня",
+                "id": "1141468999763102180",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 921618372905404599,
+                    "information": null,
+                    "name": "Inactive Practitioner",
+                    "specialization": null,
+                    "tz": "US/Pacific"
+                },
+                "starts_at": "2023-04-25T06:15:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?WM60b2iWjm1-0M8wYFuJt6cq4TKk9bYRL",
+                "video_link": true
+            },
+            {
+                "api_key": "MENTAL_API_KEY",
+                "cancel": false,
+                "datetime": "04/19/2023, 15:35",
+                "ends_at": "2023-04-19T13:35:00Z",
+                "future_appt": false,
+                "human_readable_UA": "15:35, середа, 19 квітня",
+                "id": "1137287832180623459",
+                "practitioner": {
+                    "cliniko_account_id": 4,
+                    "cliniko_practitioner_id": 1089197586734123109,
+                    "information": "",
+                    "name": "Марина Коржик",
+                    "specialization": "",
+                    "tz": "UTC"
+                },
+                "starts_at": "2023-04-19T12:35:00Z",
+                "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?rfg2g80N0m1-gO4BJDdSFuGPIL7fdEclE2",
+                "video_link": true
+            }
+        ],
+        "attachments": [],
+        "auth0_id": null,
+        "email": "telehelpukraine.builders+clinicians@gmail.com",
+        "first_lang_id": null,
+        "first_name": "Health Navigator",
+        "last_name": "Link",
+        "second_lang_id": null,
+        "tz": "Europe/Kiev"
+    }
 }

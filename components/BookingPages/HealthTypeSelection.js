@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Header from './Header'; 
 
 const HealthTypes = [
   {
@@ -47,28 +48,8 @@ const HealthTypeSelection = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={handleBack}>
-          <Image source={require('../../assets/goBack.png')} style={styles.headerImage} />
-        </TouchableOpacity>
-        <View style={styles.searchBarContainer}>
-          <TextInput
-            style={styles.searchBar}
-            placeholder="Search for Health Type"
-            textAlign='center'
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-          />
-          <Image source={require('../../assets/search.png')} style={styles.searchImage} />
-          <Image source={require('../../assets/mic.png')} style={styles.micImage} />
-        </View>
-        <TouchableOpacity onPress={handleClose}>
-          <Image source={require('../../assets/cancel.png')} style={styles.headerImage} />
-        </TouchableOpacity>
-      </View>
-      
-      <View style={styles.headerLine} />
-      
+      <Header handleBack={handleBack} handleClose={handleClose} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>What type of help are you looking for?</Text>
       </View>
@@ -92,7 +73,7 @@ const HealthTypeSelection = () => {
           </TouchableOpacity>
         ))}
       </View>
-      
+
       <View style={styles.bottomBar}>
         <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
           <Text style={styles.continueButtonText}>Continue</Text>
@@ -111,51 +92,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 70, 
-    width: 'auto', 
-    borderBottomWidth: 1, 
-    borderBottomColor: '#dfdfdf', 
-    backgroundColor: '#ffffff',
-  },
-  headerImage: {
-    width: 20,
-    height: 20,
-    marginHorizontal: 10,
-  },
-  searchBarContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    position: 'relative',
-  },
-  searchBar: {
-    flex: 1,
-    height: 40,
-    paddingHorizontal: 10,
-    backgroundColor: '#ffffff', 
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#dfdfdf',
-  },
-  micImage: {
-    width: 20,
-    height: 20,
-    position: 'absolute',
-    right: 10,
-  },
-  searchImage: { 
-    width: 20,
-    height: 20,
-    position: 'absolute',
-    left: 10,
-  },
-  headerLine: {
-    height: 1,
-  },
   titleContainer: {
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -172,7 +108,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 80,
-    paddingHorizontal: 20,
+    paddingHorizontal: 20, 
     backgroundColor: '#ffffff',
   },
   continueButton: {

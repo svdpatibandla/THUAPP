@@ -63,7 +63,7 @@ const AppointmentsPage = () => {
       const currentDate = new Date();
       const future = [];
       const previous = [];
-
+  
       appointments.forEach((appointment) => {
         const appointmentDate = new Date(appointment.starts_at);
         const options = { weekday: 'long', month: 'long', day: 'numeric' };
@@ -83,18 +83,22 @@ const AppointmentsPage = () => {
           uploadedFiles: uploadedFiles,
           ...appointment,
         };
-
+  
         if (appointmentDate > currentDate) {
           future.push(formattedAppointment);
         } else {
           previous.push(formattedAppointment);
         }
       });
-
+  
+      // Sort future appointments by date
+      future.sort((a, b) => new Date(a.starts_at) - new Date(b.starts_at));
+  
       setFutureAppointments(future);
       setPreviousAppointments(previous);
     }
   }, []);
+  
 
   useEffect(() => {
     // Reset visibility of FAB content when scrolling stops
@@ -149,21 +153,6 @@ const AppointmentsPage = () => {
         ) : (
           <View style={styles.noAppointmentsContainer}>
             <Text style={styles.noAppointmentsText}>You have no upcoming appointments. Sign up for a consultation.</Text>
-          </View>
-        )}
-
-        {previousAppointments.length > 0 ? (
-          <View style={styles.section}>
-            <Text style={styles.sectionHeading}>Previous Appointments</Text>
-            <View style={styles.appointmentsContainer}>
-              {previousAppointments.map((appointment) => (
-                <AppointmentItem key={appointment.id} appointment={appointment} />
-              ))}
-            </View>
-          </View>
-        ) : (
-          <View style={styles.noAppointmentsContainer}>
-            <Text style={styles.noAppointmentsText}>You have no previous appointments.</Text>
           </View>
         )}
       </ScrollView>

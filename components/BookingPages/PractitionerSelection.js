@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Header from './Header'; 
 
 const practitionersData = [
   {
@@ -45,27 +46,7 @@ const PractitionerSelection = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={handleGoBack}>
-          <Image source={require('../../assets/goBack.png')} style={styles.headerImage} />
-        </TouchableOpacity>
-        <View style={styles.searchBarContainer}>
-          <TextInput
-            style={styles.searchBar}
-            placeholder="Search for practitioner"
-            textAlign='center'
-            value={searchQuery}
-            onChangeText={setSearchQuery}
-          />
-          <Image source={require('../../assets/search.png')} style={styles.searchImage} />
-          <Image source={require('../../assets/mic.png')} style={styles.micImage} />
-        </View>
-        <TouchableOpacity onPress={handleClose}>
-          <Image source={require('../../assets/cancel.png')} style={styles.headerImage} />
-        </TouchableOpacity>
-      </View>
-      
-      <View style={styles.headerLine} />
+      <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>Practitioners you've seen before</Text>

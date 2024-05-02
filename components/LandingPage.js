@@ -1,56 +1,52 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth0 } from 'react-native-auth0';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser, clearUser } from '../redux/actions/authActions';
+import { setUser, setToken, clearUser } from '../redux/actions/authActions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import jwtDecode from 'jwt-decode'; // Import jwtDecode
-
+import jwtDecode from 'jwt-decode';
 
 const LandingPage = () => {
-
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { authorize, clearSession, getCredentials, error, isLoading, user } = useAuth0();
   const loggedIn = useSelector(state => state.auth.isAuthenticated);
 
-  const onLogin = async (userType) => {
-
+  useEffect(() => {
     if (user) {
-      console.log('User is already logged in.');
-      navigation.navigate('AppNavigator');
-      return;
+      dispatch(setUser(user)); 
     }
-    try {
-      console.log(`Attempting to log in as ${userType} user...`);
-      await authorize({}, {});
+  }, [user, dispatch]);
 
-      console.log('Logged in successfully!');
-      const credentials = await getCredentials();
-      console.log(credentials);
+// Inside onLogin function
+const onLogin = async (userType) => {
+  try {
+    console.log(`Attempting to log in as ${userType} user...`);
+    await authorize({}, {});
 
-      const user_id = credentials?.user_id;
-      console.log('ID Token:', credentials?.idToken);
-      console.log('User ID:', user_id);
+    console.log('Logged in successfully!');
+    const credentials = await getCredentials();
+    const idToken = credentials?.idToken;
 
-      AsyncStorage.setItem('isLoggedIn', JSON.stringify(true));
-      dispatch(setUser({ name: userType, ...credentials }));
+    console.log('ID Token:', idToken);
 
-      if (userType === 'New') {
-        if (credentials){
-          navigation.navigate('NewPatientForm');
-        }
-        
-      } else if (userType === 'existing') {
-        if (credentials){
-          navigation.navigate('AppNavigator');
-        }
+    AsyncStorage.setItem('isLoggedIn', JSON.stringify(true));
+    dispatch(setToken(credentials));
+
+    if (userType === 'New') {
+      if (credentials) {
+        navigation.navigate('NewPatientForm');
       }
-    } catch (e) {
-      console.error('Login Error:', e);
+    } else if (userType === 'existing') {
+      if (credentials) {
+        navigation.navigate('AppNavigator');
+      }
     }
-  };
+  } catch (e) {
+    console.error('Login Error:', e);
+  }
+};
 
 
   if (isLoading) {

@@ -1,226 +1,136 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import Header from './Header'; 
 import { useNavigation } from '@react-navigation/native';
+
 import jsonData from '../avail_appointments.json';
 
 const SlotSelection = () => {
-  const navigation = useNavigation();
+  const currentDate = new Date();
+
+  const [appointments, setAppointments] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(currentDate);
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [selectedDateIndex, setSelectedDateIndex] = useState(0);
-  const [selectedLanguage, setSelectedLanguage] = useState('English');
+  console.log(selectedDate);
+  const navigation = useNavigation();
+
+  const getSelectedDate = () => {
+    const options = { weekday: 'long', month: 'long', day: 'numeric' };
+    dateDisplay =  selectedDate.toLocaleDateString('en-US', options);
+    console.log(dateDisplay);
+    return dateDisplay;
+  };
+
+  const handleNextDate = () => {
+    setSelectedDate(new Date(selectedDate.setDate(selectedDate.getDate() + 1)));
+  };
+
+  const handlePrevDate = () => {
+    setSelectedDate(new Date(selectedDate.setDate(selectedDate.getDate() - 1)));
+  };
 
   useEffect(() => {
-    console.log("Component rendered!");
+    const allSlots = jsonData.all_slots;
+    const appointmentsList = Object.keys(allSlots).map(date => {
+      return {
+        date,
+        slots: allSlots[date]
+      };
+    });
+    setAppointments(appointmentsList);
+    console.log(appointmentsList);
   }, []);
 
-  const navigateToNewPage = (practitioner, timeSlot) => {
-    navigation.navigate('SelectPractitioner');
-  };
-  
-  const todayDate = new Date().toISOString().split('T')[0];
-  const groupedSlotsByPractitioner = () => {
-    const groupedSlots = {};
-  
-    jsonData.data.forEach(item => {
-      item['Mental Cliniko Account'].services.forEach(service => {
-        service.practitioners.forEach(practitioner => {
-          const practitionerId = practitioner.cliniko_practitioner_id;
-          const practitionerName = practitioner.name.toLowerCase();
-  
-          if (!groupedSlots[practitionerId]) {
-            groupedSlots[practitionerId] = {
-              name: practitionerName,
-              slots: [],
-              todayAppointments: [],
-              details: practitioner
-            };
-          }
-  
-          if (service.slots && service.slots.all_slots) {
-            Object.entries(service.slots.all_slots).forEach(([date, slots]) => {
-              slots.forEach(slot => {
-                const [datePart, timePart] = slot.time.split(' ');
-                const [hour, minute, second] = timePart.split(':');
-                groupedSlots[practitionerId].slots.push({
-                    date: datePart,
-                    time: `${hour}:${minute}`, 
-                    language: slot.language,
-                    appointment: item 
-                });
-            
-                if (date === todayDate) {
-                    groupedSlots[practitionerId].todayAppointments.push({
-                        date: datePart,
-                        time: `${hour}:${minute}`, 
-                        language: slot.language,
-                        appointment: item 
-                    });
-                  }
-              });
-            });
-          }
-        });
-      });
-    });
-  
-    Object.keys(groupedSlots).forEach(practitionerId => {
-      groupedSlots[practitionerId].slots.sort((a, b) => {
-        if (a.date === b.date) {
-          return a.time.localeCompare(b.time);
-        }
-        return a.date.localeCompare(b.date);
-      });
-      groupedSlots[practitionerId].todayAppointments.sort((a, b) => a.time.localeCompare(b.time));
-    });
-  
-    console.log("Grouped slots:", groupedSlots); // Log groupedSlots here
-    return groupedSlots;
-  };
-  const groupedSlots = groupedSlotsByPractitioner();
-
-  const renderTimeSlots = (practitioner, slots) => (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-      <View style={styles.timeSlotsContainer}>
-        {slots.map((slot, index) => {
-          if (slot.language === selectedLanguage) {
-            return (
-              <TouchableOpacity key={index} style={styles.timeSlot} onPress={() => handleTimeSlotPress(practitioner, slot)}>
-                <Text style={styles.timeText}>{slot.time}</Text>
-              </TouchableOpacity>
-            );
-          }
-        })}
-      </View>
-    </ScrollView>
-  );
-
-  const renderDateItems = () => {
-    return dates.map((date, index) => (
-      <TouchableOpacity
-        key={index}
-        style={[
-          styles.dateItem,
-          selectedDateIndex === index && styles.selectedDateItem,
-        ]}
-        onPress={() => handleDatePress(index)}
-      >
-        <Text style={[styles.dateText, selectedDateIndex === index && styles.selectedDateText]}>{date}</Text>
-      </TouchableOpacity>
-    ));
-  };
-
-  const dates = [];
-  for (let i = 0; i < 7; i++) {
-    const date = new Date();
-    date.setDate(date.getDate() + i);
-    if (i === 0) {
-      dates.push('Today');
-    } else {
-      const options = { weekday: 'short', month: 'short', day: 'numeric' };
-      const formattedDate = date.toLocaleDateString('en-US', options);
-      dates.push(formattedDate);
-    }
-  }
-
-  const handleBack = () => {
-    navigation.goBack(); 
+  const handleGoBack = () => {
+    navigation.goBack();
   };
 
   const handleClose = () => {
-    navigation.navigate('AppNavigator'); 
+    navigation.navigate('AppNavigator');
   };
-
-  const handleSearch = () => {
-    const results = dates.filter(date => date.toLowerCase().includes(searchQuery.toLowerCase()));
-    setSearchResults(results);
-  };
-
-  const handleDatePress = (index) => {
-    setSelectedDateIndex(index);
-  };
-
-  useEffect(() => {
-    handleDatePress(0); 
-  }, []);
-
-  const handleLanguageChange = (language) => {
-    setSelectedLanguage(language);
-  };
-
-  const renderPractitionerAppointments = (practitionerId) => {
-    const selectedDate = dates[selectedDateIndex];
-    const practitioner = groupedSlots[practitionerId];
-    console.log(selectedDate);
-    const filteredAppointments = practitioner.slots.filter(slot => slot.date === selectedDate);
-    console.log("Filtered Appointments for practitionerId", practitionerId, ":", filteredAppointments);
-    
-    return (
-      <View key={practitionerId} style={styles.practitionerBlock}>
-        <Text style={styles.practitionerName}>{practitioner.name}</Text>
-        <View style={styles.practitionerDetails}>
-          <Text>{`${practitioner.details.specialization}`}</Text>
-          <Text>{`Practitioner speaks ${practitioner.details.first_lang_id}`}</Text>
-          <View style={styles.line}></View>
-        </View>
-        <View style={styles.appointmentList}>
-        <Text style={styles.appointmentHeader}>Appointments on {selectedDate}:</Text>
-          {filteredAppointments.length > 0 ? (
-            renderTimeSlots(practitioner.details, filteredAppointments)
-          ) : (
-            <Text>No appointments on {selectedDate}</Text>
-          )}
-        </View>
-        <TouchableOpacity onPress={() => navigateToNewPage(practitioner.details)} style={styles.viewMoreButton}>
-          <Text style={styles.viewMoreText}>View All Times</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
-  
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.headerContainer}>
-        <View style={styles.searchContainer}>
-          <TouchableOpacity onPress={handleBack} style={styles.iconContainer}>
-            <Image source={require('../../assets/goBack.png')} style={styles.headerImage} />
-          </TouchableOpacity>
-          <View style={styles.searchBarContainer}>
-            <TextInput
-              style={styles.searchBar}
-              placeholder="Search for Health Type"
-              textAlign='center'
-              value={searchQuery}
-              onChangeText={setSearchQuery}
-              onSubmitEditing={handleSearch} 
-            />
-            <Image source={require('../../assets/search.png')} style={[styles.icon, styles.searchIcon]} />
-            <Image source={require('../../assets/mic.png')} style={[styles.icon, styles.micIcon]} />
+      <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <View>
+        <View style={styles.header}>
+          <Text style={styles.leftItemText}>2 results found</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <TouchableOpacity onPress={handleClose}>
+              <Image source={require('../../assets/filter.png')} style={styles.filterImage} />
+            </TouchableOpacity>
+            <Text style={{ marginLeft: 5 }}>Filter</Text>
           </View>
-          <TouchableOpacity onPress={handleClose} style={styles.iconContainer}>
-            <Image source={require('../../assets/cancel.png')} style={styles.headerImage} />
-          </TouchableOpacity>
         </View>
-
-        <View style={styles.filterContainer}>
-          <Text style={styles.resultsText}>{searchResults.length} results found.</Text>
-          <TouchableOpacity style={styles.filtersButton}>
-            <Text style={styles.filtersButtonText}>Filters</Text>
-          </TouchableOpacity>
+        <View style={styles.header}>
+          <View style={styles.searchBarContainer}>
+            <View style={styles.searchBar}>
+              <Text style={{ textAlign: 'center' }}>{getSelectedDate()}</Text>
+            </View>
+            <TouchableOpacity onPress={handlePrevDate} style={styles.searchImage}>
+              <Image source={require('../../assets/chevron_right.png')} style={styles.searchImage} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleNextDate} style={styles.micImage}>
+              <Image source={require('../../assets/chevron_right.png')} style={[styles.micImage, { transform: [{ rotate: '180deg' }] }]} />
+            </TouchableOpacity>
+          </View>
         </View>
-
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.datesContainer}>
-          {renderDateItems()}
-        </ScrollView>
       </View>
-
-      {/* Practitioner Appointments */}
       <ScrollView contentContainerStyle={styles.bodyContainer}>
-        {Object.keys(groupedSlots).map(practitionerId => (
-          renderPractitionerAppointments(practitionerId)
-        ))}
+        {appointments.map(({ date, slots }) => {
+          if (selectedDate && date !== selectedDate.toLocaleDateString('en-US')) {
+            return null;
+          }
+          return (
+            <View key={date} style={styles.dateContainer}>
+              <Text style={styles.dateText}>{date}</Text>
+              {slots.map((slot, index) => (
+                <View key={index} style={styles.slotContainer}>
+                  <View style={styles.slotContent}>
+                    <View style={styles.slotHeader}>
+                      <Text style={styles.slotHeaderText}>{slot.practitioner.name}</Text>
+                      <Text style={styles.slotSubHeaderText}>{slot.practitioner.specialization}</Text>
+                      <Text><Text style={styles.slotSubHeaderText}>Practitioner speaks </Text><Text style={styles.slotSubHeaderText}>{slot.practitioner.languages}</Text></Text>
+                    </View>
+                    <View style={styles.slotBody}>
+                      <View style={styles.slotBodyRow}>
+                        <TouchableOpacity style={styles.slotBodyButton}>
+                          <Text style={styles.slotBodyButtonText}>Treats Adults</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.slotBodyButton}>
+                          <Text style={styles.slotBodyButtonText}>Treats Children</Text>
+                        </TouchableOpacity>
+                      </View>
+                      <View style={styles.slotBodyDivider} />
+                      <View style={styles.slotBodyRow}>
+                        <Text style={styles.slotBodyLabel}>Choose appointment language:</Text>
+                        <View style={styles.slotBodyLanguage}>
+                          {slot.practitioner.languages.split(',').map((language, i) => (
+                            <TouchableOpacity key={i} style={styles.slotBodyLanguageButton}>
+                              <Text style={styles.slotBodyLanguageButtonText}>{language.trim()}</Text>
+                            </TouchableOpacity>
+                          ))}
+                        </View>
+                      </View>
+                      <View style={styles.slotBodyDivider} />
+                      <Text style={styles.slotBodyText}>Available times for {date}</Text>
+                      <View style={styles.slotBodyTimes}>
+                        {slot.slots.map((time, i) => (
+                          <TouchableOpacity key={i} style={styles.slotBodyTimeButton}>
+                            <Text style={styles.slotBodyTimeButtonText}>{time}</Text>
+                          </TouchableOpacity>
+                        ))}
+                      </View>
+                      <TouchableOpacity style={styles.slotViewAllButton}>
+                        <Text style={styles.slotViewAllButtonText}>View all times</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+              ))}
+            </View>
+          );
+        })}
       </ScrollView>   
     </View>
   );
@@ -231,159 +141,258 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f8f8f8',
   },
-  headerContainer: {
-    backgroundColor: '#ffffff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#dfdfdf',
-    paddingBottom: 10,
-  },
-  searchContainer: {
+  header: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    height: 70,
+    height: 50,
     borderBottomWidth: 1,
     borderBottomColor: '#dfdfdf',
+    backgroundColor: '#ffffff',
+    paddingHorizontal: 20,
   },
-  iconContainer: {
-    padding: 5,
+  leftItemText: {
+    color: '#151515',
+    fontSize: 16,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '700',
+    lineHeight: 24,
   },
   searchBarContainer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+    marginLeft: 10,
+    marginRight: 10,
     position: 'relative',
   },
   searchBar: {
     flex: 1,
     height: 40,
-    paddingHorizontal: 10,
     backgroundColor: '#ffffff',
     borderRadius: 5,
     borderWidth: 1,
     borderColor: '#dfdfdf',
+    justifyContent: 'center',
+    textAlign: 'center',
   },
-  icon: {
-    width: 20,
-    height: 20,
+  micImage: {
+    width: 24,
+    height: 24,
+    position: 'absolute',
+    right: 10,
   },
-  searchIcon: {
-    marginRight: 5,
+  searchImage: {
+    width: 24,
+    height: 24,
+    position: 'absolute',
+    left: 10,
   },
-  micIcon: {
-    marginLeft: 5,
-  },
-  headerImage: {
-    width: 20,
-    height: 20,
-    marginHorizontal: 10,
-  },
-  filterContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-  },
-  datesContainer: {
-    flexDirection: 'row',
-    paddingHorizontal: 10,
-  },
-  dateText: {
-    fontSize: 14,
-  },
-  dateItem: {
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 5,
-    borderWidth: 0, // Remove the border
-    borderBottomWidth: 1,
-    borderBottomColor: 'transparent', // Initially transparent
-  },
-  selectedDateItem: {
-    borderBottomColor: '#3269bd', // Blue color for selected item
-  },
-  selectedDateText: {
-    color: '#3269bd', // Change text color to blue
-  },
-  resultsText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  filtersButton: {
-    backgroundColor: '#3269bd',
-    paddingVertical: 8,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-  },
-  filtersButtonText: {
-    color: 'white',
-    fontSize: 14,
+  filterImage: {
+    width: 24,
+    height: 24,
   },
   bodyContainer: {
     backgroundColor: '#f8f8f8',
+    paddingVertical: 20,
+    paddingHorizontal: 10,
   },
-  practitionerBlock: {
-    marginVertical: 10,
-    marginHorizontal: 20,
-    padding: 10,
-    backgroundColor: '#ffffff',
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#dfdfdf',
+  dateContainer: {
+    marginBottom: 20,
   },
-  practitionerName: {
+  dateText: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
   },
-  practitionerDetails: {
-    marginBottom: 10,
+  slotContainer: {
+    width: '100%',
+    height: '100%',
+    paddingTop: 18,
+    paddingBottom: 18,
+    backgroundColor: 'white',
+    borderRadius: 6,
+    overflow: 'hidden',
+    border: '1px #E0E0E0 solid',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    gap: 10,
+    display: 'inline-flex',
   },
-  detailsTitle: {
+  slotContent: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    display: 'flex',
+  },
+  slotHeader: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    gap: 16,
+    display: 'flex',
+  },
+  slotHeaderText: {
+    color: 'black',
+    fontSize: 18,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '600',
+    lineHeight: 24,
+    wordWrap: 'break-word',
+  },
+  slotSubHeaderText: {
+    color: 'black',
     fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 5,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '400',
+    lineHeight: 24,
+    wordWrap: 'break-word',
   },
-  appointmentList: {
-    marginBottom: 10,
+  slotBody: {
+    paddingLeft: 18,
+    paddingRight: 16,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    gap: 8,
+    display: 'inline-flex',
   },
-  appointmentHeader: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  timeSlotsContainer: {
+  slotBodyRow: {
     flexDirection: 'row',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    display: 'flex',
   },
-  timeSlot: {
-    backgroundColor: '#f0f0f0',
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 5,
-    marginRight: 10,
+  slotBodyButton: {
+    width: 103,
+    height: 36,
+    paddingLeft: 8,
+    paddingRight: 8,
+    paddingTop: 5,
+    paddingBottom: 5,
+    backgroundColor: 'white',
+    borderRadius: 4,
+    overflow: 'hidden',
+    border: '1px #D9D9D9 solid',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 10,
+    display: 'flex',
   },
-  timeText: {
+  slotBodyButtonText: {
+    textAlign: 'center',
+    color: 'black',
     fontSize: 14,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '600',
+    lineHeight: 14,
+    wordWrap: 'break-word',
   },
-  viewMoreButton: {
-    backgroundColor: '#3269bd',
-    paddingVertical: 10,
-    borderRadius: 5,
-    alignSelf: 'flex-end',
+  slotBodyDivider: {
+    width: 376,
+    height: 1,
+    backgroundColor: '#E0E0E0',
+  },
+  slotBodyLabel: {
+    color: 'black',
+    fontSize: 16,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '400',
+    lineHeight: 24,
+    wordWrap: 'break-word',
+  },
+  slotBodyLanguage: {
+    width: 340,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    display: 'inline-flex',
+  },
+  slotBodyLanguageButton: {
     flex: 1,
+    alignSelf: 'stretch',
+    paddingLeft: 25,
+    paddingRight: 25,
+    paddingTop: 8,
+    paddingBottom: 8,
+    backgroundColor: '#FFF9D9',
+    borderTopLeftRadius: 4,
+    borderTopRightRadius: 4,
+    border: '1px #FFD600 solid',
+    justifyContent: 'center',
     alignItems: 'center',
-    alignContent: 'center',
+    gap: 10,
+    display: 'inline-flex',
   },
-  viewMoreText: {
+  slotBodyLanguageButtonText: {
+    textAlign: 'center',
+    color: 'black',
+    fontSize: 16,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '600',
+    lineHeight: 16,
+    wordWrap: 'break-word',
+  },
+  slotBodyText: {
+    color: 'black',
+    fontSize: 16,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '400',
+    lineHeight: 24,
+    wordWrap: 'break-word',
+  },
+  slotBodyTimes: {
+    width: 340,
+    height: 48,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    gap: 8,
+    display: 'inline-flex',
+  },
+  slotBodyTimeButton: {
+    height: 48,
+    paddingLeft: 18,
+    paddingRight: 18,
+    paddingTop: 8,
+    paddingBottom: 8,
+    backgroundColor: '#3369BD',
+    borderRadius: 4,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 10,
+    display: 'inline-flex',
+  },
+  slotBodyTimeButtonText: {
     color: 'white',
-    fontSize: 14,
+    fontSize: 16,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '700',
+    lineHeight: 16,
+    wordWrap: 'break-word',
   },
-  line: {
-    borderBottomColor: '#dfdfdf',
-    borderBottomWidth: 1,
-    marginBottom: 10,
+  slotViewAllButton: {
+    width: 340,
+    height: 48,
+    paddingLeft: 18,
+    paddingRight: 18,
+    paddingTop: 8,
+    paddingBottom: 8,
+    borderRadius: 4,
+    border: '1px #3369BD solid',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 10,
+    display: 'flex',
+  },
+  slotViewAllButtonText: {
+    color: '#3369BD',
+    fontSize: 18,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '600',
+    lineHeight: 16,
+    wordWrap: 'break-word',
   },
 });
 

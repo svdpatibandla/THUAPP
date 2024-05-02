@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Header from './Header'; 
 
 const MentalIssueTypes = ["Addiction / substance abuse", "Anger management", "Bipolar disorder", "Depression", "Grief", "Attention-deficit / hyperactivity disorder(ADHD)", "Post-traumatic stress disorder (PTSD)", "Stress", "Obsessive-compulsive disorder (OCD)", "Suicidal ideation or self-harm", "Other"];
 
@@ -40,27 +41,7 @@ const MentalIssueSelection = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-              <TouchableOpacity onPress={handleBack}>
-                <Image source={require('../../assets/goBack.png')} style={styles.headerImage} />
-              </TouchableOpacity>
-              <View style={styles.searchBarContainer}>
-                <TextInput
-                  style={styles.searchBar}
-                  placeholder="Search for Mental Issue"
-                  textAlign='center'
-                  value={searchQuery}
-                  onChangeText={setSearchQuery}
-                />
-                <Image source={require('../../assets/search.png')} style={styles.searchImage} />
-                <Image source={require('../../assets/mic.png')} style={styles.micImage} />
-              </View>
-              <TouchableOpacity onPress={handleClose}>
-                <Image source={require('../../assets/cancel.png')} style={styles.headerImage} />
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.headerLine} />
+          <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>What type of issue do you want to address</Text>
