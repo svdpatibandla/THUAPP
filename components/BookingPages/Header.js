@@ -34,10 +34,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 70,
-    borderBottomWidth: 1,
     borderBottomColor: '#dfdfdf',
     backgroundColor: '#ffffff',
-    paddingHorizontal: 20,
+    paddingHorizontal: 14,
   },
   headerImage: {
     width: 24,
@@ -66,12 +65,14 @@ const styles = StyleSheet.create({
     height: 24,
     position: 'absolute',
     right: 10,
+    paddingRight: 10,
   },
   searchImage: {
     width: 24,
     height: 24,
     position: 'absolute',
     left: 10,
+    paddingLeft: 10,
   },
   filterImage: {
     width: 24,
@@ -83,14 +84,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Source Sans Pro',
     fontWeight: '700',
     lineHeight: 24,
-  },
-  ChevronContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 10,
-    marginRight: 10,
-    position: 'relative',
   },
 });
 

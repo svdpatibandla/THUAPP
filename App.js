@@ -24,6 +24,7 @@ import MentalIssueSelection from './components/BookingPages/MentalIssueSelection
 import MentalPractitionerSelection from './components/BookingPages/MentalPractitionerSelection';
 import MedicalPractitionerSelection from './components/BookingPages/MedicalPractitionerSelection';
 import SlotSelection from './components/BookingPages/SlotSelection';
+import AppointmentDetails from './components/BookingPages/AppointmentDetails';
 
 const Stack = createStackNavigator();
 
@@ -44,6 +45,7 @@ const LoggedInNavigator = () => (
     <Stack.Screen name="MentalPractitionerSelection" component={MentalPractitionerSelection} options={{ headerShown: false}} />
     <Stack.Screen name="MedicalPractitionerSelection" component={MedicalPractitionerSelection} options={{ headerShown: false}} />
     <Stack.Screen name="SlotSelection" component={SlotSelection} options={{ headerShown: false}} />
+    <Stack.Screen name="AppointmentDetails" component={AppointmentDetails} options={{ headerShown: false}} />
     <Stack.Screen name="NewPatientForm" component={NewPatientForm} screenOptions={{ headerShown: true }} />
   </Stack.Navigator>
 );

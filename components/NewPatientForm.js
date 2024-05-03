@@ -19,24 +19,46 @@ const NewPatientForm = ({ navigation }) => {
   console.log('user: ',user);
   console.log('token: ',token);
 
-  const [FirstName, setFirstName] = useState('vamsi');
-  const [LastName, setLastName] = useState('P');
-  const [Email, setEmail] = useState('psvdutt@gmail.com');
+  /*
+  const [FirstName, setFirstName] = useState('dutt');
+  const [LastName, setLastName] = useState('patibandla');
+  const [Email, setEmail] = useState(user.email);
   const [YearOfBirth, setYearOfBirth] = useState('1988');
   const [FirstLanguage, setFirstLanguage] = useState('Ukranian');
-  const [AdditionalLanguage, setAdditionalLanguage] = useState('');
+  const [AdditionalLanguage, setAdditionalLanguage] = useState('Russian');
   const [Country, setCountry] = useState('Ukraine');
   const [CountryCode, setCountryCode] = useState('+380'); 
   const [PhoneNumber, setPhoneNumber] = useState('6692209884');
   const [TelegramId, setTelegramId] = useState('psvdutt');
   const [CheifConcern, setCheifConcern] = useState('concern-1');
   const [LocalPhysician, setLocalPhysician] = useState('Dr. Prasanth');
+  const [receiveInstructions, setReceiveInstructions] = useState(true);
+  */
+
+  const [FirstName, setFirstName] = useState('');
+  const [LastName, setLastName] = useState('');
+  const [Email, setEmail] = useState(user.email);
+  const [YearOfBirth, setYearOfBirth] = useState('');
+  const [FirstLanguage, setFirstLanguage] = useState('');
+  const [AdditionalLanguage, setAdditionalLanguage] = useState('');
+  const [Country, setCountry] = useState('');
+  const [CountryCode, setCountryCode] = useState(''); 
+  const [PhoneNumber, setPhoneNumber] = useState('');
+  const [TelegramId, setTelegramId] = useState('');
+  const [CheifConcern, setCheifConcern] = useState('');
+  const [LocalPhysician, setLocalPhysician] = useState('');
   const [receiveInstructions, setReceiveInstructions] = useState(false);
 
+
   const Years = Array.from({ length: moment().year() - 1919 }, (_, i) => (1920 + i).toString());
-  const FirstLanguages = ['Ukranian', 'Russian'];
-  const AdditionalLanguages = ['English', 'Ukranian', 'Russian'];
+  const FirstLanguages = ['Ukrainian', 'Russian'];
+  const AdditionalLanguages = ['English', 'Ukrainian', 'Russian'];
   const Countries = ['Ukraine', 'Poland'];
+  const LanguageMap = {
+    Ukrainian: 4,
+    Russian: 5,
+    English: 6,
+  }
 
   const handleCountryChange = (country) => {
     const code = getCountryCodePrefix(country);
@@ -80,16 +102,16 @@ const NewPatientForm = ({ navigation }) => {
         year_of_birth: parseInt(YearOfBirth),
         tz: Country === 'Poland' ? 'Poland' : 'Ukraine',
         created_at: moment().utc().format(),
-        first_language: FirstLanguage,
-        second_language: AdditionalLanguage,
+        first_language_id: LanguageMap[FirstLanguage],
+        second_language_id: LanguageMap[AdditionalLanguage],
         phone: `${CountryCode}${PhoneNumber}`,
-        auth0_id: `${user.sub}`,
         notes: `${CheifConcern} Telegram: ${TelegramId} Local practitioner: ${LocalPhysician}`,
         telegram: TelegramId,
         practitioner: LocalPhysician,
         health_concerns: CheifConcern,
-        token: token,
-      };
+        auth0_id: user.sub, 
+        token: token
+      };      
 
       const jsonData = JSON.stringify(patientData);
       console.log('Sending JSON:', jsonData);
@@ -102,8 +124,6 @@ const NewPatientForm = ({ navigation }) => {
   
       console.log('API Response:', response.data);
       Alert.alert('Success', 'Patient information saved successfully.');
-      
-      navigation.navigate('AppNavigator');
 
       const tokenResponse = await axios.post('https://dev-telehelpukraine.us.auth0.com/oauth/token', {
         client_id: 'p0kAe8cN24qvpOxapv6piX0ph8SPdepJ',
@@ -119,7 +139,7 @@ const NewPatientForm = ({ navigation }) => {
       const accessToken = tokenResponse.data.access_token;
 
       const roleResponse = await axios.post(
-        `https://dev-telehelpukraine.us.auth0.com/api/v2/users/auth0%7C${user.sub}/roles`,
+        `https://dev-telehelpukraine.us.auth0.com/api/v2/users/${user.sub}/roles`,
         { roles: ['rol_2uV5KBYIEa1bZWyN'] },
         {
           headers: {
@@ -130,7 +150,8 @@ const NewPatientForm = ({ navigation }) => {
         }
       );
 
-      console.log('Role Assignment Response:', roleResponse.data);
+      console.log('Role Assignment Response status:', roleResponse.status);
+      navigation.navigate('AppNavigator');
 
     } catch (error) {
       console.error('Error saving patient information:', error);

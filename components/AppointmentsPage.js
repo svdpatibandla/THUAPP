@@ -91,7 +91,6 @@ const AppointmentsPage = () => {
         }
       });
   
-      // Sort future appointments by date
       future.sort((a, b) => new Date(a.starts_at) - new Date(b.starts_at));
   
       setFutureAppointments(future);
@@ -101,10 +100,9 @@ const AppointmentsPage = () => {
   
 
   useEffect(() => {
-    // Reset visibility of FAB content when scrolling stops
     const timeout = setTimeout(() => {
       setFabVisible(true);
-    }, 2000); // Adjust the delay time as needed
+    }, 2000); 
 
     return () => clearTimeout(timeout);
   }, [scrolling]);
@@ -143,7 +141,6 @@ const AppointmentsPage = () => {
 
         {futureAppointments.length > 0 ? (
           <View style={styles.section}>
-            <Text style={styles.sectionHeading}>Future Appointments</Text>
             <View style={styles.appointmentsContainer}>
               {futureAppointments.map((appointment) => (
                 <AppointmentItem key={appointment.id} appointment={appointment} />

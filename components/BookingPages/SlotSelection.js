@@ -50,20 +50,22 @@ const SlotSelection = () => {
       [practitionerName]: language,
     }));
   };
-
+  
   return (
     <View style={styles.container}>
       <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <View>
-        <View style={styles.header}>
-          <Text style={styles.leftItemText}>2 results found</Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <TouchableOpacity onPress={handleClose}>
-              <Image source={require('../../assets/filter.png')} style={styles.filterImage} />
-            </TouchableOpacity>
-            <Text style={{ marginLeft: 5 }}>Filter</Text>
+      <View style={styles.secondContainer}>
+        <View style={styles.resultsContainer}>
+          <View style={styles.filterContainer}>
+            <Text style={styles.resultText}>2 results found</Text>
           </View>
-        </View>
+          <View style={styles.filterContainer}>
+            <View style={styles.filterIcon}>
+              <Image source={require('../../assets/filter.png')} style={styles.filterImage} />
+            </View>
+            <Text style={styles.filterText}>Filters</Text>
+          </View>
+        </View>       
         <View style={styles.header}>
           <View style={styles.searchBarContainer}>
             <View style={styles.searchBar}>
@@ -78,6 +80,7 @@ const SlotSelection = () => {
           </View>
         </View>
       </View>
+
       
       <ScrollView contentContainerStyle={styles.bodyContainer}>
         {appointments.map(({ date, slots }) => {
@@ -148,14 +151,18 @@ const SlotSelection = () => {
                   </View>
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.slotTimesContainer}>
                     {practitioner.slots.map((slot, index) => (
-                      <TouchableOpacity key={index} style={styles.slotTimeButton}>
+                      <TouchableOpacity
+                        key={index}
+                        style={styles.slotTimeButton}
+                        onPress={() => navigation.navigate('AppointmentDetails', { slotDetails: slot })}
+                      >
                         <Text style={styles.slotTimeButtonText}>{format(slot.time, 'HH:mm')}</Text>
                       </TouchableOpacity>
                     ))}
                   </ScrollView>
-                  <View style={styles.AllSlotsContainer}>
+                  <TouchableOpacity style={styles.AllSlotsContainer}>
                     <Text style={styles.AllSlotsText}>View all times</Text>
-                  </View>
+                  </TouchableOpacity>
                 </View>
               ))}
             </View>
@@ -180,14 +187,58 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#dfdfdf',
     backgroundColor: '#ffffff',
-    paddingHorizontal: 20,
+    paddingHorizontal: 18,
+  },
+  secondContainer: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
+    gap: 16,
+    display: 'flex',
+    backgroundColor: '#ffffff',
+  },
+  resultsContainer: {
+    width: 376,
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: '#ffffff',
+  },
+  resultText: {
+    color: '#151515',
+    fontSize: 16,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '700',
+    lineHeight: 24,
+  },
+  filterContainer: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 8,
+    paddingLeft: 4,
+    paddingRight: 18,
+  },
+  filterIcon: {
+    width: 16,
+    height: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    display: 'flex',
+  },
+  filterText: {
+    textAlign: 'right',
+    color: '#151515',
+    fontSize: 16,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '700',
+    lineHeight: 24,
   },
   searchBarContainer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: 10,
-    marginRight: 10,
     position: 'relative',
   },
   searchBar: {
