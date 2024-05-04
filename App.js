@@ -25,11 +25,12 @@ import MentalPractitionerSelection from './components/BookingPages/MentalPractit
 import MedicalPractitionerSelection from './components/BookingPages/MedicalPractitionerSelection';
 import SlotSelection from './components/BookingPages/SlotSelection';
 import AppointmentDetails from './components/BookingPages/AppointmentDetails';
+import BookAppointment from './components/BookingPages/BookAppointment';
 
 const Stack = createStackNavigator();
 
 const LoggedInNavigator = () => (
-  <Stack.Navigator initialRouteName="AppNavigator" screenOptions={{ headerShown: true }}>
+  <Stack.Navigator initialRouteName="BookAppointment" screenOptions={{ headerShown: true }}>
     <Stack.Screen name="AppNavigator" component={AppNavigator} options={{ title: 'My Appointments', headerLeft: null, headerTitleAlign: 'center', headerShown: false }} />
     <Stack.Screen name="Account" component={AccountPage} />
     <Stack.Screen name="MentalContent" component={MentalContent} />
@@ -47,6 +48,7 @@ const LoggedInNavigator = () => (
     <Stack.Screen name="SlotSelection" component={SlotSelection} options={{ headerShown: false}} />
     <Stack.Screen name="AppointmentDetails" component={AppointmentDetails} options={{ headerShown: false}} />
     <Stack.Screen name="NewPatientForm" component={NewPatientForm} screenOptions={{ headerShown: true }} />
+    <Stack.Screen name="BookAppointment" component={BookAppointment} options={{ headerShown: false }} />
   </Stack.Navigator>
 );
 

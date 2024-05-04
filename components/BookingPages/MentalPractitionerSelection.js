@@ -50,7 +50,7 @@ const MentalPractitionerSelection = ({ route }) => {
     };
 
     fetchServices();
-  }, [user.sub, user.email, previousDetails.account_id]);
+  }, [previousDetails.account_id]);
 
   const handleMentalPractitionerTypeSelection = (mentalPractitionerType) => {
     setSelectedMentalPractitionerType(mentalPractitionerType);

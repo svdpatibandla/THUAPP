@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import Header from './Header'; 
 import { useNavigation } from '@react-navigation/native';
-import { format, addDays, subDays } from 'date-fns';
+import { format, addDays, subDays, addMinutes } from 'date-fns';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import jsonData from '../avail_appointments.json';
@@ -33,8 +33,8 @@ const SlotSelection = ({ route }) => {
   useEffect(() => {
 
     paramsData = {
-      auth0_id: user.sub,
-      email: user.email,
+      auth0_id: "auth0|6634357975c4bd61c0d7eeaa",
+      email: "psvdutt+test5@gmail.com",
       cliniko_appointment_type_id: "1384084284544911455",
       permissions: 'get:patient_cabinet'
     };
@@ -180,7 +180,7 @@ const SlotSelection = ({ route }) => {
                     </Text>
                   </View>
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.slotTimesContainer}>
-                    {practitioner.slots.filter(slot => slot.language_id === 6)
+                    {practitioner.slots
                       .map((slot, index) => (
                         <TouchableOpacity
                           key={index}
