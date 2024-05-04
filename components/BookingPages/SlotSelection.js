@@ -3,15 +3,20 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'rea
 import Header from './Header'; 
 import { useNavigation } from '@react-navigation/native';
 import { format, addDays, subDays } from 'date-fns';
-
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 import jsonData from '../avail_appointments.json';
 
-const SlotSelection = () => {
+const SlotSelection = ({ route }) => {
   const [appointments, setAppointments] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLanguages, setSelectedLanguages] = useState({});
   const navigation = useNavigation();
+
+  const user = useSelector(state => state.auth.user);
+  const prevDetails = route.params;
+  console.log("Prev Details: ",prevDetails);
 
   const getCurrentDate = () => {
     return format(selectedDate, 'EEEE, MMMM d');
@@ -26,15 +31,37 @@ const SlotSelection = () => {
   };
 
   useEffect(() => {
-    const allSlots = jsonData.all_slots;
-    const appointmentsList = Object.keys(allSlots).map(date => {
-      return {
-        date,
-        slots: allSlots[date]
-      };
-    });
-    setAppointments(appointmentsList);
+
+    paramsData = {
+      auth0_id: user.sub,
+      email: user.email,
+      cliniko_appointment_type_id: "1384084284544911455",
+      permissions: 'get:patient_cabinet'
+    };
+    console.log("slot selection params data",paramsData);
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://mobile-app-thu-e036558309fd.herokuapp.com/mobile/slots', { params: paramsData });
+        console.log("Response:  ",response.data);
+        const allSlots = response.data.all_slots;
+        const appointmentsList = Object.keys(allSlots).map(date => {
+          return {
+            date,
+            slots: allSlots[date].map(slot => ({
+              ...slot,
+              time: addMinutes(new Date(slot.time), new Date().getTimezoneOffset())
+            }))
+          };
+        });
+        setAppointments(appointmentsList);
+      } catch (error) {
+        console.error('Error fetching slots:', error);
+      }
+    };
+    fetchData();
   }, []);
+  
 
   const handleGoBack = () => {
     navigation.goBack();
@@ -42,6 +69,12 @@ const SlotSelection = () => {
 
   const handleClose = () => {
     navigation.navigate('AppNavigator');
+  };
+  
+  const languageMap = {
+    4: 'Ukrainian',
+    5: 'Russian',
+    6: 'English',
   };
 
   const handleLanguageSelect = (practitionerName, language) => {
@@ -51,21 +84,20 @@ const SlotSelection = () => {
     }));
   };
   
+  useEffect(() => {
+    const initialLanguages = {};
+    appointments.forEach(({ slots }) => {
+      slots.forEach(slot => {
+        initialLanguages[slot.practitioner.name] = 'Ukrainian';
+      });
+    });
+    setSelectedLanguages(initialLanguages);
+  }, [appointments]);
+
   return (
     <View style={styles.container}>
-      <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchQuery} />
       <View style={styles.secondContainer}>
-        <View style={styles.resultsContainer}>
-          <View style={styles.filterContainer}>
-            <Text style={styles.resultText}>2 results found</Text>
-          </View>
-          <View style={styles.filterContainer}>
-            <View style={styles.filterIcon}>
-              <Image source={require('../../assets/filter.png')} style={styles.filterImage} />
-            </View>
-            <Text style={styles.filterText}>Filters</Text>
-          </View>
-        </View>       
         <View style={styles.header}>
           <View style={styles.searchBarContainer}>
             <View style={styles.searchBar}>
@@ -126,42 +158,41 @@ const SlotSelection = () => {
                   <View style={styles.LanguageContainer}>
                     <Text style={styles.LanguageHeading}>Select an appointment language</Text>
                     <View style={styles.languageItemContainer}>
-                      <TouchableOpacity
-                        style={[styles.languageButton, selectedLanguages[practitioner.name] === 'Ukrainian' && styles.selectedLanguageButton]}
-                        onPress={() => handleLanguageSelect(practitioner.name, 'Ukrainian')}
-                      >
-                        <Text style={[styles.languageButtonText, selectedLanguages[practitioner.name] === 'Ukrainian' && styles.selectedLanguageButtonText]}>Ukrainian</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        style={[styles.languageButton, selectedLanguages[practitioner.name] === 'Russian' && styles.selectedLanguageButton]}
-                        onPress={() => handleLanguageSelect(practitioner.name, 'Russian')}
-                      >
-                        <Text style={[styles.languageButtonText, selectedLanguages[practitioner.name] === 'Russian' && styles.selectedLanguageButtonText]}>Russian</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        style={[styles.languageButton, selectedLanguages[practitioner.name] === 'English' && styles.selectedLanguageButton]}
-                        onPress={() => handleLanguageSelect(practitioner.name, 'English')}
-                      >
-                        <Text style={[styles.languageButtonText, selectedLanguages[practitioner.name] === 'English' && styles.selectedLanguageButtonText]}>English</Text>
-                      </TouchableOpacity>
+                      {[4, 5, 6].map(id => (
+                        <TouchableOpacity
+                          key={id}
+                          style={[styles.languageButton, selectedLanguages[practitioner.name] === languageMap[id] && styles.selectedLanguageButton]}
+                          onPress={() => handleLanguageSelect(practitioner.name, languageMap[id])}
+                        >
+                          <Text style={[styles.languageButtonText, selectedLanguages[practitioner.name] === languageMap[id] && styles.selectedLanguageButtonText]}>
+                            {languageMap[id]}
+                          </Text>
+                        </TouchableOpacity>
+                      ))}
                     </View>
                   </View>
                   <View style={styles.AvailableTimes}>
                     <Text styles={styles.AvailableTimestext}> Available Times for {getCurrentDate()}</Text>
                   </View>
+                  <View style={styles.selectedLanguageContainer}>
+                    <Text style={styles.selectedLanguageText}>
+                      Selected Language: {selectedLanguages[practitioner.name]}
+                    </Text>
+                  </View>
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.slotTimesContainer}>
-                    {practitioner.slots.map((slot, index) => (
-                      <TouchableOpacity
-                        key={index}
-                        style={styles.slotTimeButton}
-                        onPress={() => navigation.navigate('AppointmentDetails', { slotDetails: slot })}
-                      >
-                        <Text style={styles.slotTimeButtonText}>{format(slot.time, 'HH:mm')}</Text>
-                      </TouchableOpacity>
-                    ))}
+                    {practitioner.slots.filter(slot => slot.language_id === 6)
+                      .map((slot, index) => (
+                        <TouchableOpacity
+                          key={index}
+                          style={styles.slotTimeButton}
+                          onPress={() => navigation.navigate('AppointmentDetails', { slotDetails: slot })}
+                        >
+                          <Text style={styles.slotTimeButtonText}>{format(slot.time, 'HH:mm')}</Text>
+                        </TouchableOpacity>
+                      ))}
                   </ScrollView>
                   <TouchableOpacity style={styles.AllSlotsContainer}>
-                    <Text style={styles.AllSlotsText}>View all times</Text>
+                    <Text style={styles.AllSlotsText}>View all times</Text> 
                   </TouchableOpacity>
                 </View>
               ))}

@@ -1,7 +1,4 @@
-// redux/reducers/authReducer.js
-import { SET_USER, SET_TOKEN, CLEAR_USER } from '../actions/authActions';
-import { SET_FIRST_NAME, SET_LAST_NAME } from '../actions/authActions';
-
+import { SET_USER, SET_TOKEN, CLEAR_USER, SET_TRANSLATIONS, SET_FIRST_NAME, SET_LAST_NAME } from '../actions/authActions';
 
 const initialState = {
   user: null,
@@ -9,8 +6,8 @@ const initialState = {
   isAuthenticated: false,
   firstName: '',
   lastName: '',
+  translations: null,
 };
-
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -39,6 +36,11 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         lastName: action.payload,
+      };
+    case SET_TRANSLATIONS:
+      return {
+        ...state,
+        translations: action.payload,
       };
     default:
       return state;

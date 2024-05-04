@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Animated } from 'react-native';
 import appointmentsData from './patient_appointments.json'; 
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
 
 const AppointmentItem = ({ appointment }) => {
   const currentTime = new Date();
@@ -56,6 +57,7 @@ const AppointmentsPage = () => {
   const [fabVisible, setFabVisible] = useState(true); 
 
   const navigation = useNavigation();
+  const translations = useSelector(state => state.auth.translations);
 
   useEffect(() => {
     if (appointmentsData && appointmentsData.patient && appointmentsData.patient.appointments) {
@@ -134,7 +136,7 @@ const AppointmentsPage = () => {
         scrollEventThrottle={16}
       >
         <View style={styles.header}>
-          <Text style={styles.titleText}>Appointments</Text>
+          <Text style={styles.titleText}>{translations?.message_profile_title}</Text>
         </View>
         
         <View style={styles.headerLine} />
@@ -149,12 +151,19 @@ const AppointmentsPage = () => {
           </View>
         ) : (
           <View style={styles.noAppointmentsContainer}>
-            <Text style={styles.noAppointmentsText}>You have no upcoming appointments. Sign up for a consultation.</Text>
+            <View style={styles.noAppointmentsTextContainer}>
+              <Text style={styles.noAppointmentsTitle}>{translations?.message_no_appts}</Text>
+              <Text style={styles.noAppointmentsSubtitle}>Find a specialist today</Text>
+            </View>
+            <TouchableOpacity style={styles.noAppointmentsButton} onPress={() => navigation.navigate('PractitionerSelection')}>
+              <Image source={require('../assets/fab_icon.png')} style={styles.noAppointmentsButtonImage} />
+              <Text style={styles.noAppointmentsButtonText}>{translations?.message_book_appt}</Text>
+            </TouchableOpacity>
           </View>
         )}
       </ScrollView>
 
-      <Animated.View style={[styles.fab]}>
+      {futureAppointments.length > 0 ? ( <Animated.View style={[styles.fab]}>
         <TouchableOpacity onPress={() => navigation.navigate('PractitionerSelection')}>
           <View style={styles.fabContent}>
             <Image source={require('../assets/fab_icon.png')} style={styles.fabImage} />
@@ -162,6 +171,7 @@ const AppointmentsPage = () => {
           </View>
         </TouchableOpacity>
       </Animated.View>
+      ) : null}
 
     </View>
   );
@@ -178,15 +188,17 @@ const styles = StyleSheet.create({
   header: {
     height: 70,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'left',
     borderBottomWidth: 1,
     borderBottomColor: '#dfdfdf',
     backgroundColor: '#ffffff',
+    paddingLeft: 20,
   },
   titleText: {
     fontWeight: 'bold',
     fontSize: 18,
     color: '#353535',
+    justifyContent: 'center', 
   },
   headerLine: {
     height: 1,
@@ -197,11 +209,79 @@ const styles = StyleSheet.create({
   },
   sectionHeading: {
     paddingTop: 10, 
-        fontWeight: 'bold',
+    fontWeight: 'bold',
     fontSize: 16,
     color: '#353535',
     marginBottom: 10,
     marginLeft: 10,
+  },
+  noAppointmentsContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft : 180,
+    paddingRight : 180,
+    marginLeft : 180,
+    marginRight : 180,
+  },
+  noAppointmentsTextContainer: {
+    flexDirection: 'column', 
+    justifyContent: 'flex-start', 
+    alignItems: 'flex-start', 
+    gap: 12, 
+    display: 'flex',
+    marginLeft: 10,
+    marginRight: 10,
+    paddingLeft : 18,
+    paddingRight : 18,
+  },
+  noAppointmentsTitle: {
+    width: 376, 
+    textAlign: 'center', 
+    color: '#363636', 
+    fontSize: 24, 
+    fontFamily: 'Source Sans Pro', 
+    fontWeight: '600', 
+    lineHeight: 32, 
+  },
+  noAppointmentsSubtitle: {
+    width: 376, 
+    textAlign: 'center', 
+    color: '#363636', 
+    fontSize: 24, 
+    fontFamily: 'Source Sans Pro', 
+    fontWeight: '400', 
+    lineHeight: 22, 
+    paddingBottom: 20
+  },
+  noAppointmentsButton: {
+    width: 376, 
+    height: 56, 
+    paddingLeft: 16, 
+    paddingRight: 16, 
+    paddingTop: 8, 
+    paddingBottom: 8, 
+    backgroundColor: '#3369BD', 
+    boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.20)', 
+    borderRadius: 4, 
+    overflow: 'hidden', 
+    justifyContent: 'center',
+    alignItems: 'center', 
+    gap: 8, 
+    display: 'inline-flex',
+    flexDirection: 'row'
+  },
+  noAppointmentsButtonImage:{
+    width: 24, 
+    height: 24, 
+    position: 'relative'
+  },
+  noAppointmentsButtonText: {
+    color: 'white', 
+    fontSize: 18, 
+    fontFamily: 'Source Sans Pro', 
+    fontWeight: '600', 
+    lineHeight: 24, 
   },
   appointmentsContainer: {
     padding: 10,
@@ -240,7 +320,6 @@ const styles = StyleSheet.create({
   },
   uploadedFilesContainer: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     marginBottom: 5,
   },
   uploadedFile: {
@@ -301,6 +380,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    flex: 1,
   },
   noAppointmentsText: {
     fontSize: 16,
@@ -309,12 +389,12 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: 'absolute',
-    width: 'auto', // Adjust width to content
-    height: 60, // Set height to your desired value
+    width: 'auto', 
+    height: 60,
     backgroundColor: '#3269bd',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 10, // Adjust border radius to round corners
+    borderRadius: 10, 
     right: 20,
     bottom: 20,
     elevation: 8,

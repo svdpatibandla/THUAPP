@@ -23,7 +23,7 @@ const MentalIssueSelection = () => {
         }
     };
 
-    const handleBack = () => {
+    const handleGoBack = () => {
       navigation.goBack();
     };
 

@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Header from './Header'; 
+import Header from './Header';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const MentalPractitionerTypes = [
   {
@@ -14,18 +16,70 @@ const MentalPractitionerTypes = [
   },
 ];
 
-const MentalPractitionerSelection = () => {
+const nameMapping = {
+  "Psychologist / Talk Therapy": "Adult Talk Therapy",
+  "Psychiatrist": "Psychiatrist"
+};
+
+const MentalPractitionerSelection = ({ route }) => {
   const navigation = useNavigation();
   const [selectedMentalPractitionerType, setSelectedMentalPractitionerType] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [services, setServices] = useState(null);
+  const user = useSelector(state => state.auth.user);
+  const translations = useSelector(state => state.auth.translations);
+  const previousDetails = route.params;
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      const paramsData = {
+        auth0_id: "auth0|6634357975c4bd61c0d7eeaa",
+        email: "psvdutt+test5@gmail.com",
+        account_id: previousDetails.account_id,
+        permissions: 'get:patient_cabinet'
+      };
+
+      try {
+        const response = await axios.get('https://mobile-app-thu-e036558309fd.herokuapp.com/mobile/services', { params: paramsData });
+        setServices(response.data.services);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, [user.sub, user.email, previousDetails.account_id]);
 
   const handleMentalPractitionerTypeSelection = (mentalPractitionerType) => {
     setSelectedMentalPractitionerType(mentalPractitionerType);
   };
 
   const handleContinue = () => {
-    if (selectedMentalPractitionerType) {
-      navigation.navigate('BookingPage', { selectedMentalPractitionerType });
+    console.log("Selected Mental Practitioner Type:", selectedMentalPractitionerType);
+    console.log("Services:", services);
+    if (selectedMentalPractitionerType && services) {
+      let specific_services;
+      if (previousDetails.AgeDetails === 'Adult') {
+        specific_services = services.adult_services.filter(service => {
+          return nameMapping[selectedMentalPractitionerType.name] === service.name;
+        });
+      } else if (previousDetails.AgeDetails === 'Child') {
+        specific_services = services.child_services.filter(service => {
+          return nameMapping[selectedMentalPractitionerType.name] === service.name;
+        });
+      }
+
+      if (specific_services.length > 0) {
+        navigation.navigate('SlotSelection', {
+          AgeDetails: previousDetails.AgeDetails,
+          cliniko_appointment_type_id: specific_services[0].cliniko_appointment_type_id,
+          account_id: previousDetails.account_id,
+        });
+      } else {
+        console.log("No matching service found.");
+      }
     }
   };
 
@@ -33,25 +87,20 @@ const MentalPractitionerSelection = () => {
     navigation.navigate('AppNavigator');
   };
 
-  const handleBack = () => {
+  const handleGoBack = () => {
     navigation.goBack();
   };
 
-  // Filter MentalPractitionerTypes based on the searchQuery
-  const filteredMentalPractitionerTypes = MentalPractitionerTypes.filter(mentalPractitionerType =>
-    mentalPractitionerType.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   return (
     <View style={styles.container}>
-      <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <Header handleBack={handleGoBack} handleClose={handleClose} />
       
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>What type of help are you looking for?</Text>
+        <Text style={styles.titleText}>{translations?.message_choose_appt_type}</Text>
       </View>
 
       <View style={styles.datacontainer}>
-        {filteredMentalPractitionerTypes.map((mentalPractitionerType, index) => (
+        {MentalPractitionerTypes.map((mentalPractitionerType, index) => (
           <TouchableOpacity
             key={index} 
             style={[styles.MentalPractitionerTypeBox, selectedMentalPractitionerType === mentalPractitionerType && styles.selected]}
@@ -88,51 +137,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 70, 
-    width: 'auto', 
-    borderBottomWidth: 1, 
-    borderBottomColor: '#dfdfdf', 
-    backgroundColor: '#ffffff',
-  },
-  headerImage: {
-    width: 20,
-    height: 20,
-    marginHorizontal: 10,
-  },
-  searchBarContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    position: 'relative',
-  },
-  searchBar: {
-    flex: 1,
-    height: 40,
-    paddingHorizontal: 10,
-    backgroundColor: '#ffffff', 
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#dfdfdf',
-  },
-  micImage: {
-    width: 20,
-    height: 20,
-    position: 'absolute',
-    right: 10,
-  },
-  searchImage: { 
-    width: 20,
-    height: 20,
-    position: 'absolute',
-    left: 10,
-  },
-  headerLine: {
-    height: 1,
-  },
   titleContainer: {
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -149,17 +153,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 80,
-    paddingHorizontal: 20,
+    paddingHorizontal: 20, 
     backgroundColor: '#ffffff',
   },
   continueButton: {
+    flex: 1,
     backgroundColor: '#3269bd',
     paddingVertical: 10,
     borderRadius: 5,
     alignItems: 'center', 
     marginBottom: 20,
-    marginHorizontal: 20,
-    flex: 1,
   },
   continueButtonText: {
     color: 'white',
@@ -200,7 +203,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     backgroundColor: '#3269bd',
   },
-  MentalPractitionerTypeContent: {
+  mentalPractitionerTypeContent: {
     marginLeft: 5,
     flex: 1,
   },
@@ -218,4 +221,3 @@ const styles = StyleSheet.create({
 });
 
 export default MentalPractitionerSelection;
-

@@ -2,37 +2,55 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from './Header'; 
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
 
-const HealthTypes = [
-  {
-    name: "Mental Health",
-    description: "The help of psychologists, psychotherapists and psychiatrists for adults and children.",
-  },
-  {
-    name: "Medical Health",
-    description: "The help of oncologists, endocrinologists, cardiologists, rheumatologists, dermatologists, etc. ",
-  },
-];
 
-const HealthTypeSelection = () => {
+
+const HealthTypeSelection = ({ route }) => {
+
   const navigation = useNavigation();
-  const [selectedHealthType, setSelectedHealthType] = useState('');
+  const [selectedHealthType, setSelectedHealthType] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const translations = useSelector(state => state.auth.translations);
+  const { AgeDetails } = route.params;
+  console.log(AgeDetails);
+
+  const HealthTypes = [
+    {
+      name: translations.first_button_data.text_account_name,
+      description: translations.first_button_data.description,
+      account_id: translations.first_button_data.account_id,
+    },
+    {
+      name: translations.second_button_data.text_account_name,
+      description: translations.second_button_data.description,
+      account_id: translations.second_button_data.account_id,
+    },
+  ];
 
   const handleHealthTypeSelection = (healthType) => {
-    setSelectedHealthType(healthType);
+    console.log(healthType)
+    setSelectedHealthType(healthType.name);
   };
 
   const handleContinue = () => {
     console.log("Selected Health Type:", selectedHealthType);
-    if (selectedHealthType === HealthTypes[0]) {
-      navigation.navigate('MentalIssueSelection', { selectedHealthType });
-    } else if (selectedHealthType === HealthTypes[1]){
-      navigation.navigate('MedicalPractitionerSelection', { selectedHealthType });
-    } else{
+    if (selectedHealthType === HealthTypes[0].name) {
+      navigation.navigate('MentalPractitionerSelection', { 
+        AgeDetails: AgeDetails,
+        account_id: HealthTypes[0].account_id
+      });
+    } else if (selectedHealthType === HealthTypes[1].name){
+      navigation.navigate('MedicalPractitionerSelection', { 
+        AgeDetails: AgeDetails,
+        cliniko_account_id: HealthTypes[1].account_id
+      });
+    } else {
       console.log("Please select a Health Type");
     }
   };
+  
 
   const handleClose = () => {
     navigation.navigate('AppNavigator'); 
@@ -58,12 +76,12 @@ const HealthTypeSelection = () => {
         {filteredHealthTypes.map((healthType, index) => (
           <TouchableOpacity
             key={index} 
-            style={[styles.healthTypeBox, selectedHealthType === healthType && styles.selected]}
+            style={[styles.healthTypeBox, selectedHealthType === healthType.name && styles.selected]}
             onPress={() => handleHealthTypeSelection(healthType)}
           >
             <View style={styles.radioContainer}>
               <View style={styles.outerCircle}>
-                {selectedHealthType === healthType && <View style={styles.innerCircle} />}
+                {selectedHealthType === healthType.name && <View style={styles.innerCircle} />}
               </View>
               <View style={styles.healthTypeContent}>
                 <Text style={styles.healthTypeName}>{healthType.name}</Text>
@@ -76,7 +94,7 @@ const HealthTypeSelection = () => {
 
       <View style={styles.bottomBar}>
         <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
-          <Text style={styles.continueButtonText}>Continue</Text>
+          <Text style={styles.continueButtonText}>{translations.continue}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -108,17 +126,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 80,
-    paddingHorizontal: 20, 
+    paddingHorizontal: 20,
     backgroundColor: '#ffffff',
   },
   continueButton: {
+    flex: 1,
     backgroundColor: '#3269bd',
     paddingVertical: 10,
     borderRadius: 5,
-    alignItems: 'center', 
+    alignItems: 'center',
     marginBottom: 20,
-    marginHorizontal: 20,
-    flex: 1,
   },
   continueButtonText: {
     color: 'white',

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from './Header'; 
+import { useDispatch, useSelector } from 'react-redux';
 
 const MedicalPractitionerTypes = ["Cardiologist", "Dermatologist", "Rheumatologist", "Oncologist", "Gastroenterologist", "Endocrinologist", "Family doctor", "Other"];
 
@@ -9,6 +10,7 @@ const MedicalPractitionerSelection = () => {
   const navigation = useNavigation();
   const [selectedMedicalPractitionerType, setSelectedMedicalPractitionerType] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const translations = useSelector(state => state.auth.translations);
 
   const handleMedicalPractitionerTypeSelection = (medicalPractitionerType) => {
     setSelectedMedicalPractitionerType(medicalPractitionerType);
@@ -37,7 +39,7 @@ const MedicalPractitionerSelection = () => {
       <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>Who would you like to talk to?</Text>
+        <Text style={styles.titleText}>{translations?.message_choose_appt_type}</Text>
       </View>
 
       <View style={styles.datacontainer}>

@@ -2,22 +2,36 @@
 import React from 'react';
 import { Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import { useDispatch, useSelector } from 'react-redux';
 import AppointmentsPage from './AppointmentsPage';
 import AccountPage from './AccountPage';
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
+
+  const translations = useSelector(state => state.auth.translations);
+  
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarLabelStyle: {
-          fontSize: 12,
+          marginBottom: 16,
+          color: '#363636',
+          fontSize: 16,
+          fontFamily: 'Source Sans Pro',
+          fontWeight: '600',
+          lineHeight: 16,
+          letterSpacing: 0.50,
         },
         tabBarStyle: [
           {
             display: 'flex',
+            height: 80,
+            backgroundColor: '#ffffff',
+            paddingTop: 1,
+            paddingBottom: 10,
+            paddingLeft: 8,
           },
           null,
         ],
@@ -27,11 +41,20 @@ const AppNavigator = () => {
         name="Appointments"
         component={AppointmentsPage}
         options={{
+          tabBarLabel: translations?.message_appointments,
           headerShown: false,
           tabBarIcon: () => (
             <Image
-              source={require('../assets/PlusSign.png')}
-              style={{ width: 20, height: 20 }}
+              source={require('../assets/Appointments_Icon.png')}
+              style={
+                { 
+                  width: 24, 
+                  height: 24,
+                  marginTop: 4,
+                  marginBottom: 4,
+                  marginLeft: 4,
+                }
+              }
             />
           ),
         }}
@@ -43,8 +66,16 @@ const AppNavigator = () => {
           headerShown: false,
           tabBarIcon: () => (
             <Image
-              source={require('../assets/PlusSign.png')}
-              style={{ width: 20, height: 20 }}
+              source={require('../assets/Account_Icon.png')}
+              style={
+                { 
+                  width: 24, 
+                  height: 24,
+                  marginTop: 4,
+                  marginBottom: 4,
+                  marginLeft: 4,
+                }
+              }
             />
           ),
         }}
@@ -54,5 +85,3 @@ const AppNavigator = () => {
 };
 
 export default AppNavigator;
-
-//can u do the same for this page and also update the style and variable names accordingly

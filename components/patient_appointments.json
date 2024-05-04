@@ -4,8 +4,8 @@
             {
                 "api_key": "MENTAL_API_KEY",
                 "cancel": true,
-                "datetime": "05/15/2024, 00:00",
-                "ends_at": "2024-05-14T22:00:00Z",
+                "datetime": "04/14/2024, 00:00",
+                "ends_at": "2024-04-14T22:00:00Z",
                 "future_appt": true,
                 "human_readable_UA": "00:00, середа, 15 травня",
                 "id": "1364570146068237161",
@@ -17,7 +17,7 @@
                     "specialization": "Family Medicine",
                     "tz": "Europe/Kiev"
                 },
-                "starts_at": "2024-05-14T21:00:00Z",
+                "starts_at": "2024-04-14T21:00:00Z",
                 "telehealth_url": "https://marcos-healthy.ca1.cliniko.com/c?F4choIeKNC1-tzowGEhqHXh0KP8KK77NO",
                 "video_link": true
             },

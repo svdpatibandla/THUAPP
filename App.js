@@ -29,7 +29,7 @@ import AppointmentDetails from './components/BookingPages/AppointmentDetails';
 const Stack = createStackNavigator();
 
 const LoggedInNavigator = () => (
-  <Stack.Navigator initialRouteName="SlotSelection" screenOptions={{ headerShown: true }}>
+  <Stack.Navigator initialRouteName="AppNavigator" screenOptions={{ headerShown: true }}>
     <Stack.Screen name="AppNavigator" component={AppNavigator} options={{ title: 'My Appointments', headerLeft: null, headerTitleAlign: 'center', headerShown: false }} />
     <Stack.Screen name="Account" component={AccountPage} />
     <Stack.Screen name="MentalContent" component={MentalContent} />

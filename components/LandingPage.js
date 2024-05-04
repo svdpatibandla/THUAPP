@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image, Button } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth0 } from 'react-native-auth0';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser, setToken, clearUser } from '../redux/actions/authActions';
+import { setUser, setToken, clearUser, fetchTranslations } from '../redux/actions/authActions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import jwtDecode from 'jwt-decode';
 
 const LandingPage = () => {
   const navigation = useNavigation();
@@ -14,12 +13,17 @@ const LandingPage = () => {
   const loggedIn = useSelector(state => state.auth.isAuthenticated);
 
   useEffect(() => {
+    dispatch(fetchTranslations());
+  }, [dispatch]);
+
+
+  useEffect(() => {
     if (user) {
       dispatch(setUser(user)); 
     }
   }, [user, dispatch]);
 
-// Inside onLogin function
+
 const onLogin = async (userType) => {
   try {
     console.log(`Attempting to log in as ${userType} user...`);

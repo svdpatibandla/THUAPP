@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from './Header'; 
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const practitionersData = [
   {
@@ -27,6 +29,8 @@ const practitionersData = [
 const PractitionerSelection = () => {
   const navigation = useNavigation();
   const [searchQuery, setSearchQuery] = useState('');
+  const translations = useSelector(state => state.auth.translations);
+  const AgeGroups = [translations.message_adult, translations.message_child];
 
   const filteredPractitioners = practitionersData.filter(practitioner =>
     practitioner.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -43,13 +47,17 @@ const PractitionerSelection = () => {
   const handleClose = () => {
     navigation.navigate('AppNavigator');
   };
+  
+  const handlePractitionerSelection = (practitioner) => {
+    navigation.navigate('AppointmentSelection', { practitioner });
+  }
 
   return (
     <View style={styles.container}>
       <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>Practitioners you've seen before</Text>
+        <Text style={styles.titleText}>{translations?.message_previous_practitioners}</Text>
       </View>
 
       <View style={styles.datacontainer}>
@@ -75,7 +83,7 @@ const PractitionerSelection = () => {
       
       <View style={styles.bottomBar}>
         <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
-          <Text style={styles.continueButtonText}>New Doctor Appointment</Text>
+          <Text style={styles.continueButtonText}>{translations?.message_new_doctor_appt}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -139,8 +147,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     paddingHorizontal: 20,
-    paddingVertical: 
-10,
+    paddingVertical: 10,
     marginTop: 10,
     marginBottom: 10,
   },
@@ -156,19 +163,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 80,
-    paddingHorizontal: 20, // Add padding for space on both sides
+    paddingHorizontal: 20, 
     backgroundColor: '#ffffff',
   },
   continueButton: {
-    flex: 1, // Take remaining space
-    backgroundColor: '#3269bd',
+    flex: 1,
+    borderColor: '#3269bd',
+    borderWidth: 1,
     paddingVertical: 10,
     borderRadius: 5,
-    alignItems: 'center', // Center button content horizontally
-    marginBottom: 20,
+    alignItems: 'center',
+    marginBottom: 20, 
   },
   continueButtonText: {
-    color: 'white',
+    color:  '#3269bd',
     fontSize: 16,
   },
   scrollView: {

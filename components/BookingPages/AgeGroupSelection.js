@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from './Header';
-
-const AgeGroups = ["Adult", "Child / Teen"];
+import { useDispatch, useSelector } from 'react-redux';
 
 const AgeGroupSelection = () => {
+  const dispatch = useDispatch();
+  const translations = useSelector(state => state.auth.translations);
+  const AgeGroups = [translations.message_adult, translations.message_child];
+
   const navigation = useNavigation();
-  const [selectedAgeGroup, setSelectedAgeGroup] = useState('Adult'); // Initialize with 'Adult'
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState(AgeGroups[0]);
   const [searchText, setSearchText] = useState('');
 
   const handleAgeGroupSelection = (ageGroup) => {
@@ -16,8 +19,8 @@ const AgeGroupSelection = () => {
 
   const handleContinue = () => {
     if (selectedAgeGroup) {
-      console.log("Selected Age Group:", selectedAgeGroup);
-      navigation.navigate('HealthTypeSelection', { selectedAgeGroup });
+      navigation.navigate('HealthTypeSelection', { AgeDetails: selectedAgeGroup });
+      console.log('Selected Age Group:', selectedAgeGroup);
     }
   };
 
@@ -29,41 +32,45 @@ const AgeGroupSelection = () => {
     navigation.navigate('AppNavigator');
   };
 
-  // Filter age groups based on search text
   const filteredAgeGroups = AgeGroups.filter((ageGroup) =>
     ageGroup.toLowerCase().includes(searchText.toLowerCase())
   );
 
   return (
     <View style={styles.container}>
-      <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchText} setSearchQuery={setSearchText} />
-      
+      <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchText} />
+
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>Who needs help?</Text>
+        <Text style={styles.titleText}>{translations?.message_appt_age}</Text>
       </View>
 
       <View style={styles.datacontainer}>
-        {filteredAgeGroups.map((ageGroup, index) => (
-          <TouchableOpacity
-            key={index}
-            style={[styles.practitionerBox, selectedAgeGroup === ageGroup && styles.selected]}
-            onPress={() => handleAgeGroupSelection(ageGroup)}
-          >
-            <View style={styles.radioContainer}>
-              <View style={styles.outerCircle}>
-                {selectedAgeGroup === ageGroup && <View style={styles.innerCircle} />}
-              </View>
-              <Text style={styles.ageGroupText}>{ageGroup}</Text>
-            </View>
-          </TouchableOpacity>
-        ))}
+        {filteredAgeGroups.map((ageGroup, index) => {
+          if (typeof ageGroup === 'string' || typeof ageGroup === 'number') {
+            return (
+              <TouchableOpacity
+                key={index}
+                style={[styles.practitionerBox, selectedAgeGroup === ageGroup && styles.selected]}
+                onPress={() => handleAgeGroupSelection(ageGroup)}
+              >
+                <View style={styles.radioContainer}>
+                  <View style={styles.outerCircle}>
+                    {selectedAgeGroup === ageGroup && <View style={styles.innerCircle} />}
+                  </View>
+                  <Text style={styles.ageGroupText}>{ageGroup}</Text>
+                </View>
+              </TouchableOpacity>
+            );
+          }
+          return null; 
+        })}
       </View>
-      
+
       <View style={styles.bottomLine} />
-      
+
       <View style={styles.bottomBar}>
         <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
-          <Text style={styles.continueButtonText}>Continue</Text>
+          <Text style={styles.continueButtonText}>{translations?.message_continue}</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -73,7 +80,7 @@ const AgeGroupSelection = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8f8f8', 
+    backgroundColor: '#f8f8f8',
   },
   datacontainer: {
     flex: 1,
@@ -98,7 +105,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 80,
-    paddingHorizontal: 20, 
+    paddingHorizontal: 20,
     backgroundColor: '#ffffff',
   },
   continueButton: {
@@ -150,7 +157,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#3269bd',
   },
   ageGroupText: {
-    fontSize: 16, 
+    fontSize: 16,
     fontWeight: '500',
     color: '#353535',
   },
