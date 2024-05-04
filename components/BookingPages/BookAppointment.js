@@ -11,6 +11,11 @@ const BookAppointment = () => {
     const [selectedLanguage, setSelectedLanguage] = useState('Ukrainian');
     const [availableSlots, setAvailableSlots] = useState([]);
 
+    const customTheme = {
+        calendarBackground: '#ffffff',
+        arrowColor: '#3369BD',
+    };
+
     useEffect(() => {
         console.log(selectedDate);
         const fetchData = async () => {
@@ -118,7 +123,8 @@ const BookAppointment = () => {
                         markedDates={{
                             [selectedDate]: { selected: true, selectedColor: '#3369BD' },
                         }}
-                        style={styles.calendar}
+                        style={[styles.calendar, { borderTopWidth: 0 }]} 
+                        theme={customTheme}
                     />
                 </View>
                 <View style={styles.AvailableTimesContainer}>
