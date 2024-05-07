@@ -93,11 +93,11 @@ const BookAppointment = ({ route }) => {
                     <View style={styles.practitionerContainer}>
                         <View style={styles.practitionerDetails}>
                             <View style={styles.AboutPractitioner}>
-                                <Text style={styles.practitionerName}>{availableSlots[0].practitioner.name}</Text>
-                                <Text style={styles.practitionerSpecialization}>{availableSlots[0].practitioner.specialization}</Text>
+                                <Text style={styles.practitionerName}></Text>
+                                <Text style={styles.practitionerSpecialization}></Text>
                                 <View style={styles.practitionerLanguage}>
                                     <Text style={styles.practitionerLanguageText}>Practitioner speaks</Text>
-                                    <Text style={styles.practitionerLanguageValue}>{LanguageMap[availableSlots[0].language_id]}</Text>
+                                    <Text style={styles.practitionerLanguageValue}></Text>
                                 </View>
                             </View>
                             <View style={styles.TreatsContainer}>
@@ -142,7 +142,7 @@ const BookAppointment = ({ route }) => {
                 <View style={styles.AvailableTimesContainer}>
                     <View style={styles.AvailableTimesTextContainer}>
                         <Text style={styles.AvailableTimestext}> Available Times for</Text>
-                        <Text style={styles.AvailableTimestextValue}> {getCurrentDate()}</Text>
+                        <Text style={styles.AvailableTimestextValue}> {format(selectedDate, 'EE, MMMM d')}</Text>
                     </View>
                     <View style={styles.timeButtonsContainer}>
                         {availableSlots.map((slot, index) => (

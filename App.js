@@ -35,7 +35,6 @@ const LoggedInNavigator = () => (
     <Stack.Screen name="Account" component={AccountPage} />
     <Stack.Screen name="MentalContent" component={MentalContent} />
     <Stack.Screen name="PlanPage" component={PlanPage} />
-    <Stack.Screen name="LandingPage" component={LandingPage} />
     <Stack.Screen name="AppointmentsPage" component={AppointmentsPage} options={{ headerShown: false }} />
     <Stack.Screen name="PractitionerPage" component={PractitionerPage} />
     <Stack.Screen name="ConfirmAppointment" component={ConfirmAppointment} />
