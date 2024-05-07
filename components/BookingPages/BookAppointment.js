@@ -5,11 +5,12 @@ import { Calendar } from 'react-native-calendars';
 import { format } from 'date-fns';
 import axios from 'axios';
 
-const BookAppointment = () => {
+const BookAppointment = ({ route }) => {
     const navigation = useNavigation();
     const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
     const [selectedLanguage, setSelectedLanguage] = useState('Ukrainian');
     const [availableSlots, setAvailableSlots] = useState([]);
+    const prevDetails = route.params;
 
     const customTheme = {
         calendarBackground: '#ffffff',
@@ -18,18 +19,21 @@ const BookAppointment = () => {
 
     useEffect(() => {
         console.log(selectedDate);
+        console.log("PrevDetails at BookAppointment: ",prevDetails);
         const fetchData = async () => {
             const paramsData = {
-                auth0_id: "auth0|6634357975c4bd61c0d7eeaa",
-                email: "psvdutt+test5@gmail.com",
-                permissions: "get:patient_cabiner",
-                cliniko_appointment_type_id: "1384084284544911455",
-                cliniko_practitioner_id: "933300557148326133",
+                auth0_id: prevDetails.auth0_id,
+                email: prevDetails.email,
+                permissions: "get:patient_cabinet",
+                cliniko_appointment_type_id:prevDetails.cliniko_appointment_type_id,
+                cliniko_practitioner_id: prevDetails.cliniko_practitioner_id,
             }
+            console.log(paramsData)
 
             try {
                 const response = await axios.get('https://mobile-app-thu-e036558309fd.herokuapp.com/mobile/slots', { params: paramsData });
                 setAvailableSlots(response.data.all_slots[selectedDate] || []);
+                console.log("--------------------");
                 console.log(availableSlots);
             } catch (error) {
                 console.log(error);
@@ -52,6 +56,12 @@ const BookAppointment = () => {
     const getCurrentDate = () => {
         return format(selectedDate, 'EE, MMMM d');
     };
+    
+    const LanguageMap = {
+        '4': 'Ukrainian',
+        '5': 'Russian',
+        '6': 'English',
+    };
 
     const languageMap = {
         4: 'Ukrainian',
@@ -63,7 +73,9 @@ const BookAppointment = () => {
         setSelectedLanguage(language);
     };
     const handleSlotSelection = (slot) => {
-        navigation.navigate('AppointmentDetails', { slot });
+        navigation.navigate('AppointmentDetails', { 
+            slot: slot,
+         });
     };
 
 
@@ -81,11 +93,11 @@ const BookAppointment = () => {
                     <View style={styles.practitionerContainer}>
                         <View style={styles.practitionerDetails}>
                             <View style={styles.AboutPractitioner}>
-                                <Text style={styles.practitionerName}>Bender Rodriguez</Text>
-                                <Text style={styles.practitionerSpecialization}>Psychologist</Text>
+                                <Text style={styles.practitionerName}>{availableSlots[0].practitioner.name}</Text>
+                                <Text style={styles.practitionerSpecialization}>{availableSlots[0].practitioner.specialization}</Text>
                                 <View style={styles.practitionerLanguage}>
                                     <Text style={styles.practitionerLanguageText}>Practitioner speaks</Text>
-                                    <Text style={styles.practitionerLanguageValue}>Ukraine</Text>
+                                    <Text style={styles.practitionerLanguageValue}>{LanguageMap[availableSlots[0].language_id]}</Text>
                                 </View>
                             </View>
                             <View style={styles.TreatsContainer}>

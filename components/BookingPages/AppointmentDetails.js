@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, Image, Text, ScrollView, Button, Alert, Modal, TouchableHighlight } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Image, Text, ScrollView, Button, Modal, TouchableHighlight } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { TextInput } from 'react-native-gesture-handler';

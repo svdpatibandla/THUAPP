@@ -55,6 +55,7 @@ const SlotSelection = ({ route }) => {
           };
         });
         setAppointments(appointmentsList);
+        console.log("Appointments: ",appointmentsList);
       } catch (error) {
         console.error('Error fetching slots:', error);
       }
@@ -133,6 +134,8 @@ const SlotSelection = ({ route }) => {
                     slots: [slot],
                   });
                 }
+                console.log("-------------------------------------------");
+                console.log("practitioners: ",practitioners[0].slots[0].cliniko_practitioner_id);
                 return practitioners;
               }, []).map((practitioner, index) => (
                 <View key={index} style={styles.practitionerContainer}>
@@ -191,7 +194,15 @@ const SlotSelection = ({ route }) => {
                         </TouchableOpacity>
                       ))}
                   </ScrollView>
-                  <TouchableOpacity style={styles.AllSlotsContainer}>
+                  <TouchableOpacity 
+                    style={styles.AllSlotsContainer}
+                    onPress = {() => navigation.navigate('BookAppointment', { 
+                      auth0_id: user.sub,
+                      email: user.email,
+                      cliniko_practitioner_id: practitioner.slots[0].cliniko_practitioner_id,
+                      cliniko_appointment_type_id: paramsData.cliniko_appointment_type_id,
+                    })}
+                  >
                     <Text style={styles.AllSlotsText}>View all times</Text> 
                   </TouchableOpacity>
                 </View>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ScrollView, Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Header from './Header'; 
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,37 +34,58 @@ const MedicalPractitionerSelection = () => {
     medicalPractitionerType.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  return (
-    <View style={styles.container}>
-      <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      
-      <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>{translations?.message_choose_appt_type}</Text>
-      </View>
+  const waitlistUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeTaVwXEi8BhgHg_Ebs0sEIqXMirthyWx3UzlOnJpb89NBbTg/viewform';
+  const handleWaitlist = () => {
+    console.log('waitlist');
+    Linking.openURL(waitlistUrl);
+  }
 
-      <View style={styles.datacontainer}>
-        {filteredMedicalPractitionerTypes.map((medicalPractitionerType, index) => (
-          <TouchableOpacity
-            key={index}
-            style={[styles.practitionerBox, selectedMedicalPractitionerType === medicalPractitionerType && styles.selected]}
-            onPress={() => handleMedicalPractitionerTypeSelection(medicalPractitionerType)}
-          >
-            <View style={styles.radioContainer}>
-              <View style={styles.outerCircle}>
-                {selectedMedicalPractitionerType === medicalPractitionerType && <View style={styles.innerCircle} />}
+
+  return (
+    <ScrollView>
+      <View style={styles.container}>
+        <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        
+        <View style={styles.titleContainer}>
+          <Text style={styles.titleText}>{translations?.message_choose_appt_type}</Text>
+        </View>
+
+        <View style={styles.datacontainer}>
+          {filteredMedicalPractitionerTypes.map((medicalPractitionerType, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[styles.practitionerBox, selectedMedicalPractitionerType === medicalPractitionerType && styles.selected]}
+              onPress={() => handleMedicalPractitionerTypeSelection(medicalPractitionerType)}
+            >
+              <View style={styles.radioContainer}>
+                <View style={styles.outerCircle}>
+                  {selectedMedicalPractitionerType === medicalPractitionerType && <View style={styles.innerCircle} />}
+                </View>
+                <Text style={styles.medicalPractitionerTypeText}>{medicalPractitionerType}</Text>
               </View>
-              <Text style={styles.medicalPractitionerTypeText}>{medicalPractitionerType}</Text>
+            </TouchableOpacity>
+          ))}
+          
+          { selectedMedicalPractitionerType === 'Other'  ? (
+            <View>
+              <Text style={{fontSize: 14, fontFamily: 'Source Sans Pro', fontWeight: '400', lineHeight: 24}}>We are very sorry if you couldn’t find the specialist you were looking for. We can suggest seeing a Family doctor or signing up for our waitlist. We’ll contact you when we have available slots for practitioners with this specialization.</Text>
+              <ScrollView>
+                <TouchableOpacity style={styles.otherBox} onPress={handleWaitlist} >
+                  <Text style={{ color: '#3269bd', fontSize: 16, fontFamily: 'Source Sans Pro', fontWeight: '600', lineHeight: 24, }}>Sign up to the wailist</Text>
+                  <Image source={require('../../assets/chevron_right.png')} style={[styles.arrowRight, { transform: [{ rotate: '180deg' }] }]} />
+                </TouchableOpacity>
+              </ScrollView>
             </View>
+          ) : null}
+        </View>
+        
+        <View style={styles.bottomBar}>
+          <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
+            <Text style={styles.continueButtonText}>Continue</Text>
           </TouchableOpacity>
-        ))}
+        </View>
       </View>
-      
-      <View style={styles.bottomBar}>
-        <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
-          <Text style={styles.continueButtonText}>Continue</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -158,9 +179,7 @@ const styles = StyleSheet.create({
   },
   practitionerBox: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    width: '100%',
     height: 50,
     backgroundColor: 'white',
     marginVertical: 5,
@@ -168,6 +187,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'lightgrey',
     borderRadius: 5,
+    fontSize: 16,
+  },
+  otherBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 50,
+    borderColor: 'lightgrey',
+    borderRadius: 5,
+    fontSize: 16,
   },
   selected: {
     backgroundColor: '#e6ecfc',
@@ -192,10 +220,11 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     backgroundColor: '#3269bd',
   },
-  MedicalPractitionerTypeText: {
-    fontSize: 16, 
-    fontWeight: '500',
-    color: '#353535',
+  medicalPractitionerTypeText: {
+    fontSize: 16,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '400',
+    lineHeight: 24,
   },
 });
 

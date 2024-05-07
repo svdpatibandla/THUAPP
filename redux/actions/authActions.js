@@ -38,8 +38,14 @@ export const setTranslations = (translations) => ({
 
 export const fetchTranslations = () => {
   return async (dispatch) => {
+
+    const paramsData = {
+      "email": "psvdutt+test5@gmail.com",
+      "auth0_id": "auth0|6634357975c4bd61c0d7eeaa",
+    }
     try {
       const translations = await axios.get('https://mobile-app-thu-e036558309fd.herokuapp.com/mobile/translations', {
+        params: paramsData,
         headers: {
           'Content-Type': 'application/json',
         },
