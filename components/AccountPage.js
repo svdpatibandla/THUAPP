@@ -25,7 +25,7 @@ const AccountPage = () => {
     "About us": "https://telehelpukraine.com/who-we-are-0",
     "Contact us": "https://telehelpukraine.com/contact-0",
     "Useful resources": "https://telehelpukraine.com/patient-resources-0",
-    "Share THU": "",
+    "Share THU": "https://drive.google.com/drive/u/1/folders/15z8SM3XZGyGhFe6sWKz5cgj-dyOAaZyV",
   };
 
   const onLogout = async () => {

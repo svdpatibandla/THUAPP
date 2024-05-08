@@ -1,60 +1,157 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, Modal, TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import DocumentPicker from 'react-native-document-picker';
+import { useDispatch, useSelector } from 'react-redux'; 
+import { format } from 'date-fns';
+
+
 
 const PatientAttachments = () => {
-    const navigation = useNavigation();
-    const [showPopup, setShowPopup] = useState(false);
 
-    const handleClose = () => {
+    const [showPopup, setShowPopup] = useState({ visible: false, index: null });
+    const [uploadedFiles, setUploadedFiles] = useState([]);
+    const [prevUploadedFiles, setPrevUploadedFiles] = useState(useSelector(state => state.auth.uploadedFiles)) || []; 
+    const [deleteIndex, setDeleteIndex] = useState(null); 
+    const [popupTop, setPopupTop] = useState(0);
+    const [popupLeft, setPopupLeft] = useState(0);
+    const currentDate = format(new Date(), 'yyyy-MM-dd')
+
+    const navigation = useNavigation();
+
+    const handleDelete = (deleteIndex) => {
+
+        console.log('Delete index:', deleteIndex);
+        if (deleteIndex !== null) {
+            const updatedFiles = uploadedFiles.filter((_, index) => index !== deleteIndex);
+            setUploadedFiles(updatedFiles);
+            console.log('Deleted file at index:', deleteIndex);
+            console.log('Updated files:', updatedFiles);
+            setShowPopup({ visible: false, index: null });
+            setDeleteIndex(null);
+        }
+    };
+    
+
+    const handleDownload = (showPopup) => {
+        console.log("showPopup: ", showPopup);  
+        setShowPopup({ visible: false, index: null });
+    };
+    
+    const dispatch = useDispatch(); 
+
+    const handleGoBack = () => {
+        console.log("Uploaded files by closing time: ", uploadedFiles);
+        dispatch(setUploadedFiles(uploadedFiles));
+        setPrevUploadedFiles(prevUploadedFiles => [...(prevUploadedFiles || []), ...uploadedFiles]);
+        console.log("Final files by closing time: ", prevUploadedFiles);
+        setUploadedFiles([]);
         navigation.navigate('AccountPage');
     };
+    
 
-    const handleDelete = () => {
-        // Handle delete functionality
-        setShowPopup(false);
+    const handleUpload = async () => {
+        try {
+            const res = await DocumentPicker.pick({
+                type: [DocumentPicker.types.allFiles],
+            });
+            setUploadedFiles(prevUploadedFiles => {
+                const newUploadedFiles = [...prevUploadedFiles, res];
+                console.log("New uploaded files after each upload: ", newUploadedFiles); 
+                return newUploadedFiles;
+            });
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+                console.log('User cancelled the picker');
+            } else {
+                console.log('Error occurred while picking the file', err);
+            }
+        }
     };
-
-    const handleDownload = () => {
-        // Handle download functionality
-        setShowPopup(false);
-    };
-
+    
     return (
-        <ScrollView style={styles.container}>
-            <View style={styles.header}>
-                <TouchableOpacity onPress={handleClose}>
-                    <Image source={require('../../assets/goBack.png')} style={styles.headerImage} />
-                </TouchableOpacity>
-                <Text style={styles.headerText}>Documents</Text>
-            </View>
-            <View style={styles.listContainer}>
-                {/* List of recent image uploads */}
-                <View style={styles.imageUpload}>
-                    <Image source={require('../../assets/arrow.png')} style={styles.image} />
-                    <Text style={styles.imageText}>Image 1</Text>
-                    <TouchableOpacity onPress={() => setShowPopup(true)}>
-                        <Text style={styles.dots}>...</Text>
+        <ScrollView
+            style={styles.container}
+            onTouchStart={() => setShowPopup({ visible: false, index: null })} 
+        >
+            <TouchableOpacity
+                style={styles.container}
+                activeOpacity={1}
+                onPress={() => setShowPopup({ visible: false, index: null })}
+            >
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={handleGoBack}>
+                        <Image source={require('../../assets/goBack.png')} style={styles.headerImage} />
                     </TouchableOpacity>
+                    <Text style={styles.headerText}>Documents</Text>
                 </View>
-            </View>
-            <TouchableOpacity style={styles.uploadButton}>
-                <Image source={require('../../assets/file_upload.png')} style={styles.uploadImage} />
-                <Text style={styles.uploadButtonText}>Upload</Text>
-            </TouchableOpacity>
+    
+                <TouchableOpacity style={styles.uploadButton} onPress={handleUpload}>
+                    <Image source={require('../../assets/file_upload.png')} style={styles.uploadImage} />
+                    <Text style={styles.uploadButtonText}>Upload</Text>
+                </TouchableOpacity>
+    
+                {uploadedFiles.length > 0 &&
+                    <View style={styles.listContainer}>
+                        <Text style={styles.UploadText}>Recent Uploads</Text>
+                        {uploadedFiles.flat().map((file, index) => (
+                            <View key={index} style={styles.imageUpload}>
+                                <Image source={{ uri: file.uri }} style={styles.image} />
+                                <View style={{ flex: 1 }}>
+                                    <Text style={styles.imageTitleText}>{file.name}</Text>
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <Text style={styles.imageText}>{format(new Date(), 'd MMM, yyyy')} - </Text>
+                                        <Text style={styles.imageText}>{(file.size / 1024).toFixed(2)} KB</Text>
+                                    </View>
+                                </View>
+                                <TouchableOpacity onPress={(e) => {
+                                    const { pageY, pageX } = e.nativeEvent;
+                                    setPopupTop(pageY - 90);
+                                    setPopupLeft(pageX - 90);
+                                    setShowPopup({ visible: true, index });
+                                }}>
+                                    <Text style={styles.dots}>...</Text>
+                                </TouchableOpacity>
+                            </View>
+                        ))}
+                    </View>
+                }
 
-            <Modal visible={showPopup} transparent={true} animationType='fade'>
-                <View style={styles.popup}>
-                    <TouchableOpacity onPress={handleDelete} style={styles.popupItem}>
+                { prevUploadedFiles > 0 && 
+                    <View style={styles.listContainer}>
+                        <Text style={styles.UploadText}>Previously Uploaded</Text>
+                        {prevUploadedFiles.flat().map((file, index) => (
+                            <View key={index} style={styles.imageUpload}>
+                                <Image source={{ uri: file.uri }} style={styles.image} />
+                                <Text style={styles.imageText}>{file.name}</Text>
+                                <TouchableOpacity onPress={(e) => {
+                                    const { pageY, pageX } = e.nativeEvent;
+                                    setPopupTop(pageY - 90);
+                                    setPopupLeft(pageX - 90);
+                                    setShowPopup({ visible: true, index });
+                                }}>
+                                    <Text style={styles.dots}>...</Text>
+                                </TouchableOpacity>
+                            </View>
+                        ))}
+                    </View>
+                }
+            </TouchableOpacity>
+    
+            <Modal visible={showPopup.visible} transparent={true} animationType='fade'>
+                <View style={[styles.popup, { top: popupTop, left: popupLeft }]}>
+                    <TouchableOpacity onPress={() => handleDelete(showPopup.index)} style={styles.popupItem}>
                         <Text>Delete</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={handleDownload} style={styles.popupItem}>
+                    <TouchableOpacity onPress={() => handleDownload(showPopup)} style={styles.popupItem}>
                         <Text>Download</Text>
                     </TouchableOpacity>
                 </View>
             </Modal>
+
         </ScrollView>
     );
+    
 };
 
 const styles = StyleSheet.create({
@@ -94,11 +191,13 @@ const styles = StyleSheet.create({
     image: {
         width: 50,
         height: 50,
-        borderRadius: 25,
         marginRight: 10,
     },
-    imageText: {
+    imageTitleText: {
+        fontSize: 16,
         flex: 1,
+    },
+    imageText: {
         fontSize: 16,
     },
     dots: {
@@ -106,6 +205,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 5,
     },
     uploadButton: {
+        marginTop: 20,
         backgroundColor: '#3269bd',
         alignItems: 'center',
         marginHorizontal: 16,
@@ -120,6 +220,12 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         width: 140
     },
+    UploadText: {
+        fontSize: 16,
+        color: '#151515',
+        fontWeight: 'bold',
+        marginBottom: 10,
+    },
     uploadImage: {
         width: 20,
         height: 20,
@@ -131,8 +237,6 @@ const styles = StyleSheet.create({
     },
     popup: {
         position: 'absolute',
-        top: 70,
-        right: 10,
         backgroundColor: 'white',
         borderRadius: 5,
         paddingVertical: 8,
@@ -146,3 +250,4 @@ const styles = StyleSheet.create({
 });
 
 export default PatientAttachments;
+

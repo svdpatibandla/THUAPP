@@ -7,6 +7,7 @@ export const USER_INFO = 'USER_INFO';
 export const SET_FIRST_NAME = 'SET_FIRST_NAME'; 
 export const SET_LAST_NAME = 'SET_LAST_NAME';
 export const SET_TRANSLATIONS = 'SET_TRANSLATIONS';
+export const SET_UPLOADEDFILES = 'SET_UPLOADEDFILES';
 
 export const setUser = (user) => ({
   type: SET_USER,
@@ -41,6 +42,12 @@ export const setTranslations = (translations) => ({
   type: SET_TRANSLATIONS,
   payload: translations,
 });
+
+export const setUploadedFiles = (uploadedFiles) => ({
+  type: SET_UPLOADEDFILES,
+  payload: uploadedFiles,
+});
+
 
 
 export const fetchTranslations = () => {

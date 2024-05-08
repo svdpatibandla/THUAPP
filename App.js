@@ -32,9 +32,9 @@ import PatientAttachments from './components/AccountPages/PatientAttachments';
 const Stack = createStackNavigator();
 
 const LoggedInNavigator = () => (
-  <Stack.Navigator initialRouteName="LandingPage" screenOptions={{ headerShown: true }}>
+  <Stack.Navigator initialRouteName="PatientAttachments" screenOptions={{ headerShown: true }}>
     <Stack.Screen name="AppNavigator" component={AppNavigator} options={{ title: 'My Appointments', headerLeft: null, headerTitleAlign: 'center', headerShown: false }} />
-    <Stack.Screen name="Account" component={AccountPage} />
+    <Stack.Screen name="AccountPage" component={AccountPage} />
     <Stack.Screen name="MentalContent" component={MentalContent} />
     <Stack.Screen name="PlanPage" component={PlanPage} />
     <Stack.Screen name="AppointmentsPage" component={AppointmentsPage} options={{ headerShown: false }} />

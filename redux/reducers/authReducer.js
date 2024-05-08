@@ -1,4 +1,4 @@
-import { SET_USER, SET_TOKEN, CLEAR_USER, SET_TRANSLATIONS, SET_FIRST_NAME, SET_LAST_NAME, USER_INFO } from '../actions/authActions';
+import { SET_USER, SET_TOKEN, CLEAR_USER, SET_TRANSLATIONS, SET_FIRST_NAME, SET_LAST_NAME, USER_INFO, SET_UPLOADEDFILES } from '../actions/authActions';
 
 const initialState = {
   user: null,
@@ -8,6 +8,7 @@ const initialState = {
   firstName: '',
   lastName: '',
   translations: null,
+  uploadedFiles: [],
 };
 
 const authReducer = (state = initialState, action) => {
@@ -32,6 +33,11 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         userInfo: action.payload,
+      };
+    case SET_UPLOADEDFILES:
+      return {
+        ...state,
+        uploadedFiles: action.payload,
       };
     case SET_FIRST_NAME:
       return {
