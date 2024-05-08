@@ -1,7 +1,8 @@
-import { SET_USER, SET_TOKEN, CLEAR_USER, SET_TRANSLATIONS, SET_FIRST_NAME, SET_LAST_NAME } from '../actions/authActions';
+import { SET_USER, SET_TOKEN, CLEAR_USER, SET_TRANSLATIONS, SET_FIRST_NAME, SET_LAST_NAME, USER_INFO } from '../actions/authActions';
 
 const initialState = {
   user: null,
+  userInfo: null,
   token: '',
   isAuthenticated: false,
   firstName: '',
@@ -26,6 +27,11 @@ const authReducer = (state = initialState, action) => {
         ...state,
         user: null,
         isAuthenticated: false,
+      };
+    case USER_INFO:
+      return {
+        ...state,
+        userInfo: action.payload,
       };
     case SET_FIRST_NAME:
       return {

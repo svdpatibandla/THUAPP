@@ -16,7 +16,7 @@ const AccountPage = () => {
   const patientItems = {
     "Personal Info": "PersonalInfo",
     "Languages": "Languages",
-    "Documents/Files": "ManageAttachments",
+    "Documents/Files": "PatientAttachments",
     "Past appointments": "PastAppointments",
     "App language": "ManageLanguages"
   };
@@ -142,8 +142,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   divider: {
-    height: 1,
-    backgroundColor: '#dfdfdf',
+    height: 6,
     marginHorizontal: 18,
   },
   logoutContainer: {

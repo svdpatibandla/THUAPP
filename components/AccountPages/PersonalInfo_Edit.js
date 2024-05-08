@@ -5,6 +5,7 @@ import { View, TextInput, Button, Text, StyleSheet, Alert, ScrollView, Touchable
 import { Picker } from '@react-native-picker/picker';
 import { RadioButton } from 'react-native-paper';
 import moment from 'moment-timezone';
+import { CheckBox } from 'react-native-elements';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux'; 
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 export const SET_USER = 'SET_USER';
 export const SET_TOKEN = 'SET_TOKEN';
 export const CLEAR_USER = 'CLEAR_USER';
+export const USER_INFO = 'USER_INFO';
 export const SET_FIRST_NAME = 'SET_FIRST_NAME'; 
 export const SET_LAST_NAME = 'SET_LAST_NAME';
 export const SET_TRANSLATIONS = 'SET_TRANSLATIONS';
@@ -21,6 +22,11 @@ export const clearUser = () => ({
   type: CLEAR_USER,
 });
 
+export const setUserInfo = (userInfo) => ({
+  type: USER_INFO,
+  payload: userInfo,
+});
+
 export const setFirstName = (firstName) => ({
   type: SET_FIRST_NAME,
   payload: firstName,
@@ -35,6 +41,7 @@ export const setTranslations = (translations) => ({
   type: SET_TRANSLATIONS,
   payload: translations,
 });
+
 
 export const fetchTranslations = () => {
   return async (dispatch) => {

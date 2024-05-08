@@ -27,6 +27,8 @@ import SlotSelection from './components/BookingPages/SlotSelection';
 import AppointmentDetails from './components/BookingPages/AppointmentDetails';
 import BookAppointment from './components/BookingPages/BookAppointment';
 import  PersonalInfo from './components/AccountPages/PersonalInfo';
+import PatientAttachments from './components/AccountPages/PatientAttachments';
+
 const Stack = createStackNavigator();
 
 const LoggedInNavigator = () => (
@@ -49,6 +51,7 @@ const LoggedInNavigator = () => (
     <Stack.Screen name="NewPatientForm" component={NewPatientForm} screenOptions={{ headerShown: true }} />
     <Stack.Screen name="BookAppointment" component={BookAppointment} options={{ headerShown: false }} />
     <Stack.Screen name="PersonalInfo" component={PersonalInfo} options={{ headerShown: false }} />
+    <Stack.Screen name="PatientAttachments" component={PatientAttachments} options={{ headerShown: false }} />
   </Stack.Navigator>
 );
 
