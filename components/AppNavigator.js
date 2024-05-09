@@ -10,6 +10,8 @@ const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
 
+  const data = useSelector(state => state.auth);
+  console.log("Complete auth data: ", data);  
   const translations = useSelector(state => state.auth.translations);
   
   return (

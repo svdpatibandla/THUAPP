@@ -5,16 +5,16 @@ import { Provider } from "react-redux";
 
 import App from "./App";
 import { name as appName } from "./app.json";
-import store from "./redux/store"
-
+import { store } from './redux/store';
 export default function Main() {
+
   return (
     <PaperProvider>
-      <Provider store={store}>
-        <App />
-      </Provider>
+       <Provider store={store}>
+      <App />
+    </Provider>
     </PaperProvider>
   );
 }
 
-AppRegistry.registerComponent(appName, () => Main);
+AppRegistry.registerComponent(appName, () => Main)

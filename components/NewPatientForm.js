@@ -13,13 +13,10 @@ const NewPatientForm = ({ navigation }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
   const token = useSelector(state => state.auth.token.idToken);
-  const firstName = useSelector(state => state.auth.firstName);
-  const lastName = useSelector(state => state.auth.lastName);
 
   console.log('user: ',user);
   console.log('token: ',token);
 
-  /*
   const [FirstName, setFirstName] = useState('dutt');
   const [LastName, setLastName] = useState('patibandla');
   const [Email, setEmail] = useState(user.email);
@@ -33,8 +30,9 @@ const NewPatientForm = ({ navigation }) => {
   const [CheifConcern, setCheifConcern] = useState('concern-1');
   const [LocalPhysician, setLocalPhysician] = useState('Dr. Prasanth');
   const [receiveInstructions, setReceiveInstructions] = useState(true);
-  */
+  
 
+  /*
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
   const [Email, setEmail] = useState(user.email);
@@ -48,7 +46,7 @@ const NewPatientForm = ({ navigation }) => {
   const [CheifConcern, setCheifConcern] = useState('');
   const [LocalPhysician, setLocalPhysician] = useState('');
   const [receiveInstructions, setReceiveInstructions] = useState(false);
-
+  */
 
   const Years = Array.from({ length: moment().year() - 1919 }, (_, i) => (1920 + i).toString());
   const FirstLanguages = ['Ukrainian', 'Russian'];

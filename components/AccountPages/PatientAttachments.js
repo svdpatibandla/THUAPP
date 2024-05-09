@@ -1,26 +1,32 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, Modal, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, Modal } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import DocumentPicker from 'react-native-document-picker';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { format } from 'date-fns';
-
+import { storeUploadedFiles } from '../../redux/actions/authActions';
+import RNFS from 'react-native-fs';
 
 
 const PatientAttachments = () => {
 
+    const dispatch = useDispatch(); 
+    const navigation = useNavigation();
+
     const [showPopup, setShowPopup] = useState({ visible: false, index: null });
     const [uploadedFiles, setUploadedFiles] = useState([]);
-    const [prevUploadedFiles, setPrevUploadedFiles] = useState(useSelector(state => state.auth.uploadedFiles)) || []; 
+    const prevUploadedFiles = useSelector(state => state.auth.uploadedFiles) || [];
     const [deleteIndex, setDeleteIndex] = useState(null); 
     const [popupTop, setPopupTop] = useState(0);
     const [popupLeft, setPopupLeft] = useState(0);
+    const [DeleteText, setDeleteText] = useState("Delete");
     const currentDate = format(new Date(), 'yyyy-MM-dd')
 
-    const navigation = useNavigation();
+    console.log("prevUploadedFiles at start: ", prevUploadedFiles);
 
-    const handleDelete = (deleteIndex) => {
 
+    const handleDelete = async (showPopup) => {
+        deleteIndex = showPopup.index;
         console.log('Delete index:', deleteIndex);
         if (deleteIndex !== null) {
             const updatedFiles = uploadedFiles.filter((_, index) => index !== deleteIndex);
@@ -31,30 +37,36 @@ const PatientAttachments = () => {
             setDeleteIndex(null);
         }
     };
-    
 
-    const handleDownload = (showPopup) => {
-        console.log("showPopup: ", showPopup);  
-        setShowPopup({ visible: false, index: null });
+    const handleDownload = async (showPopup) => {
+        try {
+            const fileToDownload = uploadedFiles[showPopup.index];
+            const destPath = RNFS.ExternalDirectoryPath + '/' + fileToDownload.name;
+            await RNFS.downloadFile({
+                fromUrl: fileToDownload.uri,
+                toFile: destPath,
+            }).promise;
+            console.log('File downloaded to:', destPath);
+            setShowPopup({ visible: false, index: null });
+        } catch (err) {
+            console.log('Error downloading file:', err);
+        }
     };
     
-    const dispatch = useDispatch(); 
 
     const handleGoBack = () => {
         console.log("Uploaded files by closing time: ", uploadedFiles);
-        dispatch(setUploadedFiles(uploadedFiles));
-        setPrevUploadedFiles(prevUploadedFiles => [...(prevUploadedFiles || []), ...uploadedFiles]);
-        console.log("Final files by closing time: ", prevUploadedFiles);
+        dispatch(storeUploadedFiles(uploadedFiles));
         setUploadedFiles([]);
-        navigation.navigate('AccountPage');
+        navigation.navigate('AppNavigator');
     };
-    
 
     const handleUpload = async () => {
         try {
             const res = await DocumentPicker.pick({
                 type: [DocumentPicker.types.allFiles],
             });
+            
             setUploadedFiles(prevUploadedFiles => {
                 const newUploadedFiles = [...prevUploadedFiles, res];
                 console.log("New uploaded files after each upload: ", newUploadedFiles); 
@@ -70,86 +82,96 @@ const PatientAttachments = () => {
     };
     
     return (
-        <ScrollView
-            style={styles.container}
-            onTouchStart={() => setShowPopup({ visible: false, index: null })} 
-        >
-            <TouchableOpacity
+        <View style={styles.container}>
+            <ScrollView
                 style={styles.container}
-                activeOpacity={1}
-                onPress={() => setShowPopup({ visible: false, index: null })}
+                onTouchStart={() => setShowPopup({ visible: false, index: null })} 
             >
-                <View style={styles.header}>
-                    <TouchableOpacity onPress={handleGoBack}>
-                        <Image source={require('../../assets/goBack.png')} style={styles.headerImage} />
-                    </TouchableOpacity>
-                    <Text style={styles.headerText}>Documents</Text>
-                </View>
-    
-                <TouchableOpacity style={styles.uploadButton} onPress={handleUpload}>
-                    <Image source={require('../../assets/file_upload.png')} style={styles.uploadImage} />
-                    <Text style={styles.uploadButtonText}>Upload</Text>
-                </TouchableOpacity>
-    
-                {uploadedFiles.length > 0 &&
-                    <View style={styles.listContainer}>
-                        <Text style={styles.UploadText}>Recent Uploads</Text>
-                        {uploadedFiles.flat().map((file, index) => (
-                            <View key={index} style={styles.imageUpload}>
-                                <Image source={{ uri: file.uri }} style={styles.image} />
-                                <View style={{ flex: 1 }}>
-                                    <Text style={styles.imageTitleText}>{file.name}</Text>
-                                    <View style={{ flexDirection: 'row' }}>
-                                        <Text style={styles.imageText}>{format(new Date(), 'd MMM, yyyy')} - </Text>
-                                        <Text style={styles.imageText}>{(file.size / 1024).toFixed(2)} KB</Text>
+                <TouchableOpacity
+                    style={styles.container}
+                    activeOpacity={1}
+                    onPress={() => setShowPopup({ visible: false, index: null })}
+                >
+                    <View style={styles.header}>
+                        <TouchableOpacity onPress={handleGoBack}>
+                            <Image source={require('../../assets/goBack.png')} style={styles.headerImage} />
+                        </TouchableOpacity>
+                        <Text style={styles.headerText}>Documents</Text>
+                    </View>
+        
+                    {uploadedFiles.length > 0 &&
+                        <View style={styles.listContainer}>
+                            <Text style={styles.UploadText}>New uploads</Text>
+                            {uploadedFiles.flat().map((file, index) => (
+                                <View key={index} style={styles.imageUpload}>
+                                    <Image source={{ uri: file.uri }} style={styles.image} />
+                                    <View style={{ flex: 1 }}>
+                                        <Text style={styles.imageTitleText}>{file.name}</Text>
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <Text style={styles.imageText}>{format(new Date(), 'd MMM, yyyy')} - </Text>
+                                            <Text style={styles.imageText}>{(file.size / 1024).toFixed(2)} KB</Text>
+                                        </View>
                                     </View>
+                                    <TouchableOpacity onPress={(e) => {
+                                        const { pageY, pageX } = e.nativeEvent;
+                                        setPopupTop(pageY - 90);
+                                        setPopupLeft(pageX - 90);
+                                        setDeleteText("Delete")
+                                        setShowPopup({ visible: true, index });
+                                    }}>
+                                        <Text style={styles.dots}>...</Text>
+                                    </TouchableOpacity>
                                 </View>
-                                <TouchableOpacity onPress={(e) => {
-                                    const { pageY, pageX } = e.nativeEvent;
-                                    setPopupTop(pageY - 90);
-                                    setPopupLeft(pageX - 90);
-                                    setShowPopup({ visible: true, index });
-                                }}>
-                                    <Text style={styles.dots}>...</Text>
-                                </TouchableOpacity>
-                            </View>
-                        ))}
-                    </View>
-                }
+                            ))}
+                        </View>
+                    }
 
-                { prevUploadedFiles > 0 && 
-                    <View style={styles.listContainer}>
-                        <Text style={styles.UploadText}>Previously Uploaded</Text>
-                        {prevUploadedFiles.flat().map((file, index) => (
-                            <View key={index} style={styles.imageUpload}>
-                                <Image source={{ uri: file.uri }} style={styles.image} />
-                                <Text style={styles.imageText}>{file.name}</Text>
-                                <TouchableOpacity onPress={(e) => {
-                                    const { pageY, pageX } = e.nativeEvent;
-                                    setPopupTop(pageY - 90);
-                                    setPopupLeft(pageX - 90);
-                                    setShowPopup({ visible: true, index });
-                                }}>
-                                    <Text style={styles.dots}>...</Text>
-                                </TouchableOpacity>
-                            </View>
-                        ))}
+                    { prevUploadedFiles[0] && 
+                        <View style={styles.listContainer}>
+                            <Text style={styles.UploadText}>Previous uploads</Text>
+                            {prevUploadedFiles.flat().map((file, index) => (
+                                <View key={index} style={styles.imageUpload}>
+                                    <Image source={{ uri: file.uri }} style={styles.image} />
+                                    <View style={{ flex: 1 }}>
+                                        <Text style={styles.imageTitleText}>{file.name}</Text>
+                                        <View style={{ flexDirection: 'row' }}>
+                                            <Text style={styles.imageText}>{format(new Date(), 'd MMM, yyyy')} - </Text>
+                                            <Text style={styles.imageText}>{(file.size / 1024).toFixed(2)} KB</Text>
+                                        </View>
+                                    </View>
+                                    <TouchableOpacity onPress={(e) => {
+                                        const { pageY, pageX } = e.nativeEvent;
+                                        setPopupTop(pageY - 90);
+                                        setPopupLeft(pageX - 120);
+                                        setDeleteText("Request to delete");
+                                        setShowPopup({ visible: true, index });
+                                    }}>
+                                        <Text style={styles.dots}>...</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            ))}
+                        </View>
+                    }
+                </TouchableOpacity>
+        
+                <Modal visible={showPopup.visible} transparent={true} animationType='fade'>
+                    <View style={[styles.popup, { top: popupTop, left: popupLeft }]}>
+                        <TouchableOpacity onPress={() => handleDelete(showPopup)} style={styles.popupItem}>
+                            <Text>{DeleteText}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => handleDownload(showPopup)} style={styles.popupItem}>
+                            <Text>Download</Text>
+                        </TouchableOpacity>
                     </View>
-                }
+                </Modal>
+
+            </ScrollView>
+
+            <TouchableOpacity style={styles.uploadButton} onPress={handleUpload}>
+                <Image source={require('../../assets/file_upload.png')} style={styles.uploadImage} />
+                <Text style={styles.uploadButtonText}>Upload</Text>
             </TouchableOpacity>
-    
-            <Modal visible={showPopup.visible} transparent={true} animationType='fade'>
-                <View style={[styles.popup, { top: popupTop, left: popupLeft }]}>
-                    <TouchableOpacity onPress={() => handleDelete(showPopup.index)} style={styles.popupItem}>
-                        <Text>Delete</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleDownload(showPopup)} style={styles.popupItem}>
-                        <Text>Download</Text>
-                    </TouchableOpacity>
-                </View>
-            </Modal>
-
-        </ScrollView>
+        </View>
     );
     
 };
@@ -169,7 +191,10 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     },
     headerText: {
-        fontSize: 20,
+        color: '#151515', 
+        fontSize: 18, 
+        fontFamily: 'Source Sans Pro', 
+        fontWeight: '800', 
         fontWeight: 'bold',
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -182,11 +207,15 @@ const styles = StyleSheet.create({
     listContainer: {
         paddingHorizontal: 16,
         marginTop: 20,
+        borderBottomColor: '#dfdfdf',
     },
     imageUpload: {
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 10,
+        paddingBottom: 10,
+        borderBottomColor: '#dfdfdf',
+        borderBottomWidth: 1,
     },
     image: {
         width: 50,
@@ -196,6 +225,7 @@ const styles = StyleSheet.create({
     imageTitleText: {
         fontSize: 16,
         flex: 1,
+        fontWeight: '700',
     },
     imageText: {
         fontSize: 16,
@@ -203,6 +233,7 @@ const styles = StyleSheet.create({
     dots: {
         fontSize: 24,
         paddingHorizontal: 5,
+        fontWeight: 'bold',
     },
     uploadButton: {
         marginTop: 20,
@@ -217,8 +248,11 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         flexDirection: 'row',
         gap: 8,
-        marginBottom: 20,
-        width: 140
+        width: 140,
+        alignSelf: 'flex-end',
+        position: 'absolute',
+        bottom: 20,
+        right: 10,
     },
     UploadText: {
         fontSize: 16,

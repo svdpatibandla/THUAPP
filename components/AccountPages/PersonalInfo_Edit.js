@@ -1,35 +1,38 @@
 //NewPatientForm.js
 
-import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
-import moment from 'moment-timezone';
-import { CheckBox } from 'react-native-elements';
-import axios from 'axios';
+import { Picker } from '@react-native-picker/picker';
 import { useDispatch, useSelector } from 'react-redux'; 
+import  { useNavigation } from '@react-navigation/native';
+import { View, TextInput, Text, StyleSheet, Alert, ScrollView, TouchableOpacity, Image } from 'react-native';
 
-const PersonalInfo = ({ navigation }) => {
+import axios from 'axios';
+import moment from 'moment-timezone';
+
+
+const PersonalInfo = ({ route }) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const user = useSelector(state => state.auth.user);
   const token = useSelector(state => state.auth.token.idToken);
-  const firstName = useSelector(state => state.auth.firstName);
-  const lastName = useSelector(state => state.auth.lastName);
 
-  console.log('user: ',user);
-  console.log('token: ',token);
+  const personal_info = route.params.PersonalInfo;
+  console.log(personal_info);
 
-  const [FirstName, setFirstName] = useState('dutt');
-  const [LastName, setLastName] = useState('patibandla');
-  const [Email, setEmail] = useState('user.email');
-  const [YearOfBirth, setYearOfBirth] = useState('1988');
-  const [Gender, setGender] = useState('Male');
-  const [Country, setCountry] = useState('Ukraine');
-  const [CountryCode, setCountryCode] = useState('+380'); 
-  const [PhoneNumber, setPhoneNumber] = useState('6692209884');
-  const [TelegramId, setTelegramId] = useState('psvdutt');
-  const [CheifConcern, setCheifConcern] = useState('concern-1');
-  const [LocalPhysician, setLocalPhysician] = useState('Dr. Prasanth');
+
+  const [FirstName, setFirstName] = useState(personal_info.first_name);
+  const [LastName, setLastName] = useState(personal_info.last_name);
+  const [Email, setEmail] = useState(personal_info.email);
+  const [YearOfBirth, setYearOfBirth] = useState(personal_info.year_of_birth.toString());
+  const [Gender, setGender] = useState(personal_info.gender);
+  const [Country, setCountry] = useState(personal_info.country);
+  const [CountryCode, setCountryCode] = useState(personal_info.phone_number.slice(0, -10));
+  const [PhoneNumber, setPhoneNumber] = useState(personal_info.phone_number.slice(-10));
+  const [addInfo, setAddInfo] = useState(personal_info.notes);
+  const [TelegramId, setTelegramId] = useState(personal_info.telegram);
+  const [CheifConcern, setCheifConcern] = useState(personal_info.chief_concern);
+  const [LocalPhysician, setLocalPhysician] = useState(personal_info.practitioner);
 
 
   const Years = Array.from({ length: moment().year() - 1919 }, (_, i) => (1920 + i).toString());
@@ -38,12 +41,13 @@ const PersonalInfo = ({ navigation }) => {
 
 
   const handleClose = () => {
-    navigation.navigate('AppNavigator');
+    navigation.navigate('PersonalInfo');
   };
 
-  const handlePhoneNumberChange = (text) => {
-    const numericText = text.replace(/\D/g, '');
-    setPhoneNumber(numericText);
+  const handlePhoneNumberChange = (Phone) => {
+    const PhoneNumber = Phone.replace(/\D/g, '');
+    setPhoneNumber(PhoneNumber);
+    console.log(PhoneNumber);
   };
   
   const changeGender = () => {
@@ -70,7 +74,7 @@ const PersonalInfo = ({ navigation }) => {
         tz: Country === 'Ukraine' ? 'Ukraine' : 'Poland',
         created_at: moment().utc().format(),
         gender: Gender,
-        phone: `${CountryCode}${PhoneNumber}`, // Concatenate country code and phone number
+        phone: `${CountryCode}${PhoneNumber}`,
         notes: `${CheifConcern} Telegram: ${TelegramId} Local practitioner: ${LocalPhysician}`,
         telegram: TelegramId,
         practitioner: LocalPhysician,
@@ -100,12 +104,9 @@ const PersonalInfo = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={handleClose}>
-          <Image source={require('../../assets/goBack.png')} style={styles.headerImage} />
-        </TouchableOpacity>
         <Text style={styles.headerText}>Personal Info</Text>
         <TouchableOpacity onPress={handleClose}>
-          <Text style={styles.EditText}>Edit</Text>
+        <Image source={require('../../assets/cancel.png')} style={styles.headerImage} />
         </TouchableOpacity>
       </View>
       <View style={styles.formContainer}>
@@ -133,6 +134,7 @@ const PersonalInfo = ({ navigation }) => {
             <Picker
               selectedValue={YearOfBirth}
               onValueChange={(itemValue) => setYearOfBirth(itemValue)}
+              style={{ paddingVertical: 12 }}
             >
               {Years.map((year, index) => (
                 <Picker.Item key={index} label={year} value={year} />
@@ -148,19 +150,21 @@ const PersonalInfo = ({ navigation }) => {
                 <RadioButton
                   value={gender}
                   status={Gender === gender ? 'checked' : 'unchecked'}
+                  color='#3269bd'
                   onPress={() => setGender(gender)}
                 />
-                <Text>{gender}</Text>
+                <Text style={styles.RadioButtonText}>{gender}</Text>
               </View>
             ))}
           </View>
-        </View>
-        <View style={styles.moreGenders}>
-          <Text style={styles.Genderlabel}>Transgender Man </Text>
+          <View style={styles.moreGenders}>
+          <Text style={styles.RadioButtonText}>Transgender Man </Text>
           <TouchableOpacity onPress={changeGender}>
             <Text style={styles.changeGender}>Change</Text>
           </TouchableOpacity>
         </View>
+        </View>
+
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Country of residence</Text>
           <View style={styles.languageContainer}>
@@ -168,10 +172,11 @@ const PersonalInfo = ({ navigation }) => {
               <View key={index} style={styles.radioButtonContainer}>
                 <RadioButton
                   value={country}
+                  color='#3269bd'
                   status={Country === country ? 'checked' : 'unchecked'}
                   onPress={() => setCountry(country)}
                 />
-                <Text>{country}</Text>
+                <Text style={styles.RadioButtonText}>{country}</Text>
               </View>
             ))}
           </View>
@@ -188,21 +193,21 @@ const PersonalInfo = ({ navigation }) => {
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Phone Number*</Text>
           <View style={styles.phoneNumberContainer}>
-            <Picker
-              selectedValue={CountryCode}
-              onValueChange={(itemValue) => setCountryCode(itemValue)}
-              style={styles.countryCodePicker}
-            >
-              <Picker.Item label="+380" value="+380" />
-              <Picker.Item label="+48" value="+48" />
-            </Picker>
+          <Picker
+            selectedValue={CountryCode}
+            onValueChange={(itemValue) => setCountryCode(itemValue)}
+            style={styles.countryCodePicker}
+          >
+            <Picker.Item label="+380" value="+380" />
+            <Picker.Item label="+48" value="+48" />
+          </Picker>
             <View style={styles.borderVertical}></View>
             <TextInput
               style={styles.phoneInput}
               keyboardType="phone-pad"
               placeholder="Enter phone number"
-              value={PhoneNumber}
-              onChangeText={setPhoneNumber}
+              value={`${PhoneNumber}`}
+              onChangeText={handlePhoneNumberChange}
             />
           </View>
         </View>
@@ -220,8 +225,8 @@ const PersonalInfo = ({ navigation }) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your Chief Concern"
-            value={CheifConcern}
-            onChangeText={setCheifConcern}
+            value={addInfo}
+            onChangeText={setAddInfo}
           />
         </View>
         <View style={styles.inputContainer}>
@@ -264,12 +269,13 @@ const styles = StyleSheet.create({
     height: 24,
   },
   headerText: {
-    textAlign: 'center', 
     color: '#151515', 
     fontSize: 18, 
     fontFamily: 'Source Sans Pro', 
     fontWeight: '800', 
     lineHeight: 28,
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   EditText: {
     textAlign: 'right', 
@@ -328,40 +334,49 @@ const styles = StyleSheet.create({
   }, 
   countryCodePicker: {
     flex: 1,
-    padding: 3,
     fontSize: 14,
   },
   phoneInput: {
     flex: 2, 
     height: 40,
-    padding: 8,
+    paddingVertical: 8,
+    paddingLeft: 16,
     fontSize: 16,
     color: '#363636',
     fontFamily: 'Source Sans Pro',
     fontWeight: '400',
     lineHeight: 24,
   }, 
+  RadioButtonText: {
+    color: 'black',
+    fontSize: 16,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '600',
+    lineHeight: 24,
+  },
   Genderlabel: {
     fontSize: 16,
   },
   changeGender: {
-    fontSize: 16,
     color: '#015ABE',
     fontSize: 16,
     fontFamily: 'Source Sans Pro',
-    fontWeight: '400',
+    fontWeight: '600',
   },
   moreGenders: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
   },
   pickerContainer: {
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 6,
     overflow: 'hidden',
+    height: 40, 
+    marginBottom: 8, 
+    justifyContent: 'center',
   },
+  
   languageContainer: {
     flexDirection: 'columns',
     flexWrap: 'wrap',

@@ -3,9 +3,7 @@ import axios from 'axios';
 export const SET_USER = 'SET_USER';
 export const SET_TOKEN = 'SET_TOKEN';
 export const CLEAR_USER = 'CLEAR_USER';
-export const USER_INFO = 'USER_INFO';
-export const SET_FIRST_NAME = 'SET_FIRST_NAME'; 
-export const SET_LAST_NAME = 'SET_LAST_NAME';
+export const SET_USERINFO = 'SET_USERINFO';
 export const SET_TRANSLATIONS = 'SET_TRANSLATIONS';
 export const SET_UPLOADEDFILES = 'SET_UPLOADEDFILES';
 
@@ -24,18 +22,8 @@ export const clearUser = () => ({
 });
 
 export const setUserInfo = (userInfo) => ({
-  type: USER_INFO,
+  type: SET_USERINFO,
   payload: userInfo,
-});
-
-export const setFirstName = (firstName) => ({
-  type: SET_FIRST_NAME,
-  payload: firstName,
-});
-
-export const setLastName = (lastName) => ({
-  type: SET_LAST_NAME,
-  payload: lastName,
 });
 
 export const setTranslations = (translations) => ({
@@ -48,7 +36,16 @@ export const setUploadedFiles = (uploadedFiles) => ({
   payload: uploadedFiles,
 });
 
-
+export const storeUploadedFiles = (uploadedFiles) => {
+  return async (dispatch, getState) => {
+    const { auth } = getState();
+    const currentPrevUploadedFiles = auth.uploadedFiles || []; 
+    console.log('Current prev uploaded files at dispatch:', currentPrevUploadedFiles);
+    const newPrevUploadedFiles = [...uploadedFiles, ...currentPrevUploadedFiles ]; 
+    console.log('New prev uploaded files at dispatch:', newPrevUploadedFiles);
+    dispatch(setUploadedFiles(newPrevUploadedFiles)); 
+  };
+};
 
 export const fetchTranslations = () => {
   return async (dispatch) => {

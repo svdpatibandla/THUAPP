@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { format, addDays, subDays, addMinutes } from 'date-fns';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import jsonData from '../avail_appointments.json';
 
 const SlotSelection = ({ route }) => {
   const [appointments, setAppointments] = useState([]);
