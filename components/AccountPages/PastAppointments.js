@@ -1,13 +1,36 @@
-import React from 'react';
-import jsonData from './prev_apps.json';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { format } from 'date-fns';
+import axios from 'axios';
+
+
+import jsonData from './prev_apps.json';
 
 const PreviousAppointments = () => {
     const navigation = useNavigation();
     const translations = useSelector(state => state.auth.translations);
+    const [appointments, setAppointments] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+
+            paramsData = {
+                auth0_id: 'auth0%663423592868f8d981074511',
+                email: 'psvdutt%2Btest4%40gmail.com',
+            }
+            try {
+                const response = await axios.get('https://mobile-app-thu-e036558309fd.herokuapp.com/mobile/patient', { params: paramsData });
+                setAppointments(response.data);
+                console.log(appointments);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleGoBack = () => {
         navigation.navigate('AccountPage');

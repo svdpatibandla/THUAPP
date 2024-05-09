@@ -34,7 +34,7 @@ import PastAppointments from './components/AccountPages/PastAppointments';
 const Stack = createStackNavigator();
 
 const LoggedInNavigator = () => (
-  <Stack.Navigator initialRouteName="PastAppointments" screenOptions={{ headerShown: true }}>
+  <Stack.Navigator initialRouteName="LandingPage" screenOptions={{ headerShown: true }}>
     <Stack.Screen name="AppNavigator" component={AppNavigator} options={{ title: 'My Appointments', headerLeft: null, headerTitleAlign: 'center', headerShown: false }} />
     <Stack.Screen name="AccountPage" component={AccountPage} options={{ headerShown: false }} />
     <Stack.Screen name="MentalContent" component={MentalContent} />
