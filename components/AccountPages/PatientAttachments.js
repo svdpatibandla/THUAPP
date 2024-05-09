@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 'auto',
         marginRight: 'auto',
+        paddingHorizontal: 80,
     },
     headerImage: {
         width: 20,

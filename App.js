@@ -26,14 +26,15 @@ import MedicalPractitionerSelection from './components/BookingPages/MedicalPract
 import SlotSelection from './components/BookingPages/SlotSelection';
 import AppointmentDetails from './components/BookingPages/AppointmentDetails';
 import BookAppointment from './components/BookingPages/BookAppointment';
-import  PersonalInfo from './components/AccountPages/PersonalInfo';
+import PersonalInfo from './components/AccountPages/PersonalInfo';
 import PatientAttachments from './components/AccountPages/PatientAttachments';
 import PersonalInfo_Edit from './components/AccountPages/PersonalInfo_Edit';
+import PastAppointments from './components/AccountPages/PastAppointments';
 
 const Stack = createStackNavigator();
 
 const LoggedInNavigator = () => (
-  <Stack.Navigator initialRouteName="AppNavigator" screenOptions={{ headerShown: true }}>
+  <Stack.Navigator initialRouteName="PastAppointments" screenOptions={{ headerShown: true }}>
     <Stack.Screen name="AppNavigator" component={AppNavigator} options={{ title: 'My Appointments', headerLeft: null, headerTitleAlign: 'center', headerShown: false }} />
     <Stack.Screen name="AccountPage" component={AccountPage} options={{ headerShown: false }} />
     <Stack.Screen name="MentalContent" component={MentalContent} />
@@ -54,6 +55,7 @@ const LoggedInNavigator = () => (
     <Stack.Screen name="PersonalInfo" component={PersonalInfo} options={{ headerShown: false }} />
     <Stack.Screen name="PersonalInfo_Edit" component={PersonalInfo_Edit} options={{ headerShown: false }} />
     <Stack.Screen name="PatientAttachments" component={PatientAttachments} options={{ headerShown: false }} />
+    <Stack.Screen name="PastAppointments" component={PastAppointments} options={{ headerShown: false }} />
   </Stack.Navigator>
 );
 
