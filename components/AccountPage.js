@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 58,
+    height: 50,
     borderBottomColor: '#dfdfdf',
     backgroundColor: '#ffffff',
     borderBottomWidth: 1,
@@ -101,12 +101,10 @@ const styles = StyleSheet.create({
   headerText: {
     flex: 1,
     fontSize: 18,
-    fontWeight: '900',
+    fontWeight: '800',
     textAlign: 'left',
     color: '#363636',
-    fontSize: 24,
     fontFamily: 'Source Sans Pro',
-    paddingVertical: 16,
     paddingHorizontal: 18,
   },
   titleText: {

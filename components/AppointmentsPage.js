@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Animated } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Animated, Image } from 'react-native';
 import appointmentsData from './patient_appointments.json'; 
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
@@ -21,9 +21,6 @@ const AppointmentItem = ({ appointment, translations }) => {
     styles.joinButtonText,
     isActiveAppointment && styles.joinButtonTextActive,
   ];
-
-  console.log(appointment);
-
 
   return (
     <View style={styles.appointmentItem}>
@@ -63,7 +60,6 @@ const AppointmentsPage = () => {
       const appointments = appointmentsData.patient.appointments;
       const future = [];
       
-                           
       appointments.forEach((appointment) => {
         if (appointment.future_appt) {
           const appointmentDate = new Date(appointment.starts_at);
@@ -93,7 +89,6 @@ const AppointmentsPage = () => {
       setFutureAppointments(future);
     }
   }, []);
-  
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -372,27 +367,6 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
   joinButton: {
-    backgroundColor: '#8a8a8a',
-    paddingVertical: 8,
-    borderRadius: 5,
-    flex: 1,
-    justifyContent: 'center', 
-    alignItems: 'center',
-  },
-  buttonImage: {
-    width: 20,
-    height: 20,
-    marginRight: 5,
-  },
-  modifyButtonText: {
-    color: '#363636',
-    fontSize: 18,
-    fontWeight: '400',
-    color: '#363636',
-    fontFamily: 'Source Sans Pro',
-    lineHeight: 24
-  },
-  joinButton: {
     width: 'auto',
     height: 'auto',
     paddingVertical: 8,
@@ -455,6 +429,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16, 
     paddingVertical: 8,
     borderRadius: 30,
+    width: 'auto',
     backgroundColor: '#3269bd',
   },
   fabImage: {

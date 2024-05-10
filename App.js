@@ -46,9 +46,9 @@ import Search_speciality from './components/SearchPages/Search_speciality';
 const Stack = createStackNavigator();
 
 const LoggedInNavigator = () => (
-  <Stack.Navigator initialRouteName="AppNavigator" screenOptions={{ headerShown: true }}>
+  <Stack.Navigator initialRouteName="SlotSelection" screenOptions={{ headerShown: true }}>
     <Stack.Screen name="LandingPage" component={LandingPage} options={{ headerShown: false }} />
-    <Stack.Screen name="AppNavigator" component={AppNavigator} options={{ title: 'My Appointments', headerLeft: null, headerTitleAlign: 'center', headerShown: false }} />
+    <Stack.Screen name="AppNavigator" component={AppNavigator} options={{ headerShown: false }} />
     <Stack.Screen name="AccountPage" component={AccountPage} options={{ headerShown: false }} />
     <Stack.Screen name="MentalContent" component={MentalContent} />
     <Stack.Screen name="PlanPage" component={PlanPage} />

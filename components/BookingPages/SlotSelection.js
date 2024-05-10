@@ -54,7 +54,7 @@ const SlotSelection = ({ route }) => {
           };
         });
         setAppointments(appointmentsList);
-        console.log("Appointments: ",appointmentsList);
+        console.log("Appointments::: ",appointmentsList);
       } catch (error) {
         console.error('Error fetching slots:', error);
       }
@@ -97,19 +97,27 @@ const SlotSelection = ({ route }) => {
   return (
     <View style={styles.container}>
       <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchQuery} />
-      <View style={styles.secondContainer}>
-        <View style={styles.header}>
-          <View style={styles.searchBarContainer}>
-            <View style={styles.searchBar}>
-              <Text style={{ textAlign: 'center' }}>{getCurrentDate()}</Text>
-            </View>
-            <TouchableOpacity onPress={handlePrevDate} style={styles.searchImage}>
-              <Image source={require('../../assets/chevron_right.png')} style={styles.searchImage} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleNextDate} style={styles.micImage}>
-              <Image source={require('../../assets/chevron_right.png')} style={[styles.micImage, { transform: [{ rotate: '180deg' }] }]} />
-            </TouchableOpacity>
+      <View style={styles.headerContainer}>
+        <View style={styles.resultsContainer}>
+          <Text style={styles.resultText}>Results</Text>
+          <View style={styles.filterContainer}>
+            <Image source={require('../../assets/filter.png')} style={styles.filterImage} />
+            <Text style={styles.filterText}>Filters</Text>
           </View>
+        </View>
+
+        <View style={styles.calenderContainer}>
+          <TouchableOpacity onPress={handlePrevDate} style={styles.Imagestyle}>
+            <Image source={require('../../assets/chevron_right.png')} style={styles.Imagestyle} />
+          </TouchableOpacity>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+            <Image source={require('../../assets/Appointments_Icon.png')} style={styles.Imagestyle} />
+            <Text style={styles.DateText}>{getCurrentDate()}</Text>
+            <Image source={require('../../assets/arrow_drop_down.png')} style={styles.Imagestyle} />
+          </View>
+          <TouchableOpacity onPress={handleNextDate} style={styles.Imagestyle}>
+            <Image source={require('../../assets/chevron_right.png')} style={[styles.Imagestyle, { transform: [{ rotate: '180deg' }] }]} />
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -133,8 +141,6 @@ const SlotSelection = ({ route }) => {
                     slots: [slot],
                   });
                 }
-                console.log("-------------------------------------------");
-                console.log("practitioners: ",practitioners[0].slots[0].cliniko_practitioner_id);
                 return practitioners;
               }, []).map((practitioner, index) => (
                 <View key={index} style={styles.practitionerContainer}>
@@ -220,31 +226,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f8f8f8',
   },
-  header: {
+  headerContainer:{
+    backgroundColor: '#ffffff',
+    paddingHorizontal: 18,
+  },
+  calenderContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     height: 50,
     borderBottomWidth: 1,
     borderBottomColor: '#dfdfdf',
-    backgroundColor: '#ffffff',
-    paddingHorizontal: 18,
-  },
-  secondContainer: {
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-end',
-    gap: 16,
-    display: 'flex',
-    backgroundColor: '#ffffff',
+    paddingBottom: 12,
   },
   resultsContainer: {
-    width: 376,
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    display: 'flex',
     flexDirection: 'row',
     backgroundColor: '#ffffff',
+    marginTop: 12,
+    marginBottom: 12,
+    alignItems: 'center',
   },
   resultText: {
     color: '#151515',
@@ -254,22 +254,14 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   filterContainer: {
-    justifyContent: 'flex-start',
-    alignItems: 'center',
     flexDirection: 'row',
     gap: 8,
-    paddingLeft: 4,
-    paddingRight: 18,
   },
   filterIcon: {
     width: 16,
     height: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-    display: 'flex',
   },
   filterText: {
-    textAlign: 'right',
     color: '#151515',
     fontSize: 16,
     fontFamily: 'Source Sans Pro',
@@ -281,28 +273,45 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     position: 'relative',
+    borderRadius: 35,
+    borderWidth: 1,
   },
-  searchBar: {
+  CalenderBar: {
     flex: 1,
     height: 40,
     backgroundColor: '#ffffff',
-    borderRadius: 5,
-    borderWidth: 1,
+    borderRadius: 35,
     borderColor: '#dfdfdf',
     justifyContent: 'center',
     textAlign: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    display: 'inline-flex',
   },
-  micImage: {
+  calenderContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 40,
+    borderBottomWidth: 1,
+    borderBottomColor: '#dfdfdf',
+    paddingHorizontal: 18,
+    borderWidth: 1,
+    borderRadius: 35,
+    borderColor: '#dfdfdf',
+    marginBottom: 12,
+  },
+  DateText: { 
+    textAlign: 'center', 
+    fontWeight: '700', 
+    color: '#363636',
+    fontFamily: 'Source Sans Pro',
+    fontSize: 16
+  },
+  Imagestyle: {
     width: 24,
     height: 24,
-    position: 'absolute',
-    right: 10,
-  },
-  searchImage: {
-    width: 24,
-    height: 24,
-    position: 'absolute',
-    left: 10,
+    marginRight: 10, // Adjust as needed
   },
   filterImage: {
     width: 24,
