@@ -37,6 +37,10 @@ import LanguageSelection from './components/RegistrationPages/LanguageSelection'
 import PersonalInfoSelection from './components/RegistrationPages/PersonalInfoSelection';
 import ResidencePage  from './components/RegistrationPages/ResidencePage';
 import SelectLangcont from './components/RegistrationPages/SelectLangcont';
+import All_filters from './components/FilterPages/All_filters';
+import Speciality_filters from './components/FilterPages/Speciality_filters';
+import Search_focussed from './components/SearchPages/Search_focussed';
+import Search_speciality from './components/SearchPages/Search_speciality';
 
 
 const Stack = createStackNavigator();
@@ -72,15 +76,19 @@ const LoggedInNavigator = () => (
     <Stack.Screen name="PersonalInfoSelection" component={PersonalInfoSelection} options={{ headerShown: false }} />
     <Stack.Screen name="ResidencePage" component={ResidencePage} options={{ headerShown: false }} />
     <Stack.Screen name="SelectLangcont" component={SelectLangcont} options={{ headerShown: false }} />
+    <Stack.Screen name="All_filters" component={All_filters} options={{ headerShown: false }} />
+    <Stack.Screen name="Speciality_filters" component={Speciality_filters} options={{ headerShown: false }} />
+    <Stack.Screen name="Search_focussed" component={Search_focussed} options={{ headerShown: false }} />
+    <Stack.Screen name="Search_speciality" component={Search_speciality} options={{ headerShown: false }} />
   </Stack.Navigator>
 );
 
 const GuestNavigator = () => (
   <Stack.Navigator initialRouteName="LandingPage" screenOptions={{ headerShown: false }}>
-    <Stack.Screen name="LandingPage" component={LandingPage} />
-    <Stack.Screen name="NewPatientForm" component={NewPatientForm} screenOptions={{ headerShown: true }} />
-    <Stack.Screen name="AppNavigator" component={AppNavigator} />
-    <Stack.Screen name="LanguageSelection" component={LanguageSelection} />
+    <Stack.Screen name="LandingPage" component={LandingPage}  screenOptions={{ headerShown: false }}/>
+    <Stack.Screen name="NewPatientForm" component={NewPatientForm} screenOptions={{ headerShown: false }} />
+    <Stack.Screen name="AppNavigator" component={AppNavigator}  screenOptions={{ headerShown: false }}/>
+    <Stack.Screen name="LanguageSelection" component={LanguageSelection}  screenOptions={{ headerShown: false }}/>
   </Stack.Navigator>
 );
 

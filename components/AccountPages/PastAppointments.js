@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import jsonData from './prev_apps.json';
 
-const PreviousAppointments = () => {
+const PastAppointments = () => {
     const navigation = useNavigation();
     const translations = useSelector(state => state.auth.translations);
     const [appointments, setAppointments] = useState([]);
@@ -47,15 +47,28 @@ const PreviousAppointments = () => {
 
             <View style={styles.container}>
                 <ScrollView>
-                    { jsonData ? (jsonData.patient.appointments.map(appointment => (
+                {jsonData ? (
+                    jsonData.patient.appointments
+                        .filter(appointment => !appointment.future_appt)
+                        .map(appointment => (
                         <View style={styles.appointmentContainer} key={appointment.id}>
-                            <Text style={styles.date}>{format(new Date(appointment.starts_at), "eeee, MMMM d, yyyy")}</Text>
-                            <Text style={styles.time}>{format(new Date(appointment.starts_at), "HH:mm")} - {format(new Date(appointment.ends_at), "HH:mm")}</Text>
-                            <Text style={styles.title}>{translations.message_practitioner}: {appointment.practitioner.name}</Text>
-                            <Text style={styles.interpreter}>{translations.message_interpreter}: {appointment.interpreter}</Text>
+                            <Text style={styles.date}>
+                                {format(new Date(appointment.starts_at), "eeee, MMMM d, yyyy")}
+                            </Text>
+                            <Text style={styles.time}>
+                                {format(new Date(appointment.starts_at), "HH:mm")} - {format(new Date(appointment.ends_at), "HH:mm")}
+                            </Text>
+                            <Text style={styles.title}>
+                                {translations.message_practitioner}: {appointment.practitioner.name}
+                            </Text>
+                            <Text style={styles.interpreter}>
+                                {translations.message_interpreter}: {appointment.interpreter}
+                            </Text>
                         </View>
-                    ))): 
-                    <Text>Here you will be able to see the details about your past appointments</Text>}
+                        ))
+                    ) : (
+                    <Text>Here you will be able to see the details about your past appointments</Text>
+                    )}
                 </ScrollView>
             </View>
 
@@ -133,4 +146,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PreviousAppointments;
+export default PastAppointments;

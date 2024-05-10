@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Animated } from 'react-native';
 import appointmentsData from './patient_appointments.json'; 
 import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const AppointmentItem = ({ appointment }) => {
+const AppointmentItem = ({ appointment, translations }) => {
   const currentTime = new Date();
   const appointmentTime = new Date(appointment.starts_at);
 
-  const isFutureAppointment = appointmentTime > currentTime;
+  const isFutureAppointment = appointmentTime.future_appts;
   const isActiveAppointment = appointmentTime.getTime() === currentTime.getTime();
 
   const joinButtonStyle = [
@@ -16,29 +16,29 @@ const AppointmentItem = ({ appointment }) => {
     !isFutureAppointment && styles.disabledButton,
     isActiveAppointment && styles.joinButtonActive,
   ];
-
+  
   const joinButtonTextStyle = [
     styles.joinButtonText,
     isActiveAppointment && styles.joinButtonTextActive,
   ];
 
+  console.log(appointment);
+
+
   return (
     <View style={styles.appointmentItem}>
       <Text style={styles.appointmentDate}>{appointment.date}</Text>
       <Text style={styles.appointmentTime}>{appointment.time}</Text>
-      <Text style={styles.appointmentTitle}>{appointment.human_readable_UA}</Text>
-      <Text style={styles.appointmentText}>Practitioner: {appointment.practitioner.name} (Speaks {appointment.practitioner.language})</Text>
+      <Text style={styles.appointmentSpecialization}>{appointment.practitioner.specialization}</Text>
+      <Text style={styles.appointmentText}>{translations.message_practitioner}: {appointment.practitioner.name} (Speaks {appointment.practitioner.language})</Text>
       {appointment.interpreter ? (
-        <Text style={styles.appointmentText}>Interpreter: {appointment.interpreter.name} ({appointment.interpreter.language})</Text>
+        <Text style={styles.appointmentText}>{translations.message_practitioner}: {appointment.interpreter.name} ({appointment.interpreter.language})</Text>
       ) : (
         <Text style={styles.appointmentText}>No interpreter: Appointment in {appointment.practitioner.language}</Text>
       )}
-      <View style={styles.uploadedFilesContainer}>
-        <Text style={styles.appointmentText}>Uploaded files:</Text>
-      </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.modifyButton}>
-          <Image source={require('../assets/modify.png')} style={styles.buttonImage} />
+          <Image source={require('../assets/modify.png')} style={styles.modifyImage} />
           <Text style={styles.modifyButtonText}>Modify</Text>
         </TouchableOpacity>
         <TouchableOpacity style={joinButtonStyle}>
@@ -51,7 +51,6 @@ const AppointmentItem = ({ appointment }) => {
 
 const AppointmentsPage = () => {
   const [futureAppointments, setFutureAppointments] = useState([]);
-  const [previousAppointments, setPreviousAppointments] = useState([]);
   const [scrollY, setScrollY] = useState(new Animated.Value(0));
   const [scrolling, setScrolling] = useState(false);
   const [fabVisible, setFabVisible] = useState(true); 
@@ -62,41 +61,36 @@ const AppointmentsPage = () => {
   useEffect(() => {
     if (appointmentsData && appointmentsData.patient && appointmentsData.patient.appointments) {
       const appointments = appointmentsData.patient.appointments;
-      const currentDate = new Date();
       const future = [];
-      const previous = [];
-  
+      
+                           
       appointments.forEach((appointment) => {
-        const appointmentDate = new Date(appointment.starts_at);
-        const options = { weekday: 'long', month: 'long', day: 'numeric' };
-        const formattedDate = appointmentDate.toLocaleDateString('en-US', options);
-        const startTime = appointmentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-        const endTime = new Date(appointment.ends_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-        const timeRange = `${startTime} - ${endTime}`;
-        const details = `${formattedDate}\n${timeRange}\n${appointment.human_readable_UA}\nPractitioner: ${appointment.practitioner.name} (Speaks ${appointment.practitioner.language})`;
-        const interpreter = appointment.interpreter ? appointment.interpreter.name : null;
-        const uploadedFiles = appointment.attachments ? appointment.attachments.map(file => file.filename) : [];
-        const formattedAppointment = {
-          id: appointment.id,
-          date: formattedDate,
-          time: timeRange,
-          details: details,
-          interpreter: interpreter,
-          uploadedFiles: uploadedFiles,
-          ...appointment,
-        };
-  
-        if (appointmentDate > currentDate) {
+        if (appointment.future_appt) {
+          const appointmentDate = new Date(appointment.starts_at);
+          const options = { weekday: 'long', month: 'long', day: 'numeric' };
+          const formattedDate = appointmentDate.toLocaleDateString('en-US', options);
+          const startTime = appointmentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+          const endTime = new Date(appointment.ends_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+          const timeRange = `${startTime} - ${endTime}`;
+          const details = `${formattedDate}\n${timeRange}\n${appointment.human_readable_UA}\nPractitioner: ${appointment.practitioner.name} (Speaks ${appointment.practitioner.language})`;
+          const interpreter = appointment.interpreter ? appointment.interpreter.name : null;
+          const uploadedFiles = appointment.attachments ? appointment.attachments.map(file => file.filename) : [];
+          const formattedAppointment = {
+            id: appointment.id,
+            date: formattedDate,
+            time: timeRange,
+            details: details,
+            interpreter: interpreter,
+            uploadedFiles: uploadedFiles,
+            ...appointment,
+          };
+    
           future.push(formattedAppointment);
-        } else {
-          previous.push(formattedAppointment);
-        }
+        };
       });
   
       future.sort((a, b) => new Date(a.starts_at) - new Date(b.starts_at));
-  
       setFutureAppointments(future);
-      setPreviousAppointments(previous);
     }
   }, []);
   
@@ -144,8 +138,8 @@ const AppointmentsPage = () => {
         {futureAppointments.length > 0 ? (
           <View style={styles.section}>
             <View style={styles.appointmentsContainer}>
-              {futureAppointments.map((appointment) => (
-                <AppointmentItem key={appointment.id} appointment={appointment} />
+              {futureAppointments.map((appointment, index) => (
+                <AppointmentItem key={`${appointment.id}_${index}`} appointment={appointment} translations={translations}/>
               ))}
             </View>
           </View>
@@ -186,7 +180,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   header: {
-    height: 70,
+    height: 50,
     justifyContent: 'center',
     alignItems: 'left',
     borderBottomWidth: 1,
@@ -288,11 +282,11 @@ const styles = StyleSheet.create({
   },
   appointmentItem: {
     marginBottom: 10,
-    padding: 10,
+    padding: 18,
     backgroundColor: '#ffffff',
-    borderRadius: 5,
+    borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#dfdfdf',
+    borderColor: '#E0E0E0',
   },
   appointmentTitle: {
     fontWeight: 'bold',
@@ -301,22 +295,37 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   appointmentDate: {
-    fontWeight: 'bold',
-    fontSize: 16,
-    color: '#353535',
+    color: '#363636', 
+    fontSize: 16, 
+    fontFamily: 'Source Sans Pro', 
+    fontWeight: '700', 
+    lineHeight: 24, 
   },
   appointmentTime: {
-    fontSize: 14,
-    color: '#353535',
+    color: '#363636', 
+    fontSize: 16, 
+    fontFamily: 'Source Sans Pro', 
+    fontWeight: '700', 
+    lineHeight: 24, 
+  },
+  appointmentSpecialization: {
+    color: '#363636', 
+    fontSize: 16, 
+    fontFamily: 'Source Sans Pro', 
+    fontWeight: '700', 
+    lineHeight: 24, 
   },
   appointmentDetails: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#353535',
     marginBottom: 5,
   },
   appointmentText: {
-    fontSize: 14,
-    color: '#353535',
+    color: '#575757', 
+    fontSize: 16, 
+    fontFamily: 'Source Sans Pro', 
+    fontWeight: '400', 
+    lineHeight: 24, 
   },
   uploadedFilesContainer: {
     flexDirection: 'row',
@@ -333,20 +342,42 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   buttonContainer: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start', 
+    gap: 8, 
+    display: 'inline-flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 10,
   },
   modifyButton: {
-    backgroundColor: '#ffffff',
-    borderColor: '#000000',
-    borderWidth: 1,
+    width: 'auto', 
+    height: 'auto', 
     paddingVertical: 8,
-    paddingHorizontal: 15,
+    paddingHorizontal: 18,
+    flexDirection: 'row',
+    borderRadius: 4, 
+    borderWidth: 1,
+    borderColor: '#575757',
+    overflow: 'hidden', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    gap: 8, 
+    display: 'flex',
+  },
+  modifyImage: {
+    width: 24, 
+    height: 24, 
+    position: 'relative'
+  },
+  joinButton: {
+    backgroundColor: '#8a8a8a',
+    paddingVertical: 8,
     borderRadius: 5,
-    flexDirection: 'row', 
-    alignItems: 'center'
+    flex: 1,
+    justifyContent: 'center', 
+    alignItems: 'center',
   },
   buttonImage: {
     width: 20,
@@ -354,18 +385,37 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   modifyButtonText: {
-    color: '#3269bd',
-    fontWeight: 'bold',
+    color: '#363636',
+    fontSize: 18,
+    fontWeight: '400',
+    color: '#363636',
+    fontFamily: 'Source Sans Pro',
+    lineHeight: 24
   },
   joinButton: {
-    backgroundColor: '#8a8a8a',
+    width: 'auto',
+    height: 'auto',
     paddingVertical: 8,
     paddingHorizontal: 15,
     borderRadius: 5,
+    paddingVertical: 8, 
+    backgroundColor: '#FFD600', 
+    borderRadius: 4, 
+    overflow: 'hidden', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    gap: 10, 
+    display: 'inline-flex',
+    borderWidth: 1,
+    borderColor: '#FFD600',
   },
   joinButtonText: {
-    color: 'white',
-    fontWeight: 'bold',
+    textAlign: 'center', 
+    color: '#363636', 
+    fontSize: 18, 
+    fontFamily: 'Source Sans Pro', 
+    fontWeight: '800', 
+    lineHeight: 24, 
   },
   joinButtonActive: {
     backgroundColor: '#3269bd',
@@ -402,19 +452,22 @@ const styles = StyleSheet.create({
   fabContent: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 10, 
-    paddingVertical: 5,
+    paddingHorizontal: 16, 
+    paddingVertical: 8,
     borderRadius: 30,
     backgroundColor: '#3269bd',
   },
   fabImage: {
     width: 40,
     height: 40,
-    marginRight: 10,
+    marginRight: 5,
   },
   fabText: {
-    fontSize: 16,
     color: 'white',
+    fontSize: 18,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '600',
+    lineHeight: 24,
   }
 });
 
