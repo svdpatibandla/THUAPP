@@ -30,20 +30,18 @@ const SlotSelection = ({ route }) => {
   };
 
   useEffect(() => {
-
     paramsData = {
       auth0_id: "auth0|6634357975c4bd61c0d7eeaa",
       email: "psvdutt+test5@gmail.com",
       cliniko_appointment_type_id: "1384084284544911455",
       permissions: 'get:patient_cabinet'
     };
-    console.log("slot selection params data",paramsData);
-
+  
     const fetchData = async () => {
       try {
         const response = await axios.get('https://mobile-app-thu-e036558309fd.herokuapp.com/mobile/slots', { params: paramsData });
-        console.log("Response:  ",response.data);
         const allSlots = response.data.all_slots;
+        console.log("All slots: ",allSlots);
         const appointmentsList = Object.keys(allSlots).map(date => {
           return {
             date,
@@ -52,15 +50,24 @@ const SlotSelection = ({ route }) => {
               time: addMinutes(new Date(slot.time), new Date().getTimezoneOffset())
             }))
           };
-        });
+        });        
         setAppointments(appointmentsList);
-        console.log("Appointments::: ",appointmentsList);
+        console.log('Appointments:', appointmentsList );
+    
+        const firstAppointmentDate = appointmentsList[0]?.date;
+        console.log('First appointment date:', firstAppointmentDate);
+        if (firstAppointmentDate) {
+          setSelectedDate(new Date(firstAppointmentDate));
+          console.log("initial selected date: ",selectedDate);
+        }
+    
       } catch (error) {
         console.error('Error fetching slots:', error);
       }
-    };
+    };    
     fetchData();
   }, []);
+  
   
 
   const handleGoBack = () => {
@@ -94,12 +101,20 @@ const SlotSelection = ({ route }) => {
     setSelectedLanguages(initialLanguages);
   }, [appointments]);
 
+  console.log(new Date().toLocaleTimeString);
+
+  console.log(appointments[0]);
+
   return (
     <View style={styles.container}>
       <Header handleBack={handleGoBack} handleClose={handleClose} searchQuery={searchQuery} />
       <View style={styles.headerContainer}>
         <View style={styles.resultsContainer}>
-          <Text style={styles.resultText}>Results</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center', gap: 8}}>
+            <Text style={styles.resultText}>{appointments.length}</Text>
+            <Text>results found</Text>
+          </View>
+
           <View style={styles.filterContainer}>
             <Image source={require('../../assets/filter.png')} style={styles.filterImage} />
             <Text style={styles.filterText}>Filters</Text>
@@ -195,7 +210,7 @@ const SlotSelection = ({ route }) => {
                           style={styles.slotTimeButton}
                           onPress={() => navigation.navigate('AppointmentDetails', { slotDetails: slot })}
                         >
-                          <Text style={styles.slotTimeButtonText}>{format(slot.time, 'HH:mm')}</Text>
+                          <Text style={styles.slotTimeButtonText}>{new Date(slot.time).toLocaleTimeString()}</Text>
                         </TouchableOpacity>
                       ))}
                   </ScrollView>
