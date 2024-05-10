@@ -30,11 +30,20 @@ import PersonalInfo from './components/AccountPages/PersonalInfo';
 import PatientAttachments from './components/AccountPages/PatientAttachments';
 import PersonalInfo_Edit from './components/AccountPages/PersonalInfo_Edit';
 import PastAppointments from './components/AccountPages/PastAppointments';
+import AdditionalGender from './components/RegistrationPages/AdditionalGender';
+import DataPrintPage from './components/RegistrationPages/DataPrintPage';
+import FinalPage from './components/RegistrationPages/FinalPage';
+import LanguageSelection from './components/RegistrationPages/LanguageSelection';
+import PersonalInfoSelection from './components/RegistrationPages/PersonalInfoSelection';
+import ResidencePage  from './components/RegistrationPages/ResidencePage';
+import SelectLangcont from './components/RegistrationPages/SelectLangcont';
+
 
 const Stack = createStackNavigator();
 
 const LoggedInNavigator = () => (
-  <Stack.Navigator initialRouteName="LandingPage" screenOptions={{ headerShown: true }}>
+  <Stack.Navigator initialRouteName="AppNavigator" screenOptions={{ headerShown: true }}>
+    <Stack.Screen name="LandingPage" component={LandingPage} options={{ headerShown: false }} />
     <Stack.Screen name="AppNavigator" component={AppNavigator} options={{ title: 'My Appointments', headerLeft: null, headerTitleAlign: 'center', headerShown: false }} />
     <Stack.Screen name="AccountPage" component={AccountPage} options={{ headerShown: false }} />
     <Stack.Screen name="MentalContent" component={MentalContent} />
@@ -56,6 +65,13 @@ const LoggedInNavigator = () => (
     <Stack.Screen name="PersonalInfo_Edit" component={PersonalInfo_Edit} options={{ headerShown: false }} />
     <Stack.Screen name="PatientAttachments" component={PatientAttachments} options={{ headerShown: false }} />
     <Stack.Screen name="PastAppointments" component={PastAppointments} options={{ headerShown: false }} />
+    <Stack.Screen name="AdditionalGender" component={AdditionalGender} options={{ headerShown: false }} />
+    <Stack.Screen name="DataPrintPage" component={DataPrintPage} options={{ headerShown: false }} />
+    <Stack.Screen name="FinalPage" component={FinalPage} options={{ headerShown: false }} />
+    <Stack.Screen name="LanguageSelection" component={LanguageSelection} options={{ headerShown: false }} />
+    <Stack.Screen name="PersonalInfoSelection" component={PersonalInfoSelection} options={{ headerShown: false }} />
+    <Stack.Screen name="ResidencePage" component={ResidencePage} options={{ headerShown: false }} />
+    <Stack.Screen name="SelectLangcont" component={SelectLangcont} options={{ headerShown: false }} />
   </Stack.Navigator>
 );
 
@@ -64,6 +80,7 @@ const GuestNavigator = () => (
     <Stack.Screen name="LandingPage" component={LandingPage} />
     <Stack.Screen name="NewPatientForm" component={NewPatientForm} screenOptions={{ headerShown: true }} />
     <Stack.Screen name="AppNavigator" component={AppNavigator} />
+    <Stack.Screen name="LanguageSelection" component={LanguageSelection} />
   </Stack.Navigator>
 );
 

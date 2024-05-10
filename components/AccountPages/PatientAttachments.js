@@ -20,9 +20,7 @@ const PatientAttachments = () => {
     const [popupTop, setPopupTop] = useState(0);
     const [popupLeft, setPopupLeft] = useState(0);
     const [DeleteText, setDeleteText] = useState("Delete");
-    const currentDate = format(new Date(), 'yyyy-MM-dd')
 
-    console.log("prevUploadedFiles at start: ", prevUploadedFiles);
 
 
     const handleDelete = async (showPopup) => {
@@ -55,7 +53,6 @@ const PatientAttachments = () => {
     
 
     const handleGoBack = () => {
-        console.log("Uploaded files by closing time: ", uploadedFiles);
         dispatch(storeUploadedFiles(uploadedFiles));
         setUploadedFiles([]);
         navigation.navigate('AppNavigator');
@@ -156,7 +153,7 @@ const PatientAttachments = () => {
         
                 <Modal visible={showPopup.visible} transparent={true} animationType='fade'>
                     <View style={[styles.popup, { top: popupTop, left: popupLeft }]}>
-                        <TouchableOpacity onPress={() => handleDelete(showPopup)} style={styles.popupItem}>
+                        <TouchableOpacity onPress={handleDelete(showPopup)} style={styles.popupItem}>
                             <Text>{DeleteText}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => handleDownload(showPopup)} style={styles.popupItem}>

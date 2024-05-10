@@ -10,9 +10,9 @@ const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
 
-  const data = useSelector(state => state.auth);
-  console.log("Complete auth data: ", data);  
   const translations = useSelector(state => state.auth.translations);
+  AppointmentsTitle = translations?.message_appointments;
+  AccountTitle = translations?.message_profile;
   
   return (
     <Tab.Navigator
@@ -40,7 +40,7 @@ const AppNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Appointments"
+        name= {AppointmentsTitle}
         component={AppointmentsPage}
         options={{
           tabBarLabel: translations?.message_appointments,
@@ -62,7 +62,7 @@ const AppNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Account"
+        name={AccountTitle}
         component={AccountPage}
         options={{
           headerShown: false,

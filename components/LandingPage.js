@@ -40,7 +40,7 @@ const onLogin = async (userType) => {
 
     if (userType === 'New') {
       if (credentials) {
-        navigation.navigate('NewPatientForm');
+        navigation.navigate('LanguageSelection');
       }
     } else if (userType === 'existing') {
       if (credentials) {
