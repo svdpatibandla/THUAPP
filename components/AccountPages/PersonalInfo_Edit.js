@@ -51,7 +51,8 @@ const PersonalInfo = ({ route }) => {
   };
   
   const changeGender = () => {
-    navigation.navigate()
+    console.log("Page to be added");
+    //navigation.navigate()
   };
 
   const handleSave = async () => {

@@ -15,14 +15,14 @@ const practitionersData = [
   {
     id: 2,
     name: "Dr. Jane Smith",
-    type: "Dermatologist",
-    language: "Spanish",
+    type: "Pyschologist",
+    language: "Ukraine",
   },
   {
     id: 3,
     name: "Dr. Michael Johnson",
-    type: "Pediatrician",
-    language: "French",
+    type: "Psychiatrist",
+    language: "Russian",
   },
 ];
 

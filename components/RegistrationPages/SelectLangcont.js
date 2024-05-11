@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Switch, StyleSheet, SafeAreaView,ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Switch, StyleSheet, SafeAreaView,Image } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -46,8 +46,9 @@ const SelectLangcont = () => {
       setOtherLanguages([]);
     }
   };
+  const handleGoBack = () => navigation.goBack();
 
-  const handleSubmit = () => {
+  const handleContinue = () => {
     console.log('otherLanguages:', otherLanguages);
     console.log('noOtherLanguage:', noOtherLanguage);
     navigation.navigate('ResidencePage', {
@@ -65,15 +66,23 @@ const SelectLangcont = () => {
 
 
   return (
-    <ScrollView
-  contentContainerStyle={styles.scrollViewContent}
-  scrollIndicatorInsets={{ right: 20, top: 0, bottom: 0 }} // Adjust the size of the scroll button
->
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Complete the registration</Text>
-      <Text style={styles.subtitle}>
-      Add information about yourself that will be linked to patientemail@gmail.com
-      </Text>
+       <View style={styles.header}>
+        <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
+          <Image source={require('../../assets/goBack.png')} style={styles.headerImage} />
+        </TouchableOpacity>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: '30%' }]} />
+        </View>
+      </View>
+    <View style={styles.InfoContainer}>
+      <View style={styles.contentContainer}>
+          <Text style={styles.title}>Complete the registration</Text>
+          <Text style={styles.subtitle}>
+            Add information about yourself that will be linked to patientemail@gmail.com
+          </Text>
+          <Text style={styles.note}>Fields marked with * are required</Text>
+        </View>
       <Text style={styles.label}>The first language of communication*</Text>
       <View>
         <TouchableOpacity
@@ -83,7 +92,7 @@ const SelectLangcont = () => {
           <View
             style={[
               styles.radioCircle,
-              primaryLanguage === 'ukrainian' && styles.selectedRadio,
+              primaryLanguage === 'ukrainian' && styles.checkboxDot,
             ]}
           />
           <Text style={[styles.radioLabel, primaryLanguage === 'ukrainian' && styles.selectedText]}>Українська мова</Text>
@@ -177,13 +186,13 @@ const SelectLangcont = () => {
           </View>
         </>
       )}
-      <View style={styles.footerContainer}>
-        <TouchableOpacity style={styles.continueButton} onPress={handleSubmit}>
-          <Text style={styles.continueButtonText}>Continue</Text>
-        </TouchableOpacity>
+     <View style={styles.bottomBar}>
+          <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
+            <Text style={styles.continueButtonText}>Continue</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
-    </ScrollView>
   );
 };
 
@@ -207,6 +216,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 8,
   },
+  checkboxDot: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    backgroundColor: '#007AFF',
+  },
   radioButton: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -217,7 +232,7 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#007AFF',
+    borderColor: '#ccc',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 8,
@@ -230,7 +245,6 @@ const styles = StyleSheet.create({
     color: '#007AFF',
   },
   selectedText: {
-    color: '#007AFF',
   },
   switchContainer: {
     flexDirection: 'row',
@@ -292,6 +306,95 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: 58,
+    paddingHorizontal: 14,
+    backgroundColor: '#ffffff',
+  },
+  headerImage: {
+    width: 24,
+    height: 24,
+  },
+  progressBar: {
+    flex: 1,
+    height: 8,
+    backgroundColor: '#E5E5E5',
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  progressFill: {
+    height: '100%',
+    backgroundColor: '#FFC107',
+    borderRadius: 4,
+  },
+  backButton: {
+   // Adjust this to move the button more to the left, set to zero or even a negative value if necessary
+    padding: 0, // Remove padding to ensure the image touches the edge if that's what's desired
+  },
+
+  bottomBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 80,
+    backgroundColor: '#ffffff',
+  },
+  continueButton: {
+    flex: 1,
+    backgroundColor: '#3269bd',
+    paddingVertical: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  continueButtonText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#f8f8f8',
+  },
+
+  InfoContainer: {
+    flex: 1,
+    paddingHorizontal: 18,
+  },
+  contentContainer: { 
+    // Full width and height
+    flexDirection: 'column', // Stacks children vertically
+    paddingTop: 16, // Padding inside the container
+  },
+  title: {
+    color: '#363636',
+    fontSize: 24,
+    fontFamily: 'SourceSansPro-SemiBold', // Assuming you've loaded this font in your React Native project
+    fontWeight: '800',
+    lineHeight: 28,
+    marginBottom: 16, // Adds space between the title and the subtitle
+  },
+  subtitle: {
+    color: '#363636',
+    fontSize: 14,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '400',
+    lineHeight: 24,
+    marginBottom: 16, // Adds space between the subtitle and the note
+  },
+  note: {
+    color: '#696767',
+    fontSize: 14,
+    fontFamily: 'SourceSansPro-Regular',
+    fontWeight: '400',
+    lineHeight: 24,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 8,
   },
 });
 

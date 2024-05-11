@@ -41,12 +41,14 @@ import All_filters from './components/FilterPages/All_filters';
 import Speciality_filters from './components/FilterPages/Speciality_filters';
 import Search_focussed from './components/SearchPages/Search_focussed';
 import Search_speciality from './components/SearchPages/Search_speciality';
-
+import PatientLanguages from './components/AccountPages/PatientLanguages';
+import PatientLanguage_Edit from './components/AccountPages/PatientLanguage_Edit';
+import AppLanguage from './components/AccountPages/AppLanguage';
 
 const Stack = createStackNavigator();
 
 const LoggedInNavigator = () => (
-  <Stack.Navigator initialRouteName="SlotSelection" screenOptions={{ headerShown: true }}>
+  <Stack.Navigator initialRouteName="AppNavigator" screenOptions={{ headerShown: true }}>
     <Stack.Screen name="LandingPage" component={LandingPage} options={{ headerShown: false }} />
     <Stack.Screen name="AppNavigator" component={AppNavigator} options={{ headerShown: false }} />
     <Stack.Screen name="AccountPage" component={AccountPage} options={{ headerShown: false }} />
@@ -80,6 +82,9 @@ const LoggedInNavigator = () => (
     <Stack.Screen name="Speciality_filters" component={Speciality_filters} options={{ headerShown: false }} />
     <Stack.Screen name="Search_focussed" component={Search_focussed} options={{ headerShown: false }} />
     <Stack.Screen name="Search_speciality" component={Search_speciality} options={{ headerShown: false }} />
+    <Stack.Screen name="PatientLanguages" component={PatientLanguages} options={{ headerShown: false }} />
+    <Stack.Screen name="PatientLanguage_Edit" component={PatientLanguage_Edit} options={{ headerShown: false }} />
+    <Stack.Screen name="AppLanguage" component={AppLanguage} options={{ headerShown: false }} />
   </Stack.Navigator>
 );
 

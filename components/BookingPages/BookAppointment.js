@@ -3,13 +3,17 @@ import { View, TouchableOpacity, StyleSheet, Image, Text, ScrollView } from 'rea
 import { useNavigation } from '@react-navigation/native';
 import { Calendar } from 'react-native-calendars';
 import { format } from 'date-fns';
-import axios from 'axios';
+import axios, { all } from 'axios';
 
 const BookAppointment = ({ route }) => {
     const navigation = useNavigation();
     const [selectedDate, setSelectedDate] = useState(format(new Date(), 'yyyy-MM-dd'));
     const [selectedLanguage, setSelectedLanguage] = useState('Ukrainian');
     const [availableSlots, setAvailableSlots] = useState([]);
+    const [allSlots, setAllSlots] = useState([]);
+    const [firstDate, setFirstDate] = useState([]);
+
+
     const prevDetails = route.params;
 
     const customTheme = {
@@ -19,48 +23,40 @@ const BookAppointment = ({ route }) => {
 
     useEffect(() => {
         console.log(selectedDate);
-        console.log("PrevDetails at BookAppointment: ",prevDetails);
+        console.log("PrevDetails at BookAppointment: ", prevDetails);
         const fetchData = async () => {
             const paramsData = {
                 auth0_id: prevDetails.auth0_id,
                 email: prevDetails.email,
                 permissions: "get:patient_cabinet",
-                cliniko_appointment_type_id:prevDetails.cliniko_appointment_type_id,
+                cliniko_appointment_type_id: prevDetails.cliniko_appointment_type_id,
                 cliniko_practitioner_id: prevDetails.cliniko_practitioner_id,
             }
             console.log(paramsData)
-
+    
             try {
                 const response = await axios.get('https://mobile-app-thu-e036558309fd.herokuapp.com/mobile/slots', { params: paramsData });
-                setAvailableSlots(response.data.all_slots[selectedDate] || []);
-                console.log("--------------------");
-                console.log(availableSlots);
+                setAllSlots(response.data.all_slots);
             } catch (error) {
                 console.log(error);
             }
         };
-
-        if (selectedDate) {
-            fetchData();
-        }
-    }, [selectedDate]);
+        fetchData();
+    }, []);
+    
+    
 
     const handleClose = () => {
         navigation.navigate('SlotSelection');
     };
 
     const handleDateSelect = (date) => {
+        console.log("Selected Date from calender: ", date);
         setSelectedDate(date);
     };
 
     const getCurrentDate = () => {
         return format(selectedDate, 'EE, MMMM d');
-    };
-    
-    const LanguageMap = {
-        '4': 'Ukrainian',
-        '5': 'Russian',
-        '6': 'English',
     };
 
     const languageMap = {
@@ -73,6 +69,7 @@ const BookAppointment = ({ route }) => {
         setSelectedLanguage(language);
     };
     const handleSlotSelection = (slot) => {
+        console.log(slot)
         navigation.navigate('AppointmentDetails', { 
             slot: slot,
          });
@@ -93,11 +90,11 @@ const BookAppointment = ({ route }) => {
                     <View style={styles.practitionerContainer}>
                         <View style={styles.practitionerDetails}>
                             <View style={styles.AboutPractitioner}>
-                                <Text style={styles.practitionerName}></Text>
-                                <Text style={styles.practitionerSpecialization}></Text>
+                                <Text style={styles.practitionerName}>{prevDetails.practitioner_name}</Text>
+                                <Text style={styles.practitionerSpecialization}>{prevDetails.practitioner_specialization}</Text>
                                 <View style={styles.practitionerLanguage}>
                                     <Text style={styles.practitionerLanguageText}>Practitioner speaks</Text>
-                                    <Text style={styles.practitionerLanguageValue}></Text>
+                                    <Text style={styles.practitionerLanguageValue}>{prevDetails.practitioner_languages}</Text>
                                 </View>
                             </View>
                             <View style={styles.TreatsContainer}>
@@ -141,15 +138,15 @@ const BookAppointment = ({ route }) => {
                 </View>
                 <View style={styles.AvailableTimesContainer}>
                     <View style={styles.AvailableTimesTextContainer}>
-                        <Text style={styles.AvailableTimestext}> Available Times for</Text>
-                        <Text style={styles.AvailableTimestextValue}> {format(selectedDate, 'EE, MMMM d')}</Text>
+                        <Text style={styles.AvailableTimestext}> Available Times for </Text>
+                        <Text style={styles.AvailableTimestextValue}>{selectedDate}</Text>
                     </View>
                     <View style={styles.timeButtonsContainer}>
-                        {availableSlots.map((slot, index) => (
+                        {allSlots[selectedDate] ? (allSlots[selectedDate].map((slot, index) => (
                             <TouchableOpacity key={index} style={styles.timeButton} onPress={() => handleSlotSelection(slot)}>
                                 <Text style={styles.timeButtonText}>{format(new Date(slot.time), 'HH:mm')}</Text>
                             </TouchableOpacity>
-                        ))}
+                        ))): null}
                     </View>
                 </View>
 

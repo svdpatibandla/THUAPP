@@ -20,6 +20,7 @@ const LandingPage = () => {
   useEffect(() => {
     if (user) {
       dispatch(setUser(user)); 
+      console.log('User:', user);
     }
   }, [user, dispatch]);
 

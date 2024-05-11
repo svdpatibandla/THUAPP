@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import { storeUploadedFiles } from '../../redux/actions/authActions';
 import RNFS from 'react-native-fs';
+import axios from 'axios';
 
 
 const PatientAttachments = () => {
@@ -23,8 +24,9 @@ const PatientAttachments = () => {
 
 
 
-    const handleDelete = async (showPopup) => {
-        deleteIndex = showPopup.index;
+    const handleDelete = async (delete_index) => {
+        console.log('Deleting file at index:', delete_index);
+        setDeleteIndex(delete_index);
         console.log('Delete index:', deleteIndex);
         if (deleteIndex !== null) {
             const updatedFiles = uploadedFiles.filter((_, index) => index !== deleteIndex);
@@ -36,9 +38,10 @@ const PatientAttachments = () => {
         }
     };
 
-    const handleDownload = async (showPopup) => {
+    const handleDownload = async (item_index) => {
+        console.log('Downloading file at index:', item_index);
         try {
-            const fileToDownload = uploadedFiles[showPopup.index];
+            const fileToDownload = uploadedFiles[item_index];
             const destPath = RNFS.ExternalDirectoryPath + '/' + fileToDownload.name;
             await RNFS.downloadFile({
                 fromUrl: fileToDownload.uri,
@@ -58,15 +61,21 @@ const PatientAttachments = () => {
         navigation.navigate('AppNavigator');
     };
 
+    const uploadToCliniko = async (files) => {
+        console.log('Uploading files:', files);
+    };
+    
+
     const handleUpload = async () => {
         try {
             const res = await DocumentPicker.pick({
                 type: [DocumentPicker.types.allFiles],
             });
-            
+            console.log('File picked:', res);
+            uploadToCliniko(res);
             setUploadedFiles(prevUploadedFiles => {
+                uploadToCliniko(newUploadedFiles);
                 const newUploadedFiles = [...prevUploadedFiles, res];
-                console.log("New uploaded files after each upload: ", newUploadedFiles); 
                 return newUploadedFiles;
             });
         } catch (err) {
@@ -153,10 +162,10 @@ const PatientAttachments = () => {
         
                 <Modal visible={showPopup.visible} transparent={true} animationType='fade'>
                     <View style={[styles.popup, { top: popupTop, left: popupLeft }]}>
-                        <TouchableOpacity onPress={handleDelete(showPopup)} style={styles.popupItem}>
+                        <TouchableOpacity onPress={() => handleDelete(showPopup.index)} style={styles.popupItem}>
                             <Text>{DeleteText}</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => handleDownload(showPopup)} style={styles.popupItem}>
+                        <TouchableOpacity onPress={() => handleDownload(showPopup.index)} style={styles.popupItem}>
                             <Text>Download</Text>
                         </TouchableOpacity>
                     </View>

@@ -30,18 +30,20 @@ const SlotSelection = ({ route }) => {
   };
 
   useEffect(() => {
+
     paramsData = {
       auth0_id: "auth0|6634357975c4bd61c0d7eeaa",
       email: "psvdutt+test5@gmail.com",
       cliniko_appointment_type_id: "1384084284544911455",
       permissions: 'get:patient_cabinet'
     };
-  
+    console.log("slot selection params data",paramsData);
+
     const fetchData = async () => {
       try {
         const response = await axios.get('https://mobile-app-thu-e036558309fd.herokuapp.com/mobile/slots', { params: paramsData });
+        console.log("Response:  ",response.data);
         const allSlots = response.data.all_slots;
-        console.log("All slots: ",allSlots);
         const appointmentsList = Object.keys(allSlots).map(date => {
           return {
             date,
@@ -50,24 +52,14 @@ const SlotSelection = ({ route }) => {
               time: addMinutes(new Date(slot.time), new Date().getTimezoneOffset())
             }))
           };
-        });        
-        setAppointments(appointmentsList);
-        console.log('Appointments:', appointmentsList );
-    
-        const firstAppointmentDate = appointmentsList[0]?.date;
-        console.log('First appointment date:', firstAppointmentDate);
-        if (firstAppointmentDate) {
-          setSelectedDate(new Date(firstAppointmentDate));
-          console.log("initial selected date: ",selectedDate);
-        }
-    
+        });
+        setAppointments(appointmentsList || []);
       } catch (error) {
         console.error('Error fetching slots:', error);
       }
-    };    
+    };
     fetchData();
   }, []);
-  
   
 
   const handleGoBack = () => {
@@ -100,10 +92,6 @@ const SlotSelection = ({ route }) => {
     });
     setSelectedLanguages(initialLanguages);
   }, [appointments]);
-
-  console.log(new Date().toLocaleTimeString);
-
-  console.log(appointments[0]);
 
   return (
     <View style={styles.container}>
@@ -208,9 +196,9 @@ const SlotSelection = ({ route }) => {
                         <TouchableOpacity
                           key={index}
                           style={styles.slotTimeButton}
-                          onPress={() => navigation.navigate('AppointmentDetails', { slotDetails: slot })}
+                          onPress={() => navigation.navigate('AppointmentDetails', { slot: slot })}
                         >
-                          <Text style={styles.slotTimeButtonText}>{new Date(slot.time).toLocaleTimeString()}</Text>
+                          <Text style={styles.slotTimeButtonText}>{format(slot.time, 'HH:mm')}</Text>
                         </TouchableOpacity>
                       ))}
                   </ScrollView>
@@ -219,6 +207,9 @@ const SlotSelection = ({ route }) => {
                     onPress = {() => navigation.navigate('BookAppointment', { 
                       auth0_id: user.sub,
                       email: user.email,
+                      practitioner_name: practitioner.name,
+                      practitioner_specialization: practitioner.specialization, 
+                      practitioner_languages: practitioner.languages,
                       cliniko_practitioner_id: practitioner.slots[0].cliniko_practitioner_id,
                       cliniko_appointment_type_id: paramsData.cliniko_appointment_type_id,
                     })}
@@ -475,7 +466,7 @@ const styles = StyleSheet.create({
     paddingTop: 8,
     paddingBottom: 8,
     borderWidth: 1,
-    borderRadius: 4,
+    borderRadius: 2,
     justifyContent: 'center',
     alignItems: 'center',
     gap: 10,

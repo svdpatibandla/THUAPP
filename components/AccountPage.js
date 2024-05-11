@@ -4,10 +4,13 @@ import { View, Text, TouchableOpacity, StyleSheet, Image, Linking } from 'react-
 import { useDispatch } from 'react-redux';
 import { clearUser } from '../redux/actions/authActions';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AccountPage = () => {
+
+  const user = useSelector(state => state.auth.user);
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -15,10 +18,10 @@ const AccountPage = () => {
 
   const patientItems = {
     "Personal Info": "PersonalInfo",
-    "Languages": "Languages",
+    "Languages": "PatientLanguages",
     "Documents/Files": "PatientAttachments",
     "Past appointments": "PastAppointments",
-    "App language": "ManageLanguages"
+    "App language": "Applanguage"
   };
 
   const thuItems = {
@@ -68,7 +71,7 @@ const AccountPage = () => {
       <View style={styles.header}>
         <Text style={styles.headerText}>Cabinet</Text>
       </View>
-      <Text style={styles.titleText}>Patient Name</Text>
+      <Text style={styles.titleText}>Psvdutt</Text>
       <View style={styles.patientContainer}>
         {renderItems(patientItems)}
       </View>
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     flex: 1,
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '800',
     textAlign: 'left',
     color: '#363636',
@@ -109,7 +112,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     color: '#151515',
-    fontSize: 20,
+    fontSize: 17,
     fontFamily: "Source Sans Pro-SemiBold",
     fontWeight: '700',
     paddingVertical: 20,

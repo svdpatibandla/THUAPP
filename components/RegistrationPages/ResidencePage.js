@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, TextInput, ScrollView, Platform,Image } from 'react-native';
 import PhoneInput from 'react-native-phone-input';
 import CountryPicker from 'react-native-country-picker-modal';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
+import { Picker } from '@react-native-picker/picker';
 
 
 const ResidencePage = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [countryCode, setCountryCode] = useState('');
   const [telegramId, setTelegramId] = useState('');
   const[country, setCountry] = useState('');
   const [countryPickerVisible, setCountryPickerVisible] = useState(false);
+  const [countryCode, setCountryCode] = useState('+380');
   const navigation = useNavigation();
+console.log("Fourth page:4");
   const onSelectCountry = (country) => {
-    setCountryCode(country.cca2);
     setCountryPickerVisible(false);
+  };
+
+  const handlePhoneNumberChange = (Phone) => {
+    const PhoneNumber = Phone.replace(/\D/g, '');
+    setPhoneNumber(PhoneNumber);
+    console.log('line 25'+PhoneNumber);
   };
 
   const route = useRoute();
@@ -42,8 +49,9 @@ const ResidencePage = () => {
   console.log('noOtherLanguage:', noOtherLanguage);
   console.log('Telegram Id:', telegramId);
   console.log('Phone Number:', phoneNumber);
-  console.log('Country Code:', countryCode);
   console.log('selectedOptions:', selectedOptions);
+
+  const handleGoBack = () => navigation.goBack();
 
   const handleCountrySelect = (country) => {
     setCountry(country);
@@ -55,7 +63,6 @@ const ResidencePage = () => {
     console.log('after submission: PAGE 4 at');
     console.log('Telegram Id:', telegramId);
     console.log('Phone Number:', phoneNumber);
-    console.log('Country Code:', countryCode);
     navigation.navigate('FinalPage',{name,
       surname,
       birthYear,
@@ -64,19 +71,24 @@ const ResidencePage = () => {
       selectedOptions,
       primaryLanguage,
       phoneNumber,
-      countryCode,
       country,
+      countryCode,
       telegramId,
       otherLanguages,
       noOtherLanguage});
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
-    >
+    <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.header}>
+        <TouchableOpacity onPress={handleGoBack}>
+          <Image source={require('../../assets/goBack.png')} style={styles.headerImage} />
+        </TouchableOpacity>
+        <View style={styles.progressBar}>
+          <View style={[styles.progressFill, { width: '30%' }]} />
+        </View>
+      </View>
+
       <View style={styles.content}>
         <Text style={styles.title}>Complete the registration</Text>
         <Text style={styles.instructions}>
@@ -111,17 +123,29 @@ const ResidencePage = () => {
       </TouchableOpacity>
     </View>
 
-        <View style={styles.phoneInputContainer}>
-          <Text style={styles.PhoneInputHeading}>Phone Number</Text>
-          <PhoneInput
-            style={styles.phoneInput}
-            textStyle={styles.phoneInputText}
-            value={phoneNumber}
-            onChangePhoneNumber={setPhoneNumber}
-            initialCountry="us"
-            onSelectCountry={(iso2) => setCountryCode(iso2)}
-          />
-        </View>
+    <View style={styles.inputContainer}>
+          <Text style={styles.label}>Phone Number*</Text>
+          <View style={styles.phoneNumberContainer}>
+           <Picker
+            selectedValue={countryCode}
+            onValueChange={(itemValue) => setCountryCode(itemValue)}
+            style={styles.countryCodePicker}
+            >
+            <Picker.Item label="+380" value="+380" />
+            <Picker.Item label="+48" value="+48" />
+            </Picker>
+            <View style={styles.borderVertical}></View>
+            <TextInput
+              style={styles.phoneInput}
+              keyboardType="phone-pad"
+              placeholder="Enter phone number"
+              value={`${phoneNumber}`}
+              onChangeText={handlePhoneNumberChange}
+            />
+          </View>
+    </View>
+
+      
         <View style={styles.TelegramContainer}>
       <Text style={styles.TelegramInputHeading}>Telegram Id</Text>
       <TextInput
@@ -139,14 +163,44 @@ const ResidencePage = () => {
         </View>
 
       </View>
-    </KeyboardAvoidingView>
-  );
+    </ScrollView>);
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFFFFF',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: 58,
+    paddingHorizontal: 14,
+    backgroundColor: '#ffffff',
+  },
+  headerImage: {
+    width: 24,
+    height: 24,
+  },
+  headerText: {
+    textAlign: 'center', 
+    color: '#151515', 
+    fontSize: 18, 
+    fontFamily: 'Source Sans Pro', 
+    fontWeight: '800',
+  },
+  progressBar: {
+    flex: 1,
+    height: 8,
+    backgroundColor: '#E5E5E5',
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  progressFill: {
+    height: '100%',
+    backgroundColor: '#FFC107',
+    borderRadius: 4,
   },
   content: {
     flex: 1,
@@ -176,7 +230,7 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#007AFF',
+    borderColor: 'black',
     marginRight: 8,
   },
   selectedRadioButton: {
@@ -184,7 +238,7 @@ const styles = StyleSheet.create({
   },
   countryLabel: {
     fontSize: 16,
-    color: '#007AFF',
+    color: 'black',
   },
 
   PhoneInputHeading: {
@@ -237,6 +291,44 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
 },
+inputContainer: {
+  marginBottom: 16,
+},
+label: {
+  fontSize: 16,
+  marginBottom: 8,
+  color: '#363636',
+  fontSize: 16,
+  fontFamily: 'Source Sans Pro',
+  fontWeight: '700',
+  lineHeight: 20,  
+},
+  phoneNumberContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 6,
+    overflow: 'hidden',
+    height: 40,
+  },
+  phoneInput: {
+    flex: 2, 
+    height: 40,
+    paddingVertical: 8,
+    paddingLeft: 16,
+    fontSize: 16,
+    color: '#363636',
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '400',
+    lineHeight: 24,
+  }, 
+  borderVertical: {
+    width: 1,
+    height: '100%',
+    backgroundColor: 'gray',
+  }, 
+
 });
 
 export default ResidencePage;

@@ -8,13 +8,7 @@ const AdditionalGender = () => {
 
  const navigation = useNavigation();
  const route = useRoute();
-
- const {
-  selectedLanguage,
- name, surname, birthYear, gender
- }
-  = route.params;
-
+ const selectedLanguage = route.params;
 
   const options = [
     { label: 'Assigned female at birth', value: 'assigned_female' },
@@ -40,9 +34,8 @@ const AdditionalGender = () => {
   const handleContinue = () => {
     // Navigate to the next page
 
-    navigation.navigate('PersonalInfoSelection', { selectedLanguage, name, surname, birthYear, gender, selectedOptions});
+    navigation.navigate('PersonalInfoSelection', {selectedLanguage, selectedOptions});
       
-  
   };
 
   return (
@@ -67,9 +60,11 @@ const AdditionalGender = () => {
           </View>
         ))}
       </ScrollView>
-      <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
-        <Text style={styles.continueButtonText}>Continue</Text>
-      </TouchableOpacity>
+      <View style={styles.bottomBar}>
+        <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
+          <Text style={styles.continueButtonText}>Continue</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -120,17 +115,24 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginLeft: 32,
   },
+  bottomBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 80,
+    paddingHorizontal: 20, 
+    backgroundColor: '#ffffff',
+  },
   continueButton: {
-    backgroundColor: '#2196F3',
-    paddingVertical: 12,
-    borderRadius: 4,
-    marginTop: 16,
+    flex: 1, 
+    backgroundColor: '#3269bd',
+    paddingVertical: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 20,
   },
   continueButtonText: {
-    color: '#fff',
+    color: 'white',
     fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
 });
 

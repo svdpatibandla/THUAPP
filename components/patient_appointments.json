@@ -86,7 +86,7 @@
                 "cancel": true,
                 "datetime": "04/13/2024, 18:00",
                 "ends_at": "2024-04-13T19:00:00Z",
-                "future_appt": false,
+                "future_appt": true,
                 "human_readable_UA": "18:00, Friday, 13 April",
                 "id": "1364570146068237161",
                 "practitioner": {

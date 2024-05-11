@@ -2,7 +2,6 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
 
 import { AuthContext } from "./AuthContext_temp";
-import AppNavigator from './AppNavigator';
 const LandingPage = ({ navigation }) => {
 
     const { loggedIn } = useContext(AuthContext);
@@ -19,9 +18,7 @@ const LandingPage = ({ navigation }) => {
         if (option === 'New Patient') {
           navigation.navigate('NewPatientForm');
         } else if (option === 'Existing Patient') {
-        // Handle the action for Existing Patient (you can navigate to another screen or perform any other action)
-        // For now, let's log a message to the console
-        console.log('Handle action for Existing Patient');
+          console.log('Handle action for Existing Patient');
         }
     };
 
@@ -72,7 +69,7 @@ const styles = StyleSheet.create({
     text: {
       textAlign: 'center',
       fontSize: 18,
-      flex: 1, // Add this line to make text centered
+      flex: 1, 
     },
     image: {
       width: 30,

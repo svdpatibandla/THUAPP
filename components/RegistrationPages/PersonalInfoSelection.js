@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, SafeAreaView, TextInput, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useRoute } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 import { RadioButton } from 'react-native-paper';
+import { Item } from 'react-native-paper/lib/typescript/components/Drawer/Drawer';
 
-const PersonalInfo = () => {
+const PersonalInfoSelection = () => {
   const navigation = useNavigation();
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
@@ -13,44 +14,20 @@ const PersonalInfo = () => {
   const [gender, setGender] = useState('');
   const route = useRoute();
   const selectedLanguage = route.params.selectedLanguage || '';
-
   const selectedOptions = route.params.selectedOptions || [];
 
-  // Retrieve selectedLanguage from page 2
+  const handleGoBack = () => navigation.goBack();
+  const handleEdit = () => console.log('Edit functionality here');
 
-  const handleSubmit = () => {
-    console.log('Name:', name);
-    console.log('Surname:', surname);
-    console.log('Birth Year:', birthYear);
-    console.log('Gender:', gender);
-    console.log('Selected Language:', selectedLanguage);
-    console.log('Selected Options:', selectedOptions);
-    handleContinue();
-  };
-  const handleAdditionalGender = () => {
-    // Navigate to the next page
-
-    navigation.navigate('AdditionalGender', { selectedLanguage, name, surname, birthYear, gender,selectedOptions });
-      
-  
-  };
   const handleContinue = () => {
     if (name && surname && birthYear && gender) {
-      navigation.navigate('SelectLangcont', { selectedLanguage, name, surname, birthYear, gender,selectedOptions });  
+      navigation.navigate('SelectLangcont', { selectedLanguage, name, surname, birthYear, gender, selectedOptions });  
     } else {
       let errorMessage = 'Please fill in the following fields:';
-      if (!name) {
-        errorMessage += '\n- Name';
-      }
-      if (!surname) {
-        errorMessage += '\n- Surname';
-      }
-      if (!birthYear) {
-        errorMessage += '\n- Birth Year';
-      }
-      if (!gender) {
-        errorMessage += '\n- Gender';
-      }
+      if (!name) errorMessage += '\n- Name';
+      if (!surname) errorMessage += '\n- Surname';
+      if (!birthYear) errorMessage += '\n- Birth Year';
+      if (!gender) errorMessage += '\n- Gender';
       alert(errorMessage);
     }
   };
@@ -60,65 +37,70 @@ const PersonalInfo = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Text style={styles.backButtonText}>&#8592;</Text>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={handleGoBack}>
+          <Image source={require('../../assets/goBack.png')} style={styles.headerImage} />
         </TouchableOpacity>
         <View style={styles.progressBar}>
-          <View style={[styles.progressFill, { width: '20%' }, styles.darkYellowFill]} />
-          <View style={[styles.progressFill, { width: '5%' }]} />
+          <View style={[styles.progressFill, { width: '30%' }]} />
         </View>
       </View>
-      <View style={styles.contentContainer}>
-        <Text style={styles.title}>Complete the registration</Text>
-        <Text style={styles.subtitle}>
-          Add information about yourself that will be linked to patientemail@gmail.com
-        </Text>
-        <Text style={styles.label}>Name*</Text>
-        <TextInput
-          style={styles.input}
-          value={name}
-          onChangeText={setName}
-          placeholder="Name"
-        />
-        <Text style={styles.label}>Sur Name*</Text>
-        <TextInput
-          style={styles.input}
-          value={surname}
-          onChangeText={setSurname}
-          placeholder="Sur Name"
-        />
-        <Text style={styles.label}>Year of Birth</Text>
-        <Picker
-          style={styles.input}
-          selectedValue={birthYear}
-          onValueChange={(itemValue) => setBirthYear(itemValue)}
-        >
-          {years.map((year) => (
-            <Picker.Item key={year} label={year.toString()} value={year.toString()} />
-          ))}
-        </Picker>
-        <Text style={styles.label}>Gender*</Text>
-        <View style={styles.genderContainer}>
-          <RadioButton.Group onValueChange={newValue => setGender(newValue)} value={gender}>
-            <View style={styles.radioButtonContainer}>
-              <RadioButton.Android value="male" />
-              <Text style={styles.radioButtonText}>Male</Text>
-            </View>
-            <View style={styles.radioButtonContainer}>
-              <RadioButton.Android value="female" />
-              <Text style={styles.radioButtonText}>Female</Text>
-            </View>
-          </RadioButton.Group>
+      <View style={styles.InfoContainer}>
+        <View style={styles.contentContainer}>
+          <Text style={styles.title}>Complete the registration</Text>
+          <Text style={styles.subtitle}>
+            Add information about yourself that will be linked to patientemail@gmail.com
+          </Text>
+          <Text style={styles.note}>Fields marked with * are required</Text>
         </View>
-        <TouchableOpacity style={styles.viewListButton} onPress={(handleAdditionalGender)}>
-          <Text style={styles.viewListButtonText}>See full list</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.footerContainer}>
-        <TouchableOpacity style={styles.continueButton} onPress={handleSubmit}>
-          <Text style={styles.continueButtonText}>Continue</Text>
-        </TouchableOpacity>
+        <View style={styles.fieldContainer}>
+          <Text style={styles.label}>Name*</Text>
+          <TextInput
+            style={styles.input}
+            value={name}
+            onChangeText={setName}
+            placeholder="Name"
+          />
+          <Text style={styles.label}>Surname*</Text>
+          <TextInput
+            style={styles.input}
+            value={surname}
+            onChangeText={setSurname}
+            placeholder="Surname"
+          />
+          <Text style={styles.label}>Year of Birth*</Text>
+          <Picker
+            style={styles.input}
+            selectedValue={birthYear}
+            onValueChange={(itemValue) => setBirthYear(itemValue)}
+          >
+            {years.map((year) => (
+              <Picker.Item key={year} label={year.toString()} value={year.toString()} />
+            ))}
+          </Picker>
+          <Text style={styles.label}>Gender*</Text>
+          <View style={styles.genderContainer}>
+            <RadioButton.Group onValueChange={setGender} value={gender}>
+              <View style={styles.radioButtonContainer}>
+                <RadioButton.Android value="male" />
+                <Text style={styles.radioButtonText}>Male</Text>
+              </View>
+              <View style={styles.radioButtonContainer}>
+                <RadioButton.Android value="female" />
+                <Text style={styles.radioButtonText}>Female</Text>
+              </View>
+            </RadioButton.Group>
+          </View>
+          <TouchableOpacity style={styles.viewListButton} onPress={() => navigation.navigate('AdditionalGender')}>
+          <Text style={styles.selectedText}>{selectedOptions}</Text>
+            <Text style={styles.viewListButtonText}>See full list</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.bottomBar}>
+          <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
+            <Text style={styles.continueButtonText}>Continue</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -129,47 +111,64 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  headerContainer: {
+  header: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 16,
+    justifyContent: 'space-between',
+    height: 58,
+    paddingHorizontal: 14,
+    backgroundColor: '#ffffff',
   },
-  backButton: {
-    marginRight: 16,
+  fieldContainer: {
+    flex: 1,  //
+    paddingVertical: 10,
   },
-  backButtonText: {
-    fontSize: 32, // Increase the font size of the back button
+  headerImage: {
+    width: 24,
+    height: 24,
   },
-  progressBar: {
+  headerText: {
+    textAlign: 'center', 
+    color: '#151515', 
+    fontSize: 18, 
+    fontFamily: 'Source Sans Pro', 
+    fontWeight: '800',
+  },
+  EditText: {
+    color: '#007AFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  InfoContainer: {
     flex: 1,
-    flexDirection: 'row',
-    height: 8,
-    backgroundColor: '#E5E5E5',
-    borderRadius: 4,
-    marginLeft: 8,
-    marginTop: 8,
+    paddingHorizontal: 18,
   },
-  progressFill: {
-    height: '100%',
-    borderRadius: 4,
-  },
-  darkYellowFill: {
-    backgroundColor: '#FFC107',
-  },
-  contentContainer: {
-    flex: 1,
-    paddingHorizontal: 16,
-    paddingBottom: 16,
+  contentContainer: { // Full width and height
+    flexDirection: 'column', // Stacks children vertically
+    paddingTop: 16, // Padding inside the container
   },
   title: {
+    color: '#363636',
     fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 8,
+    fontFamily: 'SourceSansPro-SemiBold', // Assuming you've loaded this font in your React Native project
+    fontWeight: '800',
+    lineHeight: 28,
+    marginBottom: 16, // Adds space between the title and the subtitle
   },
   subtitle: {
-    fontSize: 16,
-    marginBottom: 16,
+    color: '#363636',
+    fontSize: 14,
+    fontFamily: 'Source Sans Pro',
+    fontWeight: '400',
+    lineHeight: 24,
+    marginBottom: 16, // Adds space between the subtitle and the note
+  },
+  note: {
+    color: '#696767',
+    fontSize: 14,
+    fontFamily: 'SourceSansPro-Regular',
+    fontWeight: '400',
+    lineHeight: 24,
   },
   label: {
     fontSize: 16,
@@ -186,8 +185,11 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     borderWidth: 1,
     borderRadius: 4,
-    borderColor: 'gray',
-    overflow: 'hidden',
+    overflow: 'hidden',  // Ensure background is white for better contrast
+    justifyContent: 'center',
+    backgroundColor: '#f0f0f0', // Light gray background color
+    justifyContent: 'center',
+    color: '#000',
   },
   genderContainer: {
     flexDirection: 'row',
@@ -203,30 +205,68 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   viewListButton: {
-    alignSelf: 'flex-end',
+    alignSelf: 'flex-start',  // Aligns the button to the left side of its container,
     marginTop: 8,
   },
   viewListButtonText: {
     fontSize: 16,
     color: '#007AFF',
   },
-  footerContainer: {
-    paddingHorizontal: 16,
-    paddingBottom: 16,
+  progressBar: {
+    flex: 1,
+    height: 8,
+    backgroundColor: '#E5E5E5',
+    borderRadius: 4,
+    overflow: 'hidden',
   },
-  continueButton: {
-    backgroundColor: '#007AFF',
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
+  progressFill: {
+    height: '100%',
+    backgroundColor: '#FFC107',
     borderRadius: 4,
   },
+  darkYellowFill: {
+    backgroundColor: '#FFC107',
+  },
+  backButton: {
+    marginRight: 16,
+  },
+  backButtonText: {
+    fontSize: 32,
+  },
+  progressBar: {
+    flex: 1,
+    height: 8,
+    backgroundColor: '#E5E5E5',
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  progressFill: {
+    height: '100%',
+    backgroundColor: '#FFC107',
+    borderRadius: 4,
+  },
+  bottomBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 80,
+    backgroundColor: '#ffffff',
+  },
+  continueButton: {
+    flex: 1,
+    backgroundColor: '#3269bd',
+    paddingVertical: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
   continueButtonText: {
+    color: 'white',
     fontSize: 16,
-    color: '#FFF',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#f8f8f8',
   },
 });
 
-export default PersonalInfo;
-
-
+export default PersonalInfoSelection;

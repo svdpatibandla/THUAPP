@@ -54,6 +54,28 @@ const AppointmentsPage = () => {
 
   const navigation = useNavigation();
   const translations = useSelector(state => state.auth.translations);
+  const user = useSelector(state => state.auth.user);
+
+  /*
+  useEffect(() => {
+    const fetchData = async () => {
+
+      const paramsData = {
+        auth0_id: user.sub,
+        email:user.email,
+      };
+      try {
+        const response = await axios.get('https://mobile-app-thu-e036558309fd.herokuapp.com/mobile/patient?auth0_id=auth0%7C6634357975c4bd61c0d7eeaa&email=psvdutt%2Btest5%40gmail.com');
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  */
+  
 
   useEffect(() => {
     if (appointmentsData && appointmentsData.patient && appointmentsData.patient.appointments) {
@@ -65,9 +87,10 @@ const AppointmentsPage = () => {
           const appointmentDate = new Date(appointment.starts_at);
           const options = { weekday: 'long', month: 'long', day: 'numeric' };
           const formattedDate = appointmentDate.toLocaleDateString('en-US', options);
-          const startTime = appointmentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-          const endTime = new Date(appointment.ends_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-          const timeRange = `${startTime} - ${endTime}`;
+          const startTime = appointmentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(/(AM|PM)/, '');
+          const endTime = new Date(appointment.ends_at).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }).replace(/(AM|PM)/, '');
+
+          const timeRange = `${startTime}- ${endTime}`;
           const details = `${formattedDate}\n${timeRange}\n${appointment.human_readable_UA}\nPractitioner: ${appointment.practitioner.name} (Speaks ${appointment.practitioner.language})`;
           const interpreter = appointment.interpreter ? appointment.interpreter.name : null;
           const uploadedFiles = appointment.attachments ? appointment.attachments.map(file => file.filename) : [];
@@ -185,7 +208,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 20,
     color: '#353535',
     justifyContent: 'center', 
   },

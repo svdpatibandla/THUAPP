@@ -3,6 +3,8 @@ import { View, TouchableOpacity, StyleSheet, Image, Text, ScrollView, Button, Mo
 import { CheckBox } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { TextInput } from 'react-native-gesture-handler';
+import DocumentPicker from 'react-native-document-picker';
+import { format } from 'date-fns'; // Import format function from date-fns
 
 const AppointmentDetails = ({ route }) => {
 
@@ -12,9 +14,13 @@ const AppointmentDetails = ({ route }) => {
     const [receiveInstructions, setReceiveInstructions] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
-    const { slotDetails } = route.params;
-    console.log(slotDetails);
-    practitioner = slotDetails.practitioner;
+    const PrevPage  = route.params;
+    console.log("Details from BookAppointment: ",PrevPage);
+    const slotDetails = PrevPage.slot;
+    const practitioner = slotDetails.practitioner;
+
+    const Formatted_date = format(new Date(slotDetails.patient_datetime), 'eee, MMMM dd, HH:mm');
+
 
     const handleAppointmentReasonChange = (text) => {
         setAppointmentReason(text);
@@ -24,6 +30,13 @@ const AppointmentDetails = ({ route }) => {
         navigation.navigate('SlotSelection');
     };
 
+    const handleGoBack = () => {
+        navigation.goBack();
+    };
+
+    const handleBookNow = () => {
+        navigation.navigate('AppNavigator', slotDetails);
+    };
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);
     };
@@ -36,11 +49,31 @@ const AppointmentDetails = ({ route }) => {
         }
     };
 
+    const handleUpload = async () => {
+        try {
+            const res = await DocumentPicker.pick({
+                type: [DocumentPicker.types.allFiles],
+            });
+            
+            setUploadedFiles(prevUploadedFiles => {
+                const newUploadedFiles = [...prevUploadedFiles, res];
+                console.log("New uploaded files after each upload: ", newUploadedFiles); 
+                return newUploadedFiles;
+            });
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+                console.log('User cancelled the picker');
+            } else {
+                console.log('Error occurred while picking the file', err);
+            }
+        }
+    };
+
     return (
         <ScrollView>
             <View>
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={handleClose}>
+                    <TouchableOpacity onPress={handleGoBack}>
                         <Image source={require('../../assets/goBack.png')} style={styles.headerImage} />
                     </TouchableOpacity>
                     <Text style={styles.headerText}>Appointment Details</Text>
@@ -57,7 +90,7 @@ const AppointmentDetails = ({ route }) => {
                                 <Text style={styles.practitionerSpecialization}>{practitioner.specialization}</Text>
                                 <View style={styles.practitionerLanguage}>
                                     <Text style={styles.practitionerLanguageText}>Practitioner speaks</Text>
-                                    <Text style={styles.practitionerLanguageValue}>{slotDetails.language}</Text>
+                                    <Text style={styles.practitionerLanguageValue}>{practitioner.language}</Text>
                                 </View>
                             </View>
                             <View style={styles.TreatsContainer}>
@@ -100,14 +133,14 @@ const AppointmentDetails = ({ route }) => {
                     <View style={{ background: '#E0E0E0' }} />
 
                     <Text style={styles.AppointmentDetailsText}>Documents</Text>
-                    <View style={styles.uploadButton}>
+                    <TouchableOpacity style={styles.uploadButton} onPress={handleUpload}>
                         <View style={styles.uploadIcon}>
                             <View style={styles.uploadIconInner}>
                                 <Image source={require('../../assets/file_upload.png')} style={styles.uploadImage} />
                             </View>
                         </View>
                         <Text style={styles.uploadText}>Upload</Text>
-                    </View>
+                    </TouchableOpacity>
 
                     <View style={styles.checkboxContainer}>
                         <CheckBox
@@ -129,10 +162,10 @@ const AppointmentDetails = ({ route }) => {
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
                                 <Text style={styles.modalText}>Book appointment?</Text>
-                                <Text style={styles.modalTimeText}>{slotDetails.patient_datetime}.</Text>
+                                <Text style={styles.modalTimeText}>{Formatted_date}.</Text>
                                 <View style={styles.modalButtons}>
                                     <TouchableHighlight
-                                        style={{ ...styles.modalButton,}}
+                                        style={{ ...styles.bookNowButton,}}
                                         onPress={() => {
                                             console.log('Cancel Pressed');
                                             setModalVisible(!modalVisible);
@@ -141,10 +174,11 @@ const AppointmentDetails = ({ route }) => {
                                         <Text style={styles.textStyle}>Cancel</Text>
                                     </TouchableHighlight>
                                     <TouchableHighlight
-                                        style={{ ...styles.modalButton,}}
+                                        style={{ ...styles.cancelButton,}}
                                         onPress={() => {
                                             console.log('Book Now Pressed');
                                             setModalVisible(!modalVisible);
+                                            handleBookNow();
                                         }}
                                     >
                                         <Text style={styles.textStyle}>Book Now</Text>
@@ -192,7 +226,7 @@ const styles = StyleSheet.create({
         color: '#151515',
         fontSize: 20,
         fontFamily: 'Source Sans Pro',
-        fontWeight: '600',
+        fontWeight: '800',
         lineHeight: 28,
         paddingTop: 20,
         paddingBottom: 20,
@@ -218,14 +252,14 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 18,
         fontFamily: 'Source Sans Pro',
-        fontWeight: '600',
+        fontWeight: '800',
         lineHeight: 24,
     },
     practitionerSpecialization: {
         color: 'black',
         fontSize: 16,
         fontFamily: 'Source Sans Pro',
-        fontWeight: '400',
+        fontWeight: '600',
         lineHeight: 24,
     },
     practitionerLanguage: {
@@ -239,7 +273,7 @@ const styles = StyleSheet.create({
         color: '#575757',
         fontSize: 16,
         fontFamily: 'Source Sans Pro',
-        fontWeight: '400',
+        fontWeight: '600',
         lineHeight: 24,
     },
     practitionerLanguageValue: {
@@ -310,7 +344,7 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 16,
         fontFamily: 'Source Sans Pro',
-        fontWeight: '600',
+        fontWeight: '800',
         lineHeight: 24,
     },
     Appointmentdetail: {
@@ -387,7 +421,10 @@ const styles = StyleSheet.create({
             height: 2
         },
         shadowRadius: 4,
-        elevation: 5
+        elevation: 5,
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        paddingHorizontal: 24,
     },
     modalText: {
         color: '#363636', 
@@ -411,20 +448,31 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         width: '100%',
-    },
-    modalButton: {
-        borderRadius: 5,
-        paddingTop: 24,
-        minWidth: 100,
-        marginHorizontal: 10,
-        alignItems: 'center',
-        paddingBottom: 24,
+        paddingVertical: 24,
     },
     textStyle: {
         color: '#3369BD',
         fontWeight: 'bold',
         textAlign: 'center',
     },
+    bookNowButton: {
+        color: '#015ABE',
+        fontSize: 18,
+        fontFamily: 'Source Sans Pro',
+        fontWeight: '900',
+        lineHeight: 20,
+        letterSpacing: 0.10,
+    },
+    cancelButton: {
+        color: '#015ABE',
+        fontSize: 18,
+        fontFamily: 'Source Sans Pro',
+        fontWeight: '600',
+        lineHeight: 20,
+        letterSpacing: 0.10,
+        alignItems: 'center',
+    },
+
 });
 
 export default AppointmentDetails;

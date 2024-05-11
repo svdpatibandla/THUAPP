@@ -56,8 +56,8 @@ const LanguageSelection = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.footerContainer}>
-        <TouchableOpacity style={styles.continueButton}onPress={handleContinue}>
+      <View style={styles.bottomBar}>
+        <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
           <Text style={styles.continueButtonText}>Continue</Text>
         </TouchableOpacity>
       </View>
@@ -70,27 +70,35 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  header:{
+    flexDirection: 'row',
+    alignItems: 'left',
+    justifyContent: 'space-between',
+    height: 58,
+    paddingHorizontal: 14,
+    backgroundColor: '#ffffff',
+  },
   topContainer: {
     flex: 1,
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    alignItems: 'flex-start',  // Ensure alignment to the start
     paddingTop: 40,
+    paddingHorizontal: 20,  // Side padding for better layout spacing
   },
-
-    title: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      marginBottom: 20,
-    },
-
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 30,  // Increased bottom margin to push the language options down
+  },
   languageContainer: {
-    width: '80%',
+    width: '100%',  // Use full width for better control
+    marginTop: 10,  // Additional top margin to create more space below the title
   },
   languageButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 12,
+    paddingVertical: 16,
+    paddingHorizontal: 16,
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 4,
@@ -107,21 +115,28 @@ const styles = StyleSheet.create({
     width: 24,
     height: 16,
   },
-  footerContainer: {
-    backgroundColor: '#f5f5f5',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
+  bottomBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 80,
+    paddingHorizontal: 20,
+    backgroundColor: '#ffffff',
+    // Increased top padding to push the button down
+    borderTopColor: '#dfdfdf',
+    borderTopWidth: 1,
+
   },
   continueButton: {
-    backgroundColor: '#2196F3',
-    paddingVertical: 12,
-    borderRadius: 4,
+    flex: 1, 
+    backgroundColor: '#3269bd',
+    paddingVertical: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    marginBottom: 20,
   },
   continueButtonText: {
-    color: '#fff',
+    color: 'white',
     fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
 });
 
